@@ -1,3 +1,4 @@
+# load our own completion functions
 fpath=(~/.zsh/completion $fpath)
 
 # completion

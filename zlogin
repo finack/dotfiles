@@ -1,3 +1,4 @@
+# adds the current branch name in green
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
