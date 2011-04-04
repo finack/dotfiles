@@ -32,18 +32,23 @@ export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
 # ignore duplicate history entries
 setopt histignoredups
 
-# keep more history
-export HISTSIZE=200
+# keep TONS of history
+export HISTSIZE=4096
 
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
-# restore previous cwd
-if [[ -f ~/.last_cwd ]]; then
-  cd `cat ~/.last_cwd`
-fi
-_save_last_cwd() {
-  echo `pwd` > ~/.last_cwd
-}
-chpwd_functions=( "${chpwd_functions[@]}" _save_last_cwd )
+# automatically pushd
+setopt auto_pushd
+export dirstacksize=5
 
+# awesome cd movements from zshkit
+setopt AUTOCD
+setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
+setopt cdablevars
+
+# Try to correct command line spelling
+setopt CORRECT CORRECT_ALL
+
+# Enable extended globbing
+setopt EXTENDED_GLOB
