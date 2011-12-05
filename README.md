@@ -41,10 +41,10 @@ You only have to do this once:
     git fetch upstream
     git checkout -b upstream upstream/master
 
-Update thoughtbot's changes into your customizations
-----------------------------------------------------
+Update
+------
 
-You will want to customize your environment. We suggest making changes in files that are not in thoughtbot's files.
+Each time you want to update:
 
 For example, to customize your `zsh` config, make your changes in `~/.zshenv`:
 
