@@ -16,6 +16,11 @@ if [ -e "$HOME/.aliases" ]; then
   source "$HOME/.aliases"
 fi
 
+# zestsecrets
+if [ -e "$HOME/.zestsecrets" ]; then
+  source "$HOME/.zestsecrets"
+fi
+
 # vi mode
 bindkey -v
 bindkey ^F vi-cmd-mode
