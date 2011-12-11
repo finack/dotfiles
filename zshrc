@@ -40,9 +40,6 @@ setopt histignoredups
 # keep TONS of history
 export HISTSIZE=4096
 
-# look for ey config in project dirs
-export EYRC=./.eyrc
-
 # automatically pushd
 setopt auto_pushd
 export dirstacksize=5
@@ -57,3 +54,7 @@ setopt CORRECT CORRECT_ALL
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
+
+# Enable RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
