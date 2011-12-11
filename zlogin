@@ -5,6 +5,9 @@ git_prompt_info() {
   fi
 }
 
+#https://github.com/olivierverdier/zsh-git-prompt
+source ~/.zsh/zsh-git-prompt/zshrc.sh
+
 # makes color constants available
 autoload -U colors
 colors
@@ -16,5 +19,6 @@ export CLICOLOR=1
 setopt prompt_subst
 
 # prompt
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+export PS1='[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+export RPROMPT='$(git_super_status)'
 
