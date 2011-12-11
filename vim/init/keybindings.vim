@@ -104,3 +104,6 @@ vmap <leader>a :call AckVisual()<CR>
 
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
+
+" Show Tags
+map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
