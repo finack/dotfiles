@@ -32,7 +32,7 @@ bindkey ^R history-incremental-search-backward
 setopt prompt_subst
 
 # prompt
-export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
+#export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
 
 # ignore duplicate history entries
 setopt histignoredups
@@ -58,3 +58,7 @@ setopt EXTENDED_GLOB
 # Enable RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
+f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
+compctl -/ -W ~/src/finack f
+z () { if [[ -e ~/src/zest/$1 ]] then cd ~/src/zest/$1; else cd ~/src/zest; fi }
+compctl -/ -W ~/src/zest z
