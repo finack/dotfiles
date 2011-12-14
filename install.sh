@@ -35,5 +35,3 @@ for name in *; do
     fi
   fi
 done
-
-rm $TMPFILE

@@ -23,6 +23,18 @@ There is configuration for `zsh` so switch your shell from the default `bash` to
 
     chsh -s /bin/zsh
 
+Configure VIM
+-------------
+
+Assumes VIM is compiled against your system ruby
+
+cd ~/.vim/bundle/command-t/ruby/command-t
+rvm use system
+ruby extconf.rb
+make
+sudo make install
+
+
 Why fork?
 ---------
 
