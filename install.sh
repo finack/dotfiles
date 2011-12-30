@@ -2,7 +2,7 @@
 
 cutstring="DO NOT EDIT BELOW THIS LINE"
 scriptname=`basename $0`
-TMPFILE=`mktemp /tmp/${tempfoo}.$scriptname` || exit 1
+TMPFILE=`mktemp /tmp/$scriptname.XXXXXX` || exit 1
 
 for name in *; do
   target="$HOME/.$name"

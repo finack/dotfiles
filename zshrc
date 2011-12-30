@@ -39,6 +39,7 @@ setopt histignoredups
 
 # keep TONS of history
 export HISTSIZE=4096
+export HISTFILE=~/.zsh_history
 
 # automatically pushd
 setopt auto_pushd
