@@ -57,8 +57,8 @@ vmap <s-tab> <gv
 
 " FuzzyFinder and switchback commands
 map <leader>e   :e#<CR>
-map <leader>b   :FufBuffer<CR>
-map <leader>f   <Plug>PeepOpen
+" map <leader>b   :FufBuffer<CR>
+" map <leader>f   <Plug>PeepOpen
 map <leader><C-N> :FufFile **/<CR>
 map <D-e> :FufBuffer<CR>
 map <leader>n :FufFile **/<CR>
@@ -69,7 +69,9 @@ map <leader>rf :FufRenewCache<CR>
 
 " Command-T
 map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-map <leader>f   :CommandTFlush<CR>:CommandT<CR>
+map <leader>F   :CommandTFlush<CR>:CommandT<CR>
+map <Leader>f   :CommandT<CR>
+map <Leader>b   :CommandTBuffer<CR>
 
 " ctags with rails load path
 map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
@@ -77,7 +79,6 @@ map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<C
 
 " ctags with bundler load path
 map <leader>c :!~/.rvm/bin/ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-
 
 " Git blame
 map <leader>g   :Gblame<CR>
