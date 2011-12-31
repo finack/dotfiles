@@ -94,6 +94,3 @@ setopt prompt_subst
 # prompt
 export PS1='[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 export RPROMPT='$(git_super_status)'
-
-export aws_access_key_id='AKIAI4JKMAW3FP3YBW2Q'
-export aws_secret_access_key='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'
