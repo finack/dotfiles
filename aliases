@@ -13,10 +13,16 @@ alias -g M='| less'
 alias -g L='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
 alias p='pstree -g2'
+alias ls='ls -Fh'
 
 # git
 alias g="git"
 alias gci="git pull --rebase && rake && git push"
+
+# setup
+developer_setup_git() {
+  rvm gemset use global
+  gem install pivotal_git_scripts }
 
 # Ruby
 alias help-strftime='ruby ~/bin/help-strftime.rb'
