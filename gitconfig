@@ -1,7 +1,6 @@
-# ADD LOCAL CONFIGURATION HERE
-
-
-# DO NOT EDIT BELOW THIS LINE
+[user]
+  name = Peter Baker
+  email = peter@finack.com
 [push]
   default = tracking
 [color]
@@ -9,7 +8,9 @@
   status = auto
   branch = auto
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.git_ignore
+[init]
+  templatedir = ~/.git_template
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
 [alias]
@@ -34,3 +35,4 @@
   # https://gist.github.com/1006904
   unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
   unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
+  ctags = !.git/hooks/ctags
