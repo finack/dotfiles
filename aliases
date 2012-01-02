@@ -28,7 +28,10 @@ developer_setup_git() {
 alias help-strftime='ruby ~/bin/help-strftime.rb'
 
 # CTags with all gems in your current bundler / gemset
-ct() { ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' | xargs /usr/local/bin/ctags -R }
+ct() {
+  ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' | xargs -J % find % -name '*.rb' | xargs ctags
+  find . -name '*.rb' | xargs ctags -a
+}
 
 # Bundler
 alias b="bundle"
