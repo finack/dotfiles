@@ -73,3 +73,6 @@
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
+[submodule "zsh/dircolors"]
+	path = zsh/dircolors
+	url = https://github.com/seebi/dircolors-solarized

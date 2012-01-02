@@ -21,6 +21,16 @@ if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
 
+# Fun with macs
+if [ -e "$HOME/.zsh/macfix.sh" ]; then
+  source "$HOME/.zsh/macfix.sh"
+fi
+
+# Solarized GNU Colors
+if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
+  eval `dircolors $HOME/.zsh/dircolors/dircolors.256dark`
+fi
+
 # vi mode
 bindkey -v
 bindkey ^F vi-cmd-mode
