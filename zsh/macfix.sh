@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 if [ ! $(uname -s | grep Darwin) ]; then
-  exit 0
+  return 0
 fi
 
 if [[ -e /usr/local/Cellar/coreutils/8.14/aliases ]]; then
