@@ -74,4 +74,22 @@ Then, each time you want to update thoughtbot's changes.
     git pull
     git checkout master
     git rebase upstream
-    git submodules update --init
+    g.it submodules update --init
+
+
+TODO
+----
+
+- BSD vs Posix vs GNU utils is annoying. Ctags broken
+
+
+rm -f .git/tags
+ruby -rbundler/setup -e '$LOAD_PATH.each{|x| system("find #{x} -name *.rb | xargs ctags --tag-relative -Rf.git/tags --append")}'
+find . -name '*.rb' -path .git -prune | xargs ctags --tag-relative -Rf.git/tags -a
+
+
+* Function to create a tmux session and a shell script to start the sesssion
+*  - Set SSH_AUTH_SOCK and any vars that need to be passed in tmux sessions
+   - Chmod socket to a+rwx
+
+- Add gitpair to dotfiles
