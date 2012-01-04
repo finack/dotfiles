@@ -25,6 +25,12 @@ developer_setup_git() {
   rvm gemset use global
   gem install pivotal_git_scripts }
 
+developer_setup_tmux() {
+  chmod a+rwx /tmp/pair
+  echo -e "#!/bin/zsh\nSSH_AUTH_SOCK=$SSH_AUTH_SOCK tmux -S /tmp/pair attach" > /tmp/pair-me-up-scotty
+  echo "Don't forget to git pair"
+}
+
 # Ruby
 alias help-strftime='ruby ~/bin/help-strftime.rb'
 
