@@ -70,12 +70,13 @@ alias grp='gr --patch'
 alias grsh='git reset --soft HEAD~'
 alias grv='git remote -v'
 alias gs='git show'
+alias gs.='git show --color-words="."'
 gsetup() {
   gem install git-smart omglog pivotal_git_scripts grb
 }
-alias gs.='git show --color-words="."'
-alias gst='git stash'
-alias gstp='git stash pop'
+alias gst='git status'
+alias gss='git stash'
+alias gssp='git stash pop'
 alias gup='git smart-pull'
 gupstation() {
   gup
