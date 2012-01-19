@@ -93,3 +93,26 @@ find . -name '*.rb' -path .git -prune | xargs ctags --tag-relative -Rf.git/tags 
    - Chmod socket to a+rwx
 
 - Add gitpair to dotfiles
+
+bind v run-shell "reattach-to-user-namespace -l zsh -c 'tmux set-buffer \"$(pbpaste)\"; tmux paste-buffer'"
+
+# put tmux buffer into x clipboard
+#
+#l bind y run-shell "reattach-to-user-namespace -l zsh -c 'tmux show-buffer | pbcopy'"
+
+Combine z & f into one function
+
+Snippets for inserting pry
+
+Start capturing my own cheats
+ - ssh command ~C -L blah
+ - Vim keyboard commands
+
+TOLEARN
+------
+
+How to search backwards
+Basic knowledge of tabs
+
+
+
