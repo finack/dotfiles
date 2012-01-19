@@ -31,6 +31,11 @@ if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; the
   eval `dircolors $HOME/.zsh/dircolors/dircolors.256dark`
 fi
 
+# Add bin dir
+if [ -e "$HOME/.bin" ]; then
+  export PATH=$PATH:$HOME/.bin
+fi
+
 # vi mode
 bindkey -v
 bindkey ^F vi-cmd-mode
