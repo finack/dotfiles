@@ -1,0 +1,1 @@
+See https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
