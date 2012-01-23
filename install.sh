@@ -13,7 +13,7 @@ for name in *; do
         let "cutline = $cutline - 1"
         echo "Updating $target"
         head -n $cutline "$target" > $TMPFILE
-        startline=`tail -r "$name" | grep -n -m1 "$cutstring" | sed "s/:.*//"`
+        startline=`tac "$name" | grep -n -m1 "$cutstring" | sed "s/:.*//"`
         if [[ -n $startline ]]; then
           tail -n $startline "$name" >> $TMPFILE
         else
