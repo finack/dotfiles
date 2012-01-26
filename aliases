@@ -62,18 +62,15 @@ alias gmf='git merge --ff-only'
 alias gp='git push'
 alias gpt='gp --tags'
 alias gr='git reset'
-alias grb='git rebase -p'
-alias grbc='git rebase --continue'
-alias grbi='git rebase -i'
+alias gre='git rebase -p'
+alias grec='git rebase --continue'
+alias grei='git rebase -i'
 alias grh='git reset --hard'
 alias grp='gr --patch'
 alias grsh='git reset --soft HEAD~'
 alias grv='git remote -v'
 alias gs='git show'
 alias gs.='git show --color-words="."'
-gsetup() {
-  gem install git-smart omglog pivotal_git_scripts grb
-}
 alias gst='git status'
 alias gss='git stash'
 alias gssp='git stash pop'
@@ -89,7 +86,9 @@ alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
 # setup
 developer_setup_git() {
   rvm gemset use global
-  gem install pivotal_git_scripts }
+  gem install git-smart omglog pivotal_git_scripts grb
+  echo "Install git flow"
+}
 
 developer_setup_tmux() {
   chmod a+rwx /tmp/pair
