@@ -115,4 +115,6 @@ How to search backwards
 Basic knowledge of tabs
 
 
+___ CHANGE
 
+- Test for uname darwin and then use the correct flags vs hijacking ls for gls
