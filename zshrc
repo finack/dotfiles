@@ -124,5 +124,27 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 setopt prompt_subst
 
 # prompt
-export PS1='[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+local ssh_prompt="%F{064}%n@%m%f:"
+# Set path to red if return code is not 0
+export PROMPT="${SSH_CONNECTION+${ssh_prompt}}%(?,%F{136},%F{160})%~%f "
 export RPROMPT='$(git_super_status)'
+
+## Colors
+#SOLARIZED TERMCOL  XTERM
+#--------- -------  ----
+#base03    brblack  234
+#base02    black    235
+#base01    brgreen  240
+#base00    bryellow 241
+#base0     brblue   244
+#base1     brcyan   245
+#base2     white    254
+#base3     brwhite  230
+#yellow    yellow   136
+#orange    brred    166
+#red       red      160
+#magenta   magenta  125
+#violet    brmagenta 61
+#blue      blue      33
+#cyan      cyan      37
+#green     green     64
