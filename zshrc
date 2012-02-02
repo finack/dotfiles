@@ -108,15 +108,18 @@ compctl -/ -W ~/src/finack f
 z () { if [[ -e ~/src/zest/$1 ]] then cd ~/src/zest/$1; else cd ~/src/zest; fi }
 compctl -/ -W ~/src/zest z
 
-git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
-  fi
-}
-
 #https://github.com/olivierverdier/zsh-git-prompt
 source ~/.zsh/zsh-git-prompt/zshrc.sh
+
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' actionformats \
+  # '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+# zstyle ':vcs_info:*' formats       \
+  # '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+# precmd () { vcs_info }
+# git_super_status() { echo ${vcs_info_msg_0_} }
+# PS1='%F{5}[%F{2}%n%F{5}] %F{3}%3~ ${vcs_info_msg_0_}%f%# '
 
 # makes color constants available
 autoload -U colors
@@ -131,9 +134,21 @@ setopt prompt_subst
 
 # prompt
 local ssh_prompt="%F{064}%n@%m%f:"
+local MODE_INDICATOR="%F{136}-%fvi-cmd%F{136}-%f"
+
 # Set path to red if return code is not 0
 export PROMPT="${SSH_CONNECTION+${ssh_prompt}}%(?,%F{136},%F{160})%~%f "
 export RPROMPT='$(git_super_status)'
+
+function zle-line-init {
+  zle reset-prompt
+}
+function zle-line-init zle-keymap-select {
+  export RPROMPT="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/$(git_super_status)}"
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 ## Colors
 #SOLARIZED TERMCOL  XTERM
