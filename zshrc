@@ -12,9 +12,10 @@ setopt auto_cd
 export EDITOR=vim
 
 # aliases
-if [ -e "$HOME/.aliases" ]; then
-  source "$HOME/.aliases"
-fi
+for alias in $HOME/.zsh/aliases/*
+do
+  source $alias
+done
 
 # zestsecrets
 if [ -e "$HOME/.zestsecrets" ]; then
