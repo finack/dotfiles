@@ -76,3 +76,6 @@
 [submodule "zsh/dircolors"]
 	path = zsh/dircolors
 	url = https://github.com/seebi/dircolors-solarized
+[submodule "vim/bundle/supertab"]
+	path = vim/bundle/supertab
+	url = git://github.com/ervandew/supertab.git
