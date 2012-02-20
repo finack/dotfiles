@@ -1,47 +1,14 @@
 # Unix
-alias a='alias'
-alias c='clear'
-alias tlf="tail -f"
-alias ln='ln -v'
-alias mkdir='mkdir -p'
-alias ...='../..'
-alias l='ls'
-alias sl='ls'
-alias ls='ls -Fh --color=auto'
-alias ll='ls -al'
-alias lh='ls -Alh'
-alias -g G='| grep'
-alias -g M='| less'
-alias -g L='| wc -l'
-alias -g ONE="| awk '{ print \$1}'"
-alias p='pstree -g2'
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -nr | head -n 20"
 alias tmux='tmux -2'
 alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%f"; done'
+alias ll="ls -la"
+
+# Bundler
+alias be="bundle exec"
+alias bi="bundle install"
 
 # git
-alias g="git"
-alias ga='git add'
-alias gap='ga -p'
-alias gau='git add -u'
-alias gbr='git branch -v'
-gc() {
-  git diff --cached | grep '\btap[ph]\b' >/dev/null &&
-    echo "\e[0;31;29mOops, there's a #tapp or similar in that diff.\e[0m" ||
-    git commit -v "$@"
-}
-alias gc!='git commit -v'
-alias gca='git commit -v -a'
-alias gcam='gca --amend'
-alias gch='git cherry-pick'
-alias gcm='git commit -v --amend'
-alias gco='git checkout'
-alias gcop='gco -p'
-alias gd='git diff -M'
-alias gd.='git diff -M --color-words="."'
-alias gdc='git diff --cached -M'
-alias gdc.='git diff --cached -M --color-words="."'
-alias gf='git fetch'
 git-new() {
   [ -d "$1" ] || mkdir "$1" &&
   cd "$1" &&
@@ -58,31 +25,6 @@ glsearch() {
   shift
   glog --pickaxe-regex "-S$query" "$@"
 }
-alias gm='git merge --no-ff'
-alias gmf='git merge --ff-only'
-alias gp='git push'
-alias gpt='gp --tags'
-alias gr='git reset'
-alias gre='git rebase -p'
-alias grec='git rebase --continue'
-alias grei='git rebase -i'
-alias grh='git reset --hard'
-alias grp='gr --patch'
-alias grsh='git reset --soft HEAD~'
-alias grv='git remote -v'
-alias gs='git show'
-alias gs.='git show --color-words="."'
-alias gst='git status'
-alias gss='git stash'
-alias gssp='git stash pop'
-alias gup='git smart-pull'
-gupstation() {
-  gup
-  gf production
-  gf staging
-}
-alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
-
 
 # setup
 developer_setup_git() {
@@ -98,41 +40,14 @@ developer_setup_tmux() {
   echo "Don't forget to git pair"
 }
 
-# Ruby
-alias help-strftime='ruby ~/bin/help-strftime.rb'
-
-# Bundler
-alias b="bundle"
-alias be="bundle exec"
-alias bake="bundle exec rake"
-alias s="bundle exec rspec"
-alias cuc="bundle exec cucumber"
-
-# Rubygems
-alias gi="gem install"
-alias giv="gem install -v"
-
 # Rails
-alias r='bundle exec rails'
 alias migrate="bundle exec db:migrate db:test:prepare"
-alias remigrate="bundle exec db:migrate db:migrate:redo db:schema:dump db:test:prepare"
 
-# Heroku staging
-alias staging='heroku run console --remote staging'
-alias staging-process='watch heroku ps --remote staging'
-alias staging-releases='heroku releases --remote staging'
-alias staging-tail='heroku logs --tail --remote staging'
-
-# Heroku production
-alias production='heroku run console --remote production'
-alias production-process='watch heroku ps --remote production'
-alias production-releases='heroku releases --remote production'
-alias production-tail='heroku logs --tail --remote production'
-
-# Heroku databases
-alias db-pull-staging='heroku db:pull --remote staging --confirm `basename $PWD`-staging'
-alias db-pull-production='heroku db:pull --remote production --confirm `basename $PWD`-production'
-alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging  --confirm `basename $PWD`-staging'
-alias db-backup-production='heroku pgbackups:capture --remote production'
+#MySQL
+export PATH=/opt/local/lib/mysql5/bin:$PATH
+alias mysql=/opt/local/lib/mysql5/bin/mysql
+alias mysqladmin=/opt/local/lib/mysql5/bin/mysqladmin
+alias mysqlstart="sudo /opt/local/bin/mysqld_safe5 &"
+alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
 
 # vim ft=sh

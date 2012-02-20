@@ -1,13 +1,13 @@
-finack dotfiles
+fsproru dotfiles
 ===================
 
-Originally lifted from https://github.com/thoughtbot/dotfiles. These also include
-vim configuration lifted from http://github.com/Casecommons/vim-config.
+This is a mix of https://github.com/PeterHBaker/dotfiles and https://github.com/thoughtbot/dotfiles. These also include
+with vim configuration lifted from http://github.com/Casecommons/vim-config.
 
 Install
 -------
 
-First, [fork this repo](https://github.com/finack/dotfiles#fork_box) on Github.
+First, [fork this repo](https://github.com/fsproru/dotfiles#fork_box) on Github.
 
 Then, clone your Github fork (replace "your-github-name" with your Github name) onto your laptop and install it:
 
@@ -49,7 +49,7 @@ Set up the upstream branch
 
 You only have to do this once:
 
-    git remote add upstream git@github.com:finack/dotfiles.git
+    git remote add upstream git@github.com:fsproru/dotfiles.git
     git fetch upstream
     git checkout -b upstream upstream/master
 
@@ -82,14 +82,14 @@ TODO
 
 - BSD vs Posix vs GNU utils is annoying. Ctags broken
 
-
+`
 rm -f .git/tags
 ruby -rbundler/setup -e '$LOAD_PATH.each{|x| system("find #{x} -name *.rb | xargs ctags --tag-relative -Rf.git/tags --append")}'
 find . -name '*.rb' -path .git -prune | xargs ctags --tag-relative -Rf.git/tags -a
-
+`
 
 * Function to create a tmux session and a shell script to start the sesssion
-*  - Set SSH_AUTH_SOCK and any vars that need to be passed in tmux sessions
+*  - Set SSH\_AUTH\_SOCK and any vars that need to be passed in tmux sessions
    - Chmod socket to a+rwx
 
 - Add gitpair to dotfiles

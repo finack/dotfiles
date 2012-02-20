@@ -1,39 +1,48 @@
-[user]
-  name = Peter Baker
-  email = peter@finack.com
+[alias]
+  #mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
+  # https://gist.github.com/1006904
+  st = status
+  sp = smart-pull
+  padd = add -p
+  purr = pull --rebase
+  recon = rebase --continue
+  co = checkout
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
+  unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
+  ctags = !.git/hooks/ctags
+  unstage = reset HEAD
+  staged = diff --cached
+  unstaged = diff
+  current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+  # Usage: git track origin/feature-123-login-form
+  # track = checkout -t
 [push]
   default = tracking
 [color]
-  diff = auto
-  status = auto
-  branch = auto
   ui = true
+[color "branch"]
+  current = yellow black
+  local = yellow
+  remote = magenta
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red reverse
+  new = green reverse
+  whitespace = white reverse
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan reverse
+  branch = magenta
 [core]
   excludesfile = ~/.git_ignore
 [init]
   templatedir = ~/.git_template
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
-[alias]
-  qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
-  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
-  # https://gist.github.com/1006904
-  unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
-  unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
-  ctags = !.git/hooks/ctags
-  co = checkout
-  # Log display from screencast, with train tracks.
-  l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-  # Alternate log display from Scott Chacon
-  lol = log --pretty=oneline --abbrev-commit --graph --decorate
-  # Other useful aliases:
-  unstage = reset HEAD
-  staged = diff --cached
-  unstaged = diff
-  current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-  # Usage: git track origin/feature-123-login-form
-  track = checkout -t
 [apply]
   whitespace = warn
 [help]
@@ -41,5 +50,7 @@
 [status]
   submodule = 1
 [push]
-  # Only push branches that have been set up to track a remote branch.
-  default = current
+  default = upstream
+[user]
+	name = Alexander Tamoykin
+	email = at@zestcash.com
