@@ -50,7 +50,7 @@
 [status]
   submodule = 1
 [push]
-  default = upstream
+  default = current
 [user]
 	name = Alexander Tamoykin
 	email = at@zestcash.com
