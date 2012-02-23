@@ -13,7 +13,7 @@ Then, clone your Github fork (replace "your-github-name" with your Github name) 
 
     git clone git@github.com:your-github-name/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
-    git submodules update --init
+    git submodule update --init
     ./install.sh
 
 This will create symlinks for all config files in your home directory. You can
