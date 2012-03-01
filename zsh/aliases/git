@@ -54,9 +54,9 @@ alias gst='git status'
 alias gss='git stash'
 alias gssp='git stash pop'
 alias gup='git smart-pull'
-gupstation() {
+guppy() {
   gup
-  gf production
-  gf staging
+  gf master
+  gf develop
 }
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
