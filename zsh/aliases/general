@@ -27,8 +27,8 @@ setup_git() {
 }
 
 setup_tmux() {
-  chmod a+rwx /tmp/pair
-  echo -e "#!/bin/zsh\nSSH_AUTH_SOCK=$SSH_AUTH_SOCK tmux -S /tmp/pair attach" > /tmp/pair-me-up-scotty
+  chmod a+rwx /tmp/p_tmux
+  echo -e "#!/bin/zsh\nSSH_AUTH_SOCK=$SSH_AUTH_SOCK tmux -S /tmp/p_tmux attach" > /tmp/pair-me-up-scotty
   chmod a+rx /tmp/pair-me-up-scotty
   echo "Don't forget to git pair"
 }
