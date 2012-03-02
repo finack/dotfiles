@@ -55,10 +55,10 @@ fi
 
 # vi mode
 bindkey -v
-bindkey ^F vi-cmd-mode
+bindkey '^F' vi-cmd-mode
 
 # use incremental search
-bindkey ^R history-incremental-search-backward
+bindkey '^R' history-incremental-search-backward
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
 bindkey -M viins '^a' beginning-of-line
