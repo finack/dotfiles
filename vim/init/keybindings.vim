@@ -31,7 +31,9 @@ map <D-z>       :earlier 1<CR>
 map <D-Z>       :later 1<CR>
 
 " Auto-indent whole file
-map <silent> <F7> mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
+map <leader>=   mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
+
+map <leader>u   :GundoToggle<CR>
 
 " Fast scrolling
 nnoremap <C-e>  3<C-e>
@@ -52,17 +54,16 @@ map <M-D-Left>  :bp<CR>
 map <M-D-Right> :bn<CR>
 
 "indent/unindent visual mode selection with tab/shift+tab
-vmap <tab> >gv
-vmap <s-tab> <gv
+vmap <tab>      >gv
+vmap <s-tab>    <gv
 
 " FuzzyFinder and switchback commands
 map <leader>e   :e#<CR>
 " map <leader>b   :FufBuffer<CR>
-" map <leader>f   <Plug>PeepOpen
-map <leader><C-N> :FufFile **/<CR>
-map <D-e> :FufBuffer<CR>
-map <leader>n :FufFile **/<CR>
-map <D-N> :FufFile **/<CR>
+" map <leader><C-N> :FufFile **/<CR>
+" map <D-e> :FufBuffer<CR>
+" map <leader>n :FufFile **/<CR>
+" map <D-N> :FufFile **/<CR>
 
 " refresh the FuzzyFinder cache
 map <leader>rf :FufRenewCache<CR>
