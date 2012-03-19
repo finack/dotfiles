@@ -16,6 +16,8 @@
   staged = diff --cached
   unstaged = diff
   current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+  ffs = flow feature start
+  fff = flow feature finish
   # Usage: git track origin/feature-123-login-form
   # track = checkout -t
 [push]
