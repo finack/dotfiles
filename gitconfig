@@ -7,6 +7,8 @@
   purr = pull --rebase
   recon = rebase --continue
   co = checkout
+  ffs = flow feature start
+  fff = flow feature finish
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
@@ -16,8 +18,7 @@
   staged = diff --cached
   unstaged = diff
   current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-  ffs = flow feature start
-  fff = flow feature finish
+  author = !"git config user.name 'Alexander Tamoykin' && git config user.email 'at@zestcash.com'"
   # Usage: git track origin/feature-123-login-form
   # track = checkout -t
 [push]
