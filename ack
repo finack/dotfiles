@@ -23,3 +23,5 @@
 --nonib
 --notmstuff
 --noxcode
+--ignore-dir=log/
+--ignore-dir=tmp/
