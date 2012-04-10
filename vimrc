@@ -35,3 +35,16 @@ runtime! init/**.vim
 " Machine-local vim settings - keep this at the end
 " --------------------------
 silent! source ~/.vimrc.local
+
+"RubyTest plugin setup
+let g:rubytest_in_quickfix = 0
+let g:rubytest_cmd_test = "bundle exec ruby %p"
+let g:rubytest_cmd_testcase = "bundle exec ruby %p -n '/%c/'"
+let g:rubytest_cmd_spec = "bundle exec rspec -f progress %p"
+let g:rubytest_cmd_example = "bundle exec rspec -f progress %p:%c"
+let g:rubytest_cmd_feature = "bundle exec cucumber %p"
+let g:rubytest_cmd_story = "bundle exec cucumber %p -n '%c'"
+map <Leader>rt <Plug>RubyTestRun
+map <Leader>rat <Plug>RubyFileRun
+map <Leader>rlt <Plug>RubyTestRunLast
+
