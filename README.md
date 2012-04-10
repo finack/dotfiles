@@ -14,6 +14,7 @@ Then, clone your Github fork (replace "your-github-name" with your Github name) 
     git clone git@github.com:your-github-name/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
     git submodule update --init
+    zsh
     ./install.sh
 
 This will create symlinks for all config files in your home directory. You can
@@ -28,12 +29,11 @@ Configure VIM
 
 Assumes VIM is compiled against your system ruby
 
-cd ~/.vim/bundle/command-t/ruby/command-t
-rvm use system
-ruby extconf.rb
-make
-sudo make install
-
+    cd ~/.vim/bundle/command-t/ruby/command-t 
+    rvm use system 
+    ruby extconf.rb 
+    make 
+    sudo make install 
 
 Why fork?
 ---------
@@ -74,7 +74,7 @@ Then, each time you want to update thoughtbot's changes.
     git pull
     git checkout master
     git rebase upstream
-    g.it submodules update --init
+    git submodules update --init
 
 
 TODO
