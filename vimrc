@@ -44,7 +44,4 @@ let g:rubytest_cmd_spec = "bundle exec rspec -f progress %p"
 let g:rubytest_cmd_example = "bundle exec rspec -f progress %p:%c"
 let g:rubytest_cmd_feature = "bundle exec cucumber %p"
 let g:rubytest_cmd_story = "bundle exec cucumber %p -n '%c'"
-map <Leader>rt <Plug>RubyTestRun
-map <Leader>rat <Plug>RubyFileRun
-map <Leader>rlt <Plug>RubyTestRunLast
 

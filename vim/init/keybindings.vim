@@ -113,3 +113,15 @@ nmap du :diffupdate<CR>
 
 " Show Tags
 map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
+
+" Bubble single lines
+nmap { [e
+nmap } ]e
+" Bubble multiple lines
+vmap { [egv
+vmap } ]egv
+
+" RubyTest
+map <Leader>rt <Plug>RubyTestRun
+map <Leader>rat <Plug>RubyFileRun
+map <Leader>rlt <Plug>RubyTestRunLast
