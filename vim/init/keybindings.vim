@@ -128,3 +128,7 @@ map <Leader>rlt <Plug>RubyTestRunLast
 
 "Reload Ctags
 map <silent> <Leader>ct :!echo "Updating ctags..." && ctags --extra=+f --exclude=.git --exclude=log --exclude=tmp -R * $GEM_HOME/gems/*<CR><CR>
+
+" Horizontal block movement
+vmap > >gv
+vmap < <gv
