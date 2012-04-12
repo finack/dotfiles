@@ -82,3 +82,6 @@
 [submodule "vim/bundle/vim-rubytest"]
 	path = vim/bundle/vim-rubytest
 	url = git://github.com/janx/vim-rubytest.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
