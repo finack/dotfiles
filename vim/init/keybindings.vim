@@ -122,7 +122,7 @@ vmap { [egv
 vmap } ]egv
 
 " RubyTest
-map <Leader>rt <Plug>RubyTestRun
+map <Leader>rt <Plug>RubyTestRun<Up>
 map <Leader>rat <Plug>RubyFileRun
 map <Leader>rlt <Plug>RubyTestRunLast
 
