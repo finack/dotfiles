@@ -45,3 +45,5 @@ let g:rubytest_cmd_example = "bundle exec rspec -f progress %p:%c"
 let g:rubytest_cmd_feature = "bundle exec cucumber %p"
 let g:rubytest_cmd_story = "bundle exec cucumber %p -n '%c'"
 
+" Case insensitive search
+set ignorecase
