@@ -1,11 +1,11 @@
 --sort-files
 --color
---context=1
 --follow
 --group
 
 --ignore-dir=log/
 --ignore-dir=tmp/
+--ignore-dir=.idea
 
 --type-add=ruby=.haml
 --type-add=ruby=.ru
@@ -23,5 +23,3 @@
 --nonib
 --notmstuff
 --noxcode
---ignore-dir=log/
---ignore-dir=tmp/
