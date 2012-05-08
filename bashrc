@@ -26,6 +26,7 @@ LIGHT_PURPLE="\[\033[1;34m\]"
 LIGHT_RED="\[\033[1;31m\]"
 if [ -f /opt/local/etc/bash_completion ]; then
   . /opt/local/etc/bash_completion
+  GIT_PS1_SHOWDIRTYSTATE=true
   PS1=$YELLOW'\u@\h:'$GREEN'\w'$LIGHT_RED'$(__git_ps1 " (%s)")'$LIGHT_GRAY'\$ '
 fi
 export CLICOLOR=1
