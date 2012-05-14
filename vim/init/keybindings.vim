@@ -132,3 +132,8 @@ map <silent> <Leader>ct :!echo "Updating ctags..." && ctags --extra=+f --exclude
 " Horizontal block movement
 vmap > >gv
 vmap < <gv
+
+" vim-chef
+map <Leader>cf :<C-u>ChefFindAny<CR>
+map <Leader>csf :<C-u>ChefFindAnySplit<CR>
+map <Leader>cvf :<C-u>ChefFindAnyVsplit<CR>

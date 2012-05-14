@@ -85,3 +85,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/vim-chef"]
+	path = vim/bundle/vim-chef
+	url = https://github.com/t9md/vim-chef.git
