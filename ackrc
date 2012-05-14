@@ -1,7 +1,4 @@
 --sort-files
---color
---follow
---group
 
 --ignore-dir=log/
 --ignore-dir=tmp/
