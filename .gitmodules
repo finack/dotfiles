@@ -88,3 +88,6 @@
 [submodule "vim/bundle/vim-chef"]
 	path = vim/bundle/vim-chef
 	url = https://github.com/t9md/vim-chef.git
+[submodule "vim/bundle/snipmate.vim"]
+	path = vim/bundle/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim.git
