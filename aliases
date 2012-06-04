@@ -2,7 +2,7 @@
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -nr | head -n 20"
 alias tmux='tmux -2'
 alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%f"; done'
-alias ll="ls -la"
+alias ll="ls -lha"
 
 # Bundler
 alias be="bundle exec"
