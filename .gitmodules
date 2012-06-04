@@ -91,3 +91,6 @@
 [submodule "vim/bundle/snipmate.vim"]
 	path = vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule "bash_plugins/git-flow-completion"]
+	path = bash_plugins/git-flow-completion
+	url = git://github.com/bobthecow/git-flow-completion.git

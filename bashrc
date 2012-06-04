@@ -8,6 +8,20 @@ if [ -f /etc/bash_completion ]; then
   source /etc/bash_completion
 fi
 
+if [ -d "$HOME/.bash_plugins" ]; then
+  source "$HOME/.bash_plugins/git-flow-completion/git-flow-completion.bash"
+  source "$HOME/.bash_plugins/git-completion.bash"
+
+  #Custoimized Prompt
+  GREEN="\[\033[0;32m\]"
+  LIGHT_GRAY="\[\033[0;37m\]"
+  YELLOW="\[\033[0;33m\]"
+  LIGHT_PURPLE="\[\033[1;34m\]"
+  LIGHT_RED="\[\033[1;31m\]"
+  GIT_PS1_SHOWDIRTYSTATE=true
+  PS1=$YELLOW'\u@\h:'$GREEN'\w'$LIGHT_RED'$(__git_ps1 " (%s)")'$LIGHT_GRAY'\$ '
+fi
+
 # aliases
 if [ -e "$HOME/.aliases" ]; then
   source "$HOME/.aliases"
@@ -18,17 +32,6 @@ if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
 
-#Custoimized Prompt
-GREEN="\[\033[0;32m\]"
-LIGHT_GRAY="\[\033[0;37m\]"
-YELLOW="\[\033[0;33m\]"
-LIGHT_PURPLE="\[\033[1;34m\]"
-LIGHT_RED="\[\033[1;31m\]"
-if [ -f /opt/local/etc/bash_completion ]; then
-  . /opt/local/etc/bash_completion
-  GIT_PS1_SHOWDIRTYSTATE=true
-  PS1=$YELLOW'\u@\h:'$GREEN'\w'$LIGHT_RED'$(__git_ps1 " (%s)")'$LIGHT_GRAY'\$ '
-fi
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
