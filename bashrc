@@ -18,7 +18,9 @@ if [ -d "$HOME/.bash_plugins" ]; then
   YELLOW="\[\033[0;33m\]"
   LIGHT_PURPLE="\[\033[1;34m\]"
   LIGHT_RED="\[\033[1;31m\]"
+
   GIT_PS1_SHOWDIRTYSTATE=true
+  GIT_PS1_SHOWUNTRACKEDFILES=true
   PS1=$YELLOW'\u@\h:'$GREEN'\w'$LIGHT_RED'$(__git_ps1 " (%s)")'$LIGHT_GRAY'\$ '
 fi
 
