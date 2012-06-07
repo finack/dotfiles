@@ -47,11 +47,11 @@ developer_setup_tmux() {
 alias migrate="bundle exec db:migrate db:test:prepare"
 
 #MySQL
-export PATH=/opt/local/lib/mysql5/bin:$PATH
-alias mysql=/opt/local/lib/mysql5/bin/mysql
-alias mysqladmin=/opt/local/lib/mysql5/bin/mysqladmin
-alias mysqlstart="sudo /opt/local/bin/mysqld_safe5 &"
-alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
+# export PATH=/opt/local/lib/mysql5/bin:$PATH
+# alias mysql=/opt/local/lib/mysql5/bin/mysql
+# alias mysqladmin=/opt/local/lib/mysql5/bin/mysqladmin
+# alias mysqlstart="sudo /opt/local/bin/mysqld_safe5 &"
+# alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
 alias mysqlroot='mysql -u root'
 
 # vim ft=sh
