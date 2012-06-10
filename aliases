@@ -11,6 +11,9 @@ alias bi="bundle install"
 # knife
 alias kil="knife instance list"
 
+# gem
+alias gemi='gem install --no-rdoc --no-ri'
+
 # git
 git-new() {
   [ -d "$1" ] || mkdir "$1" &&
