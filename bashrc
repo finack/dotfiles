@@ -1,8 +1,8 @@
 [[ "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-export CC=/usr/bin/gcc-4.2
-# MacPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export CC=/usr/bin/gcc-4.2 #needed to build rubies
+export RUBYOPT=rubygems # so I can use gems in raw scripts
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 
 if [ -f /etc/bash_completion ]; then
   source /etc/bash_completion
