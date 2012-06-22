@@ -15,7 +15,7 @@
   unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
   ctags = !.git/hooks/ctags
   unstage = reset HEAD
-  staged = diff --cached
+  dc = diff --cached
   unstaged = diff
   current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
   author = !"git config user.name 'Alexander Tamoykin' && git config user.email 'at@zestcash.com'"
@@ -49,7 +49,7 @@
 [apply]
   whitespace = warn
 [help]
-  autocorrect = 1
+  autocorrect = 0
 [status]
   submodule = 1
 [push]
