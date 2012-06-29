@@ -36,6 +36,12 @@ glsearch() {
   shift
   glog --pickaxe-regex "-S$query" "$@"
 }
+alias gs='git status'
+alias gsp='git smart-pull'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gap='git add -p'
+alias gc='git commit'
 
 # setup
 developer_setup_git() {
