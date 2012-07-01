@@ -94,3 +94,9 @@
 [submodule "bash_plugins/git-flow-completion"]
 	path = bash_plugins/git-flow-completion
 	url = git://github.com/bobthecow/git-flow-completion.git
+[submodule "vim/bundle/vim-coffee-script"]
+	path = vim/bundle/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/bundle/vim-slim"]
+	path = vim/bundle/vim-slim
+	url = git://github.com/bbommarito/vim-slim.git
