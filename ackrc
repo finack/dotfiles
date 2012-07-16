@@ -10,9 +10,10 @@
 --type-add=css=.sass
 --type-add=css=.scss
 --type-add=js=.coffee
---type-set=markdown=.markdown
-
 --type-add=objc=.pch
+
+--type-set=markdown=.markdown
+--type-set=cucumber=.feature
 --type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
 --type-set=ragel=.rl
 --type-set=nib=.xib
