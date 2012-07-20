@@ -16,7 +16,10 @@ alias kil="knife instance list"
 # gem
 alias gemi='gem install --no-rdoc --no-ri'
 function vimgem() {
-  vim $(bs $1)
+  gem_path=$(bundle show $1)
+  cd $gem_path
+  vim
+  cd -
 }
 
 # git
