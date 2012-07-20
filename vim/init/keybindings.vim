@@ -31,7 +31,7 @@ map <D-z>       :earlier 1<CR>
 map <D-Z>       :later 1<CR>
 
 " Auto-indent whole file
-map <silent> <F7> mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
+map <silent> <F8> mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
 
 " Fast scrolling
 nnoremap <C-e>  3<C-e>
@@ -126,7 +126,7 @@ map <Leader>rt <Plug>RubyTestRun<Up>
 map <Leader>rat <Plug>RubyFileRun
 map <Leader>rlt <Plug>RubyTestRunLast
 
-"Reload Ctags
+" Reload Ctags
 map <silent> <Leader>ct :!echo "Updating ctags..." && ctags --extra=+f --exclude=.git --exclude=log --exclude=tmp -R * $GEM_HOME/gems/* 2> /dev/null &<CR><CR>
 
 " Horizontal block movement
