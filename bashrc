@@ -45,3 +45,6 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 export CLICOLOR=1
+
+# pass <C-s> and other terminal keys to vim
+stty -ixon
