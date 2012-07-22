@@ -7,6 +7,20 @@ alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%
 alias ll="ls -lha"
 alias flushdns='dscacheutil -flushcache'
 
+# Repeat a command multiple times
+function repeat() {
+  if [[ $1 == "--help" || $1 == "-h" || $1 == "" ]]; then
+    echo "Usage: repeat <n-times> <command>"
+  else
+    n=$1
+    shift
+    while [ $(( n -= 1 )) -ge 0 ]
+    do
+      "$@"
+    done
+  fi
+}
+
 # Bundler
 alias be="bundle exec"
 alias bi="bundle install"
