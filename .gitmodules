@@ -103,3 +103,9 @@
 [submodule "vim/bundle/vim-powerline"]
 	path = vim/bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "zsh/git-prompt"]
+	path = zsh/git-prompt
+	url = git://github.com/olivierverdier/zsh-git-prompt.git
