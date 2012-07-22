@@ -1,5 +1,43 @@
+# -------------------------------------------+
+# oh-my-zsh template                         #
+# -------------------------------------------+
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+# ZSH_THEME="robbyrussell"
+
 # load our own completion functions
-fpath=(~/.zsh/completion $fpath)
+# fpath=(~/.zsh/completion $fpath)
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git-flow macports knife bundler)
+
+source $ZSH/oh-my-zsh.sh
+
+# -------------------------------------------+
+#  Customization                             #
+# -------------------------------------------+
 
 # completion
 autoload -U compinit
@@ -7,6 +45,9 @@ compinit
 
 # automatically enter directories without cd
 setopt auto_cd
+
+# stop annoying beeping
+setopt no_beep
 
 # use vim as an editor
 export EDITOR=vim
@@ -22,25 +63,25 @@ if [ -e "$HOME/.zestsecrets" ]; then
 fi
 
 # Fun with macs
-if [ -e "$HOME/.zsh/macfix.sh" ]; then
-  source "$HOME/.zsh/macfix.sh"
-fi
+# if [ -e "$HOME/.zsh/macfix.sh" ]; then
+  # source "$HOME/.zsh/macfix.sh"
+# fi
 
 # EC2 CLI API
-if [ -e "$HOME/bin/ec2-api-tools" ]; then
-  export EC2_HOME="$HOME/bin/ec2-api-tools"
-  export PATH=$PATH:$EC2_HOME/bin
-  # TODO Unmacify java_home
-  export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home/"
-  export EC2_CERT="$HOME/.secrets/p/development/aws-zest-p-cert.pem"
-  export EC2_PRIVATE_KEY="$HOME/.secrets/p/development/aws-zest-p-privatekey.pkcs8"
-fi
+# if [ -e "$HOME/bin/ec2-api-tools" ]; then
+  # export EC2_HOME="$HOME/bin/ec2-api-tools"
+  # export PATH=$PATH:$EC2_HOME/bin
+  # # TODO Unmacify java_home
+  # export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home/"
+  # export EC2_CERT="$HOME/.secrets/p/development/aws-zest-p-cert.pem"
+  # export EC2_PRIVATE_KEY="$HOME/.secrets/p/development/aws-zest-p-privatekey.pkcs8"
+# fi
 
 
-if [ -e "$HOME/bin/ElasticLoadBalancing" ]; then
-  export AWS_ELB_HOME=$HOME/bin/ElasticLoadBalancing
-  export PATH=$PATH:$HOME/bin/ElasticLoadBalancing/bin
-fi
+# if [ -e "$HOME/bin/ElasticLoadBalancing" ]; then
+  # export AWS_ELB_HOME=$HOME/bin/ElasticLoadBalancing
+  # export PATH=$PATH:$HOME/bin/ElasticLoadBalancing/bin
+# fi
 
 # Solarized GNU Colors
 if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
@@ -53,8 +94,8 @@ if [ -e "$HOME/.bin" ]; then
 fi
 
 # vi mode
-bindkey -v
-bindkey ^F vi-cmd-mode
+# bindkey -v
+# bindkey ^F vi-cmd-mode
 
 # use incremental search
 bindkey ^R history-incremental-search-backward
@@ -103,13 +144,10 @@ setopt EXTENDED_GLOB
 # Enable RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
-f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
-compctl -/ -W ~/src/finack f
-z () { if [[ -e ~/src/zest/$1 ]] then cd ~/src/zest/$1; else cd ~/src/zest; fi }
-compctl -/ -W ~/src/zest z
-
-#https://github.com/olivierverdier/zsh-git-prompt
-source ~/.zsh/zsh-git-prompt/zshrc.sh
+# f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
+# compctl -/ -W ~/src/finack f
+# z () { if [[ -e ~/src/zest/$1 ]] then cd ~/src/zest/$1; else cd ~/src/zest; fi }
+# compctl -/ -W ~/src/zest z
 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' actionformats \
@@ -125,9 +163,13 @@ source ~/.zsh/zsh-git-prompt/zshrc.sh
 autoload -U colors
 colors
 
+# https://github.com/olivierverdier/zsh-git-prompt
+source ~/.zsh/git-prompt/zshrc.sh
+ZSH_THEME_GIT_PROMPT_NOCACHE=1
+
 # enable colored output from ls, etc
 export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # expand functions in the prompt
 setopt prompt_subst
