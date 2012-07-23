@@ -77,11 +77,16 @@ fi
   # export EC2_PRIVATE_KEY="$HOME/.secrets/p/development/aws-zest-p-privatekey.pkcs8"
 # fi
 
-
 # if [ -e "$HOME/bin/ElasticLoadBalancing" ]; then
   # export AWS_ELB_HOME=$HOME/bin/ElasticLoadBalancing
   # export PATH=$PATH:$HOME/bin/ElasticLoadBalancing/bin
 # fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Enable RVM
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+export CC=/usr/bin/gcc-4.2 #needed to build rubies
+export RUBYOPT=rubygems # so I can use gems in raw scripts
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 
 # Solarized GNU Colors
 if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
@@ -92,6 +97,9 @@ fi
 if [ -e "$HOME/.bin" ]; then
   export PATH=$PATH:$HOME/.bin
 fi
+
+# pass <C-s> and other terminal keys to vim
+stty -ixon
 
 # vi mode
 # bindkey -v
@@ -140,9 +148,6 @@ setopt CORRECT CORRECT_ALL
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
-
-# Enable RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
 # f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
 # compctl -/ -W ~/src/finack f
