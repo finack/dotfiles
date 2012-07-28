@@ -65,7 +65,7 @@ alias gc='git commit'
 # setup
 developer_setup_git() {
   rvm gemset use global
-  gem install git-smart omglog pivotal_git_scripts grb
+  gem install git-smart
   echo "Install git flow"
 }
 
