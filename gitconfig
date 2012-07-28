@@ -4,8 +4,6 @@
   st = status
   sp = smart-pull
   padd = add -p
-  purr = pull --rebase
-  recon = rebase --continue
   co = checkout
   ffs = flow feature start
   fff = flow feature finish
