@@ -106,13 +106,13 @@ stty -ixon
 # bindkey ^F vi-cmd-mode
 
 # use incremental search
-bindkey ^R history-incremental-search-backward
-bindkey -M viins '^r' history-incremental-search-backward
-bindkey -M vicmd '^r' history-incremental-search-backward
-bindkey -M viins '^a' beginning-of-line
-bindkey -M vicmd '^a' beginning-of-line
-bindkey -M viins '^e' end-of-line
-bindkey -M vicmd '^e' end-of-line
+# bindkey ^R history-incremental-search-backward
+# bindkey -M viins '^r' history-incremental-search-backward
+# bindkey -M vicmd '^r' history-incremental-search-backward
+# bindkey -M viins '^a' beginning-of-line
+# bindkey -M vicmd '^a' beginning-of-line
+# bindkey -M viins '^e' end-of-line
+# bindkey -M vicmd '^e' end-of-line
 
 # expand functions in the prompt
 setopt prompt_subst
