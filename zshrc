@@ -174,7 +174,7 @@ ZSH_THEME_GIT_PROMPT_NOCACHE=1
 
 # enable colored output from ls, etc
 export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
+export LSCOLORS=ExGxCxDxBxegedabagacad
 
 # expand functions in the prompt
 setopt prompt_subst
