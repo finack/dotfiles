@@ -90,7 +90,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 
 # Solarized GNU Colors
 if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
-  eval `dircolors $HOME/.zsh/dircolors/dircolors.256dark`
+  eval `gdircolors $HOME/.zsh/dircolors/dircolors.256dark`
 fi
 
 # Add bin dir
