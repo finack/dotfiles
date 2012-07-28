@@ -1,6 +1,4 @@
 [alias]
-  #mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
-  # https://gist.github.com/1006904
   st = status
   sp = smart-pull
   padd = add -p
