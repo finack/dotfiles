@@ -1,0 +1,108 @@
+#!/usr/bin/perl
+use strict;
+
+my ($what, @args) = @ARGV;
+
+_usage() unless defined $what;
+
+$what =~ tr/-/_/;
+
+{ no strict 'refs';
+  if (defined &$what) { print $what->(@args), $ENV{GIT_GET_NO_NEWLINE} ? "" : "\n" }
+  else {
+    _usage($what);
+  }
+}
+
+sub current_branch_name {
+  if (_head_detached()) { return "" }
+  _run("git rev-parse --symbolic-full-name --abbrev-ref HEAD");
+}
+
+sub is_head_detached {
+  exit (_head_detached() ? 0 : 1);
+}
+
+sub _head_detached {
+  system("git symbolic-ref -q HEAD > /dev/null") != 0;
+}
+
+sub branch_remote {
+  my ($branch) = @_;
+  $branch ||= current_branch_name();
+  _run("git config --get 'branch.$branch.remote'");
+}
+
+sub branch_remote_branch {
+  my ($branch) = @_;
+  $branch ||= current_branch_name();
+  my $remote = branch_remote($branch) or exit 1;
+  my $remote_ref = _run("git config --get 'branch.$branch.merge'");
+  $remote_ref =~ s{^refs/heads/}{};
+  $remote_ref or exit 1;
+  return "$remote/$remote_ref";
+}
+
+sub is_working_tree_clean {
+  exit (_working_tree_dirty() ? 1 : 0);
+}
+
+sub is_working_tree_dirty {
+  exit (_working_tree_dirty() ? 0 : 1);
+}
+
+sub _working_tree_dirty {
+  my ($arg) = @_;
+  for my $cmd ("git rev-parse --verify HEAD > /dev/null",
+	       "git update-index --ignore-submodules --refresh > /dev/null",
+	       "git diff-files --quiet --ignore-submodules",
+	       "git diff-index --cached --quiet HEAD --ignore-submodules") {
+      system($cmd) == 0 or return 1;
+  }
+  return 0;
+}
+
+sub heads {
+  my @heads;
+  for (qx{git branch}) {
+    s/^..//; # Trim off leading '*' and/or spaces
+    push @heads, $_;
+  }
+  chomp $heads[-1]; # wrapper will append an extra newline on output
+  @heads;
+}
+
+sub is_remote {
+  my ($in) = @_;
+  $in .= "\n";
+  if (grep $_ eq $in, qx{git remote}) { exit 0 } else { exit 1 }
+}
+
+sub is_ancestor_of {
+  my ($A, $B) = @_;
+  is_same_object($A, _run("git", "merge-base", $A, $B));
+}
+
+sub is_same_object {
+  my ($A, $B) = @_;
+  $A = _run("git", "rev-parse", $A);
+  $B = _run("git", "rev-parse", $B);
+  exit($A eq $B ? 0 : 1);
+}
+
+sub _run {
+  my @cmd = @_;
+  open my($p), "-|", @cmd or die "Couldn't run '@cmd': $!";
+  my $res = join "", <$p>;
+  chomp($res);
+  return $res;
+}
+
+sub _usage {
+  my ($what) = @_;
+  warn "Don't know how to get '$what'; try:\n" if defined $what;
+  my @names = sort grep !/^_/ && defined &{$_}, keys %main::;
+  tr/_/-/ for @names;
+  print STDERR join "\n", @names, "";
+  exit;
+}
