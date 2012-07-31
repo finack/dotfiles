@@ -1,0 +1,45 @@
+session:
+  name: rails
+  windows:
+    - name: www
+      root: "~/src/zest/www"
+      splits:
+      - cmd: vim
+      - cmd: echo "--"
+        height: 20
+    - name: interview
+      root: "~/src/zest/ZestAdmin"
+      splits:
+      - cmd: echo vim
+      - cmd: echo "--"
+        height: 20
+    - name: servicing
+      root: "~/src/zest/ZestServicing"
+      splits:
+      - cmd: echo vim
+      - cmd: echo "--"
+        height: 20
+    - name: testing
+      root: "~/src/zest/www"
+      filters:
+        before:
+          - "secrets_for_development"
+      splits:
+      - cmd: "bundle exec guard -g tests"
+      - cmd: echo "cd ../ZestServicing && guard -g tests"
+        height: 66
+      - cmd: echo "cd ../ZestAdmin && bundle exec guard -g tests"
+        height: 50
+        target: bottom
+    - name: servers
+      root: "~/src/zest/www"
+      filters:
+        before:
+          - "secrets_for_development"
+      splits:
+      - cmd: "bundle exec guard -g server"
+      - cmd: "cd ../ZestServicing && bundle exec rails server"
+        height: 66
+      - cmd: "cd ../ZestAdmin && bundle exec rails server"
+        height: 50
+        target: bottom
