@@ -102,7 +102,9 @@ setopt CORRECT CORRECT_ALL
 setopt EXTENDED_GLOB
 
 # Enable RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
+eval "$(rbenv init -)"
 
 f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
 compctl -/ -W ~/src/finack f
