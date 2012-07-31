@@ -21,8 +21,7 @@ alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%
 
 # setup
 setup_git() {
-  rvm gemset use global
-  gem install git-smart omglog pivotal_git_scripts grb
+  gem install git-smart omglog grb
   echo "!!Now Install git flow"
 }
 
