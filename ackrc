@@ -1,11 +1,10 @@
---sort-files
 --color
---context=1
 --follow
---group
 
 --ignore-dir=log/
 --ignore-dir=tmp/
+--ignore-dir=vendor/bundle/
+--ignore-dir=.jhw-cache/
 
 --type-add=ruby=.haml
 --type-add=ruby=.ru
