@@ -25,3 +25,5 @@
 [push]
   # Only push branches that have been set up to track a remote branch.
   default = current
+[mergetool]
+  keepBackup = true
