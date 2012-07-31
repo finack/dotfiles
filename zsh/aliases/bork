@@ -1,3 +1,4 @@
+alias knife='bundle exec knife'
 alias kil='knife instance list'
 alias knl='knife node list'
 alias knd='knife node delete'
