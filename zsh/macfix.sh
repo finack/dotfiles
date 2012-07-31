@@ -4,7 +4,9 @@ if [ ! $(uname -s | grep Darwin) ]; then
   return 0
 fi
 
-if [[ -e /usr/local/Cellar/coreutils/8.14/aliases ]]; then
+if [[ -e $(brew --prefix coreutils)/libexec/gnubin ]]; then
+  export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+elif [[ -e /usr/local/Cellar/coreutils/8.14/aliases ]]; then
   source /usr/local/Cellar/coreutils/8.14/aliases
 else
   echo "Core Utils missing. Install via 'brew install coreutils'."
