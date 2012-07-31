@@ -30,12 +30,28 @@ git-new() {
 }
 alias glog='git log --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
 alias gl='glog --graph'
+alias glol='git log --pretty=oneline --abbrev-commit --graph --decorate'
+alias glwip='gl origin/master..origin/develop'
 alias gla='gl --all'
+glg() {
+  query="$1"
+  shift
+  glog "--grep=$query" "$@"
+}
 glsearch() {
   query="$1"
   shift
   glog --pickaxe-regex "-S$query" "$@"
 }
+glunpushed() {
+  branch=$(git symbolic-ref HEAD | sed 's|refs/heads/||')
+  git log origin/$branch..HEAD
+}
+glunpulled() {
+  branch=$(git symbolic-ref HEAD | sed 's|refs/heads/||')
+  git fetch && git log HEAD..origin/$branch
+}
+
 alias gm='git merge --no-ff'
 alias gmf='git merge --ff-only'
 alias gp='git push'
@@ -52,6 +68,7 @@ alias gs='git show'
 alias gs.='git show --color-words="."'
 alias gst='git status'
 alias gss='git stash'
+alias gssa='git stash apply'
 alias gssp='git stash pop'
 alias gup='git smart-pull'
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
