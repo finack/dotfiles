@@ -5,6 +5,7 @@
 --ignore-dir=.idea
 --ignore-dir=.jhw-cache
 
+--type-add=ruby=.slim
 --type-add=ruby=.haml
 --type-add=ruby=.ru
 --type-add=css=.sass
