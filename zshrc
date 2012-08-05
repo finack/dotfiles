@@ -153,10 +153,12 @@ setopt CORRECT CORRECT_ALL
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
-# f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
-# compctl -/ -W ~/src/finack f
-# z () { if [[ -e ~/src/zest/$1 ]] then cd ~/src/zest/$1; else cd ~/src/zest; fi }
-# compctl -/ -W ~/src/zest z
+local FSPRORU_PROJ_PATH=~/Documents/projects/fsproru/
+function f () { if [[ -e $FSPRORU_PROJ_PATH$1 ]] then cd $FSPRORU_PROJ_PATH$1; else cd $FSPRORU_PROJ_PATH; fi }
+compctl -/ -W $FSPRORU_PROJ_PATH f
+local ZEST_PROJ_PATH=~/Documents/projects/zest/
+function z () {if [[ -e $ZEST_PROJ_PATH$1 ]] then cd $ZEST_PROJ_PATH$1; else cd $ZEST_PROJ_PATH; fi }
+compctl -/ -W $ZEST_PROJ_PATH z
 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' actionformats \
