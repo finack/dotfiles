@@ -135,12 +135,12 @@ setopt CORRECT CORRECT_ALL
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
-local FSPRORU_PROJ_PATH=~/Documents/projects/fsproru/
-function f () { if [[ -e $FSPRORU_PROJ_PATH$1 ]] then cd $FSPRORU_PROJ_PATH$1; else cd $FSPRORU_PROJ_PATH; fi }
-compctl -/ -W $FSPRORU_PROJ_PATH f
-local ZEST_PROJ_PATH=~/Documents/projects/zest/
-function z () {if [[ -e $ZEST_PROJ_PATH$1 ]] then cd $ZEST_PROJ_PATH$1; else cd $ZEST_PROJ_PATH; fi }
-compctl -/ -W $ZEST_PROJ_PATH z
+# Jump between projects
+export PROJ_HOME=$HOME/Documents/projects
+function f () {if [[ -e $PROJ_HOME/fsproru/$1 ]] then cd $PROJ_HOME/fsproru/$1; else cd $PROJ_HOME/fsproru; fi}
+compctl -/ -W $PROJ_HOME/fsproru f
+function z () {if [[ -e $PROJ_HOME/zest/$1 ]] then cd $PROJ_HOME/zest/$1; else cd $PROJ_HOME/zest; fi }
+compctl -/ -W $PROJ_HOME z
 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' actionformats \
