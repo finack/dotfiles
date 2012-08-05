@@ -140,7 +140,7 @@ export PROJ_HOME=$HOME/Documents/projects
 function f () {if [[ -e $PROJ_HOME/fsproru/$1 ]] then cd $PROJ_HOME/fsproru/$1; else cd $PROJ_HOME/fsproru; fi}
 compctl -/ -W $PROJ_HOME/fsproru f
 function z () {if [[ -e $PROJ_HOME/zest/$1 ]] then cd $PROJ_HOME/zest/$1; else cd $PROJ_HOME/zest; fi }
-compctl -/ -W $PROJ_HOME z
+compctl -/ -W $PROJ_HOME/zest z
 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' actionformats \
