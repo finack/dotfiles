@@ -115,7 +115,7 @@ stty -ixon
 # bindkey -M vicmd '^e' end-of-line
 
 # expand functions in the prompt
-setopt prompt_subst
+# setopt prompt_subst
 
 # prompt
 #export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
