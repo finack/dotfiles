@@ -43,6 +43,10 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit
 compinit
 
+# do not display variable name in a prompt
+# if variable's value matches a current path
+setopt no_auto_name_dirs
+
 # automatically enter directories without cd
 setopt auto_cd
 
