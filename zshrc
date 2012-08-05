@@ -71,21 +71,6 @@ fi
   # source "$HOME/.zsh/macfix.sh"
 # fi
 
-# EC2 CLI API
-# if [ -e "$HOME/bin/ec2-api-tools" ]; then
-  # export EC2_HOME="$HOME/bin/ec2-api-tools"
-  # export PATH=$PATH:$EC2_HOME/bin
-  # # TODO Unmacify java_home
-  # export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home/"
-  # export EC2_CERT="$HOME/.secrets/p/development/aws-zest-p-cert.pem"
-  # export EC2_PRIVATE_KEY="$HOME/.secrets/p/development/aws-zest-p-privatekey.pkcs8"
-# fi
-
-# if [ -e "$HOME/bin/ElasticLoadBalancing" ]; then
-  # export AWS_ELB_HOME=$HOME/bin/ElasticLoadBalancing
-  # export PATH=$PATH:$HOME/bin/ElasticLoadBalancing/bin
-# fi
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Enable RVM
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export CC=/usr/bin/gcc-4.2 #needed to build rubies
@@ -117,9 +102,6 @@ stty -ixon
 # bindkey -M vicmd '^a' beginning-of-line
 # bindkey -M viins '^e' end-of-line
 # bindkey -M vicmd '^e' end-of-line
-
-# expand functions in the prompt
-# setopt prompt_subst
 
 # prompt
 #export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
