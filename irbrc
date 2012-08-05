@@ -1,3 +1,17 @@
+$:.unshift('~/.rvm/gems/ruby-1.9.2-p290@global/gems/awesome_print-1.0.2/lib')
+require 'rubygems'
+require 'ap'
+
+IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:USE_READLINE] = true
+IRB.conf[:PROMPT_MODE] = :SIMPLE
+
+IRB::Irb.class_eval do
+  def output_value
+    ap @context.last_value
+  end
+end
+
 # print SQL to STDOUT
 if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
   require 'logger'
