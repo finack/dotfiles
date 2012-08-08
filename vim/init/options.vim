@@ -136,3 +136,9 @@ endif
 if has("gui_running")
   set noballooneval
 endif
+
+" Case insensitive search by default
+set ignorecase
+
+" Use shell in vim (sources rvm)
+set shell=/bin/sh
