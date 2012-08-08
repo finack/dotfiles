@@ -140,5 +140,5 @@ map <Leader>cvf :<C-u>ChefFindAnyVsplit<CR>
 
 " Save on CTRL-s
 nmap <C-s> :w<CR>
-imap <C-s> <Esc>:w<CR>i
+imap <C-s> <Esc>:w<CR>
 vmap <C-s> <Esc>:w<CR>gv
