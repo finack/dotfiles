@@ -133,12 +133,12 @@ endif
 
 " Turn off ri tooltips that don't work with Ruby 1.9 yet
 " http://code.google.com/p/macvim/issues/detail?id=342
-if has("gui_running")
-  set noballooneval
-endif
+  if has("gui_running")
+    set noballooneval
+  endif
 
 " Case insensitive search by default
-set ignorecase
+  set ignorecase
 
 " Use shell in vim (sources rvm)
 set shell=/bin/sh
