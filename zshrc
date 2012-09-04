@@ -1,36 +1,11 @@
 # -------------------------------------------+
 # oh-my-zsh template                         #
 # -------------------------------------------+
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
 
 # load our own completion functions
 # fpath=(~/.zsh/completion $fpath)
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git-flow rvm gem macports knife bundler)
 
 source $ZSH/oh-my-zsh.sh
@@ -66,11 +41,6 @@ if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
 
-# Fun with macs
-# if [ -e "$HOME/.zsh/macfix.sh" ]; then
-  # source "$HOME/.zsh/macfix.sh"
-# fi
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Enable RVM
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export CC=/usr/bin/gcc-4.2 #needed to build rubies
@@ -89,22 +59,6 @@ fi
 
 # pass <C-s> and other terminal keys to vim
 stty -ixon
-
-# vi mode
-# bindkey -v
-# bindkey ^F vi-cmd-mode
-
-# use incremental search
-# bindkey ^R history-incremental-search-backward
-# bindkey -M viins '^r' history-incremental-search-backward
-# bindkey -M vicmd '^r' history-incremental-search-backward
-# bindkey -M viins '^a' beginning-of-line
-# bindkey -M vicmd '^a' beginning-of-line
-# bindkey -M viins '^e' end-of-line
-# bindkey -M vicmd '^e' end-of-line
-
-# prompt
-#export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
 
 # ignore duplicate history entries
 setopt histignoredups
@@ -142,16 +96,6 @@ compctl -/ -W $PROJ_HOME/fsproru f
 function z () {if [[ -e $PROJ_HOME/zest/$1 ]] then cd $PROJ_HOME/zest/$1; else cd $PROJ_HOME/zest; fi }
 compctl -/ -W $PROJ_HOME/zest z
 
-# autoload -Uz vcs_info
-# zstyle ':vcs_info:*' actionformats \
-  # '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-# zstyle ':vcs_info:*' formats       \
-  # '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-# precmd () { vcs_info }
-# git_super_status() { echo ${vcs_info_msg_0_} }
-# PS1='%F{5}[%F{2}%n%F{5}] %F{3}%3~ ${vcs_info_msg_0_}%f%# '
-
 # makes color constants available
 autoload -U colors
 colors
@@ -184,27 +128,6 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-## Colors
-#SOLARIZED TERMCOL  XTERM
-#--------- -------  ----
-#base03    brblack  234
-#base02    black    235
-#base01    brgreen  240
-#base00    bryellow 241
-#base0     brblue   244
-#base1     brcyan   245
-#base2     white    254
-#base3     brwhite  230
-#yellow    yellow   136
-#orange    brred    166
-#red       red      160
-#magenta   magenta  125
-#violet    brmagenta 61
-#blue      blue      33
-#cyan      cyan      37
-#green     green     64
-
 
 # Ubuntu likes to 'fix' your zsh. This reverts to a default (up|down) end of line behaviour
 if [[ "$TERM" != emacs ]]; then
