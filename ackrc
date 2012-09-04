@@ -5,6 +5,14 @@
 --ignore-dir=.idea
 --ignore-dir=.jhw-cache
 
+--type-set=markdown=.markdown
+--type-set=cucumber=.feature
+--type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
+--type-set=ragel=.rl
+--type-set=nib=.xib
+--type-set=plist=.plist
+--type-set=tmstuff=.tmproj,.tm_build_errors
+
 --type-add=ruby=.slim
 --type-add=ruby=.haml
 --type-add=ruby=.ru
@@ -13,13 +21,6 @@
 --type-add=js=.coffee
 --type-add=objc=.pch
 
---type-set=markdown=.markdown
---type-set=cucumber=.feature
---type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
---type-set=ragel=.rl
---type-set=nib=.xib
---type-set=plist=.plist
---type-set=tmstuff=.tmproj,.tm_build_errors
 --nonib
 --notmstuff
 --noxcode
