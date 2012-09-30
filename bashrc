@@ -2,7 +2,6 @@
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export CC=/usr/bin/gcc-4.2 #needed to build rubies
 export RUBYOPT=rubygems # so I can use gems in raw scripts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 export PATH=~/.bin:$PATH
 
 if [ -f /etc/bash_completion ]; then

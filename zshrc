@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # load our own completion functions
 # fpath=(~/.zsh/completion $fpath)
 DISABLE_AUTO_UPDATE="true"
-plugins=(git-flow rvm gem macports knife bundler)
+plugins=(git-flow rvm gem brew knife bundler)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,11 +44,10 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Enable RVM
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export CC=/usr/bin/gcc-4.2 #needed to build rubies
-export RUBYOPT=rubygems # so I can use gems in raw scripts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 
 # Solarized GNU Colors
 if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
+  # install coreutils to have gdircolors
   eval `gdircolors $HOME/.zsh/dircolors/dircolors.256dark`
 fi
 
