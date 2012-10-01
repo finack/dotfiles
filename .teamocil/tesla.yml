@@ -1,0 +1,36 @@
+session:
+  name: tesla
+  windows:
+    # - name: zsh
+      # root: "~/"
+      # splits:
+      # - cmd: clear
+    - name: flow
+      root: "~/src/zest/twilioflow"
+      splits:
+      - cmd: vim
+      - cmd: "echo --"
+        height: 20
+    - name: acd_demo
+      root: "~/src/zest/acd_demo"
+      splits:
+      - cmd: vim
+      - cmd: "r c"
+        height: 20
+    - name: www-service
+      root: "~/src/zest/www-service"
+      splits:
+      - cmd: "echo vim"
+      - cmd: "echo --"
+        height: 20
+    - name: guard
+      root: "~/src/zest/acd_demo"
+      filters:
+        before:
+          - "secrets_for_development"
+      splits:
+      - cmd: "bundle exec guard -g server"
+    - name: ssh proxy
+      root: "~/"
+      splits:
+      - cmd: "ssh -N -R 8080::3000 acd.dev.spotloan.com"

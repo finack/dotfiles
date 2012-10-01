@@ -7,39 +7,46 @@ session:
       - cmd: vim
       - cmd: echo "--"
         height: 20
+    - name: agents
+      root: "~/src/zest/agents"
+      splits:
+      - cmd: vim
+      - cmd: 'r c'
+        height: 20
     - name: interview
       root: "~/src/zest/ZestAdmin"
       splits:
-      - cmd: echo vim
-      - cmd: echo "--"
+      - cmd: vim
+      - cmd: 'r c'
         height: 20
     - name: servicing
       root: "~/src/zest/ZestServicing"
       splits:
-      - cmd: echo vim
-      - cmd: echo "--"
+      - cmd: vim
+      - cmd: 'r c'
         height: 20
     - name: testing
       root: "~/src/zest/www"
-      filters:
-        before:
-          - "secrets_for_development"
       splits:
-      - cmd: "bundle exec guard -g tests"
-      - cmd: echo "cd ../ZestServicing && guard -g tests"
-        height: 66
-      - cmd: echo "cd ../ZestAdmin && bundle exec guard -g tests"
+      - cmd: "z www"
+      - cmd: echo "z agent"
+        width: 50
+      - cmd: echo "z ZestServicing"
         height: 50
-        target: bottom
+        target: bottom-right
+      - cmd: "z ZestAdmin"
+        height: 50
+        target: bottom-left
     - name: servers
       root: "~/src/zest/www"
-      filters:
-        before:
-          - "secrets_for_development"
       splits:
       - cmd: "bundle exec guard -g server"
+      - cmd: "cd ../acd_demo && bundle exec rails server -p 3002"
+        width: 50
+        focus: true
       - cmd: "cd ../ZestServicing && bundle exec rails server"
-        height: 66
+        height: 50
+        target: bottom-right
       - cmd: "cd ../ZestAdmin && bundle exec rails server"
         height: 50
-        target: bottom
+        target: bottom-left
