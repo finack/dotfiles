@@ -21,7 +21,7 @@ alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%
 
 # setup
 setup_git() {
-  gem install git-smart omglog grb
+  gem install git-smart omglog grb simple-git-pair
   echo "!!Now Install git flow"
 }
 
