@@ -97,14 +97,20 @@ setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
 
 # Try to correct command line spelling
-setopt CORRECT CORRECT_ALL
+setopt CORRECT
+
+# Correct command line arguements based on file names
+# setopt CORRECT_ALL
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
+# TODO Detect RVM & RBenv and use one or the other
 # Enable RVM
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# [[ -s "/usr/local/rvm/scripts/rvm" ]] && . "/usr/local/rvm/scripts/rvm"
 
+# Enable RBEnv
 eval "$(rbenv init -)"
 
 f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
