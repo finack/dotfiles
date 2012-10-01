@@ -11,7 +11,7 @@
   set number                     " Line numbers
   set nowrap                     " No wrapping
   set backspace=indent,eol,start " Let backspace work over anything.
-  set clipboard=                 " turns out I do like is sharing windows clipboard
+  set clipboard=unnamed
   set ffs=unix,mac               " support these in this order
   filetype on                    " detect the type of file
   filetype plugin on             " load filetype plugins
