@@ -21,6 +21,7 @@ done
 if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
+# secrets_for_development
 
 # Fun with macs
 if [ -e "$HOME/.zsh/macfix.sh" ]; then
