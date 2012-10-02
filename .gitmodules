@@ -109,3 +109,9 @@
 [submodule "zsh/git-prompt"]
 	path = zsh/git-prompt
 	url = git://github.com/olivierverdier/zsh-git-prompt.git
+[submodule "vim/bundle/fuzzyfinder"]
+	path = vim/bundle/fuzzyfinder
+	url = git://github.com/vim-scripts/FuzzyFinder.git
+[submodule "vim/bundle/l9"]
+	path = vim/bundle/l9
+	url = git://github.com/vim-scripts/L9.git
