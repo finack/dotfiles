@@ -14,12 +14,6 @@ vmap <leader>s  :s/
 " Split screen
 map <leader>v   :vsp<CR>
 
-" Move between screens
-map <leader>w   ^Ww
-map <leader>=   ^W=
-map <leader>j   ^Wj
-map <leader>k   ^Wk
-
 " Open .vimrc file in new tab. Think Command + , [Preferences...] but with Shift.
 map <D-<>       :tabedit ~/.vimrc<CR>
 
@@ -43,43 +37,14 @@ map \           :NERDTreeToggle<CR>
 " File tree browser showing current file - pipe (shift-backslash)
 map \|          :NERDTreeFind<CR>
 
-" Previous/next quickfix file listings (e.g. search results)
-map <M-D-Down>  :cn<CR>
-map <M-D-Up>    :cp<CR>
-
-" Previous/next buffers
-map <M-D-Left>  :bp<CR>
-map <M-D-Right> :bn<CR>
-
 "indent/unindent visual mode selection with tab/shift+tab
 vmap <tab> >gv
 vmap <s-tab> <gv
 
 " FuzzyFinder and switchback commands
-map <leader>e   :e#<CR>
-" map <leader>b   :FufBuffer<CR>
-" map <leader>f   <Plug>PeepOpen
-map <leader><C-N> :FufFile **/<CR>
-map <D-e> :FufBuffer<CR>
-map <leader>n :FufFile **/<CR>
-map <D-N> :FufFile **/<CR>
-
-" refresh the FuzzyFinder cache
-map <leader>rf :FufRenewCache<CR>
-
-" Command-T
-map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-map <leader>F   :CommandTFlush<CR>:CommandT<CR>
-map <Leader>f   :CommandT<CR>
-map <Leader>b   :CommandTBuffer<CR>
-
-"" ctags moved to git hook
-" ctags with rails load path
-" map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-" map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
-
-" ctags with bundler load path
-" map <leader>c :!~/.rvm/bin/ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
+map <leader>F   :FufRenewCache<CR>:FufFile **/<CR>
+map <Leader>f   :FufFile **/<CR>
+map <Leader>b   :FufBuffer<CR>
 
 " Git blame
 map <leader>g   :Gblame<CR>
