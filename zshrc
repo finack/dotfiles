@@ -6,7 +6,8 @@ ZSH=$HOME/.oh-my-zsh
 # load our own completion functions
 # fpath=(~/.zsh/completion $fpath)
 DISABLE_AUTO_UPDATE="true"
-plugins=(git-flow rvm gem brew knife bundler)
+ZSH_THEME="bira"
+plugins=(gem brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,7 +84,8 @@ setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
 
 # Try to correct command line spelling
-setopt CORRECT CORRECT_ALL
+setopt CORRECT
+unsetopt CORRECT_ALL
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
@@ -99,27 +101,9 @@ compctl -/ -W $PROJ_HOME/zest z
 autoload -U colors
 colors
 
-# https://github.com/olivierverdier/zsh-git-prompt
-source ~/.zsh/git-prompt/zshrc.sh
-ZSH_THEME_GIT_PROMPT_NOCACHE=1
-
 # enable colored output from ls, etc
 export CLICOLOR=1
 export LSCOLORS=ExGxCxDxBxegedabagacad
 
 # expand functions in the prompt
 setopt prompt_subst
-
-# prompt
-local ssh_prompt="%F{064}%n@%m%f:"
-local MODE_INDICATOR="%F{136}-%fvi-cmd%F{136}-%f"
-
-# Set path to red if return code is not 0
-export PROMPT="${SSH_CONNECTION+${ssh_prompt}}%(?,%F{136},%F{160})%~%f "
-export RPROMPT="$(git_super_status)$(rvm_prompt_info)"
-
-function zle-line-init {
-  export RPROMPT="$(git_super_status)$(rvm_prompt_info)"
-  zle reset-prompt
-}
-zle -N zle-line-init
