@@ -42,9 +42,12 @@ if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Enable RVM
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-export CC=/usr/bin/gcc-4.2 #needed to build rubies
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # rbenv init
+# [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+# export CC=/usr/bin/gcc-4.2 # CLI tools
+export CC=/usr/local/bin/gcc-4.2 # apple gcc from homebrew
+export CFLAGS="-I/opt/X11/include" # ruby 1.8.7 needs X11 to build
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH # look for brew packages first
 
 # Solarized GNU Colors
 if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
