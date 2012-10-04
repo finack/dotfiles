@@ -1,8 +1,10 @@
-[[ "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # rbenv init
+# [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export CC=/usr/bin/gcc-4.2 #needed to build rubies
 export RUBYOPT=rubygems # so I can use gems in raw scripts
 export PATH=~/.bin:$PATH
+export CFLAGS="-I/opt/X11/include" # ruby 1.8.7 needs X11 to build
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH # look for brew packages first
 
 if [ -f /etc/bash_completion ]; then
   source /etc/bash_completion
