@@ -3,8 +3,6 @@
   sp = smart-pull
   padd = add -p
   co = checkout
-  ffs = flow feature start
-  fff = flow feature finish
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
