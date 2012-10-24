@@ -90,4 +90,4 @@
 	url = git://github.com/vim-scripts/ZoomWin.git
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
-	url = git@github.com:finack/Command-T.git
+	url = git://github.com/finack/Command-T.git
