@@ -1,3 +1,5 @@
+###This fork is no longer maintained. The new version is [dotfiles-portable](https://github.com/fsproru/dotfiles-portable)
+
 fsproru dotfiles
 ===================
 
