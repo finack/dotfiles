@@ -72,10 +72,12 @@ map <leader>e   :e#<CR>
 map <leader>rf :FufRenewCache<CR>
 
 " Command-T
-map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-map <leader>F   :CommandTFlush<CR>:CommandT<CR>
-map <Leader>f   :CommandT<CR>
-map <Leader>b   :CommandTBuffer<CR>
+" map <D-N>       :CommandTFlush<CR>:CommandT<CR>
+" map <leader>F   :CommandTFlush<CR>:CommandT<CR>
+" map <Leader>f   :CommandT<CR>
+" map <Leader>b   :CommandTBuffer<CR>
+map <Leader>f   :CtrlP<CR>
+map <Leader>b   :CtrlPBuffer<CR>
 
 "" ctags moved to git hook
 " ctags with rails load path
