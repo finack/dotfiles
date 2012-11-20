@@ -5,4 +5,5 @@
 "  endif
 
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme Tomorrow-Night
