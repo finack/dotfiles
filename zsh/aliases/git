@@ -72,3 +72,5 @@ alias gssa='git stash apply'
 alias gssp='git stash pop'
 alias gup='git smart-pull'
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
+
+# vim ft=sh

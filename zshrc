@@ -1,15 +1,11 @@
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
 
+for alias in $HOME/.zsh/aliases/*; do source $alias; done
+for plugin in $HOME/.zsh/plugins/*; do source $plugin; done
 
 # use vim as an editor
 export EDITOR=vim
-
-# aliases
-for alias in $HOME/.zsh/aliases/*
-do
-  source $alias
-done
 
 # zestsecrets
 if [ -e "$HOME/.zestsecrets" ]; then
