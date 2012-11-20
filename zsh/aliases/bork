@@ -3,3 +3,5 @@ alias kil='knife instance list'
 alias knl='knife node list'
 alias knd='knife node delete'
 alias kdbes='knife data bag edit --secret-file ~/.secrets/zestcash/development/application_keys/chef_development_databag.key'
+
+# vim ft=sh
