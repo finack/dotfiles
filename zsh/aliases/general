@@ -32,6 +32,10 @@ setup_tmux() {
   echo "Don't forget to git pair"
 }
 
+setup_pry() {
+  bundle exec gem install pry pry-doc hirb pry-rails
+}
+
 # Ruby
 alias help-strftime='ruby ~/bin/help-strftime.rb'
 
