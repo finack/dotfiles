@@ -16,6 +16,7 @@
   filetype on                    " detect the type of file
   filetype plugin on             " load filetype plugins
   set viminfo+=!                 " make sure it can save viminfo
+  set modelines=1                " enable modelines in files
 
 set list                         " Show whitespace
 if has("gui_running")
