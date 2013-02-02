@@ -1,26 +1,38 @@
 # Originally from https://github.com/joshuaclayton/dotfiles/blob/master/Rakefile
+require 'rbconfig'
 
-class Installer
-  def symlink(target, link)
-    if File.symlink?(link)
-      unlink(link)
-    elsif File.exist?(link)
-      puts "ERROR: File exists: #{link}"
-      exit 1
+module Installer
+  class << self
+    def symlink(target, link)
+      if File.symlink?(link)
+        unlink(link)
+      elsif File.exist?(link)
+        puts "ERROR: File exists: #{link}"
+        exit 1
+      end
+      puts "Symlinking #{link} => #{target}"
+      File.symlink(target, link)
     end
-    puts "Symlinking #{link} => #{target}"
-    File.symlink(target, link)
-  end
 
-  def delete_symlink(link)
-    unlink(link) if File.symlink?(link)
-  end
+    def delete_symlink(link)
+      unlink(link) if File.symlink?(link)
+    end
 
-  def unlink(link)
-    if File.exist?(link)
-      descriptor = File.symlink?(link) ? "symlink" : "file"
-      puts "Deleting #{descriptor} #{link}"
-      File.unlink(link)
+    def unlink(link)
+      if File.exist?(link)
+        descriptor = File.symlink?(link) ? "symlink" : "file"
+        puts "Deleting #{descriptor} #{link}"
+        File.unlink(link)
+      end
+    end
+
+    def mac_or_unix(mac_cmd, unix_cmd)
+      case RbConfig::CONFIG['host_os']
+      when /darwin/i
+        mac_cmd
+      when /linux/i
+        unix_cmd
+      end
     end
   end
 end
@@ -32,19 +44,21 @@ end
 
 files = File.new(File.join(pwd, "MANIFEST"), "r").read.split("\n")
 
-task :default => 'install'
+task :default => ['submodules:init', 'submodules:update', 'dotfiles:install', 'vim:install']
 
-desc "Install all dotfiles"
-task :install => ['submodules:init', 'submodules:update'] do
-  files.each do |file|
-    Installer.new.symlink(File.join(pwd, file), target_path(file))
+namespace :dotfiles do
+  desc "Install all dotfiles"
+  task :install => ['submodules:init', 'submodules:update'] do
+    files.each do |file|
+      Installer.symlink(File.join(pwd, file), target_path(file))
+    end
   end
-end
 
-desc "Remove all dotfies"
-task :uninstall do
-  files.each do |file|
-    Installer.new.unlink(target_path(file))
+  desc "Remove all dotfies"
+  task :uninstall do
+    files.each do |file|
+      Installer.unlink(target_path(file))
+    end
   end
 end
 
@@ -52,28 +66,42 @@ namespace :submodules do
   desc "Install submodules"
   task :init do
     puts "Installing submodules"
-    `git submodule init`
+    system 'git submodule init'
   end
 
   desc "Update submodules"
   task :update do
     puts "Updating submodules"
-    `git submodule update`
+    system 'git submodule update'
   end
 end
 
 namespace :vim do
-
   desc "Update VIM plugins"
   task :update do
     puts "Pull vim submodules"
     system(%{
-    for x in vim/bundle/*; do
-      echo $x
-      cd $x
-      git checkout master && git pull
-      cd -
-    done
-    })
+      for x in vim/bundle/*; do
+        echo $x
+        cd $x
+        git checkout master && git pull
+        cd -
+      done
+           })
+  end
+
+  desc "Install Vim"
+  task :install do
+    system Installer.mac_or_unix(
+      "brew install macvim --env-std --override-system-vim",
+      "apt-get install vim-nox"
+    )
+  end
+end
+
+namespace :python do
+  desc 'Install Python'
+  task :install do
+    system Installer.mac_or_unix "brew install python", "apt-get install python"
   end
 end
