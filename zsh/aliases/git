@@ -14,7 +14,13 @@ alias gcam='gca --amend'
 alias gch='git cherry-pick'
 alias gcm='git commit -v --amend'
 alias gco='git checkout'
-alias gcop='gco -p'
+gcop() {
+  git ls-remote --exit-code origin refs/pull/$1/merge
+  [ $? -ne 0 ] && echo "Could not find pull request $1" && return
+  git fetch origin +refs/pull/$1/merge
+  git checkout FETCH_HEAD
+}
+
 alias gd='git diff -M'
 alias gd.='git diff -M --color-words="."'
 alias gdc='git diff --cached -M'
