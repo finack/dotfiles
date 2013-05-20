@@ -1,52 +1,43 @@
 session:
   name: rails
   windows:
-    - name: www
-      root: "~/src/zest/www"
+    - name: TELE
+      root: "~/src/zest/telephony_engine"
       splits:
       - cmd: vim
-      - cmd: echo "--"
-        height: 20
-    - name: agents
-      root: "~/src/zest/agents"
-      splits:
-      - cmd: vim
-      - cmd: 'r c'
-        height: 20
-    - name: interview
+    - name: IV
       root: "~/src/zest/ZestAdmin"
       splits:
       - cmd: vim
-      - cmd: 'r c'
-        height: 20
-    - name: servicing
+    - name: SV
       root: "~/src/zest/ZestServicing"
       splits:
       - cmd: vim
-      - cmd: 'r c'
-        height: 20
-    - name: testing
-      root: "~/src/zest/www"
+    - name: COMMS
+      root: "~/src/zest/comms_hub"
       splits:
-      - cmd: "z www"
-      - cmd: echo "z agent"
-        width: 50
-      - cmd: echo "z ZestServicing"
-        height: 50
-        target: bottom-right
-      - cmd: "z ZestAdmin"
-        height: 50
-        target: bottom-left
-    - name: servers
-      root: "~/src/zest/www"
+      - cmd: vim
+    - name: BORK
+      root: "~/src/zest/bork"
       splits:
-      - cmd: "bundle exec guard -g server"
-      - cmd: "cd ../acd_demo && bundle exec rails server -p 3002"
+      - cmd: vim
+    - name: rails
+      root: "~/src/zest/telephony_engine"
+      splits:
+      - cmd: "cd spec/dummy && bundle exec rails server"
+      - cmd: "bundle && rackup script/telephony_proxy.ru"
         width: 50
         focus: true
-      - cmd: "cd ../ZestServicing && bundle exec rails server"
+      - cmd: "cd ../ZestServicing && bundle && bundle exec rails server"
         height: 50
         target: bottom-right
-      - cmd: "cd ../ZestAdmin && bundle exec rails server"
+      - cmd: "cd ../ZestAdmin && bundle &&  bundle exec rails server"
         height: 50
         target: bottom-left
+    - name: comms
+      root: "~/src/zest/comms_hub"
+      splits:
+      - cmd: "/usr/local/sbin/rabbitmq-server"
+      - cmd: "be ./bin/renderer.rb development"
+        width: 50
+        focus: true
