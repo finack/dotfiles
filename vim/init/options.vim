@@ -18,12 +18,6 @@
   set viminfo+=!                 " make sure it can save viminfo
   set modelines=1                " enable modelines in files
 
-set list                         " Show whitespace
-if has("gui_running")
-  set listchars=trail:·
-else
-  set listchars=trail:~
-endif
 
 " Visual Cues
   set showmatch                                      " show matching brackets
@@ -31,29 +25,32 @@ endif
   set hlsearch                                       " highlight searched for phrases
   set incsearch                                      " highlight as you type you search phrase
   set history=1024                                   " History size
-  set listchars=tab:\\.,trail:.,extends:>,precedes:< " what to show when I hit :set list
-  set list
+  set listchars=trail:◇,tab:»·,extends:>,precedes:<
   set so=5                                           " Keep x lines (top/bottom) for scope
   set novisualbell                                   " don't blink
   set noerrorbells                                   " no noises
   " Statusline from ~1994 => 2011
   " set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%05l,%04v][%LL:%p%%]
 
-  set statusline=[%n]                             " buffer number
-  set statusline+=\ %<%.99f                       " tail of the filename
-                                                  " set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, " file encoding
-  set statusline+=\ %m                            " modified flag
-  set statusline+=[
-  set statusline+=%{&ff},                         " file format
-  set statusline+=%R                              " read only flag
-  set statusline+=%Y                              " filetype
-  set statusline+=]
-  set statusline+=%=                              " left/right separator
-  set statusline+=%-16(%{fugitive#statusline()}%) " git branch
-  set statusline+=%l/%LL                          " cursor line/total lines
-  set statusline+=\ %c%VC                         " cursor column
-  set statusline+=\ %P                            " percent through file
-
+  " Statusline prior to Airline
+  " set statusline=[%n]                             " buffer number
+  " set statusline+=\ %<%.99f                       " tail of the filename
+                                                  " " set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, " file encoding
+  " set statusline+=\ %m                            " modified flag
+  " set statusline+=[
+  " set statusline+=%{&ff},                         " file format
+  " set statusline+=%R                              " read only flag
+  " set statusline+=%Y                              " filetype
+  " set statusline+=]
+  " set statusline+=%=                              " left/right separator
+  " set statusline+=%-16(%{fugitive#statusline()}%) " git branch
+  " set statusline+=%l/%LL                          " cursor line/total lines
+  " set statusline+=\ %c%VC                         " cursor column
+  " set statusline+=\ %P                            " percent through file
+  " set statusline=%{bufferline#generate_string()}
+  let g:bufferline_echo=0
+  let g:airline_theme='dark'
+  let g:airline_powerline_fonts=1
 
   set laststatus=2 " always show the status line
   set hidden                      " Allow hidden, unsaved buffers
@@ -101,7 +98,7 @@ endif
 
 " Vim UI
   set lsp=0                            " space it out a little more (easier to read)
-  set wildmenu                         " turn on wild menu
+  set wildmenu  wildmode=full          " turn on wild menu
   set ruler                            " Always show current positions along the bottom
   set cmdheight=2                      " the command bar is 2 high
   set number                           " turn on line numbers
@@ -118,10 +115,11 @@ endif
   set report=0                         " tell us when anything is changed via :...
   set noerrorbells                     " don't make noise
                                        " make the splitters between windows be blank
-  set fillchars=vert:\ ,stl:\ ,stlnc:\
+  set fillchars+=vert:\ ,stl:\ ,stlnc:\ " display spaces in fill chars
   set scrolloff=3                      " Scroll when the cursor is 3 lines from edge
   set cursorline                       " Highlight current line
   set laststatus=2                     " Always show statusline
+  set encoding=utf8
 
 " Write all writeable buffers when changing buffers or losing focus.
   set autowriteall                " Save when doing various buffer-switching things.
