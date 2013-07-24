@@ -8,7 +8,6 @@ export EDITOR=vim
 if [ -e "$HOME/.zestsecrets" ]; then
   source "$HOME/.zestsecrets"
 fi
-# secrets_for_development
 
 # Add bin dir
 if [ -e "$HOME/.bin" ]; then
