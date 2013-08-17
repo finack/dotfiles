@@ -94,7 +94,7 @@ namespace :vim do
   task :install do
     system Installer.mac_or_unix(
       "brew install macvim --env-std --override-system-vim",
-      "apt-get install vim-nox"
+      "sudo apt-get install vim-nox"
     )
   end
 end
@@ -102,6 +102,6 @@ end
 namespace :python do
   desc 'Install Python'
   task :install do
-    system Installer.mac_or_unix "brew install python", "apt-get install python"
+    system Installer.mac_or_unix "brew install python", "sudo apt-get install python"
   end
 end
