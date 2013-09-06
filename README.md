@@ -12,9 +12,7 @@ First, [fork this repo](https://github.com/finack/dotfiles#fork_box) on Github.
 Then, clone your Github fork (replace "your-github-name" with your Github name) onto your laptop and install it:
 
     git clone git@github.com:your-github-name/dotfiles.git ~/.dotfiles
-    cd ~/.dotfiles
-    git submodules update --init
-    ./install.sh
+    rake
 
 This will create symlinks for all config files in your home directory. You can
 safely run this file multiple times to update.
@@ -23,16 +21,18 @@ There is configuration for `zsh` so switch your shell from the default `bash` to
 
     chsh -s /bin/zsh
 
-Configure VIM
--------------
+ZSH Upgrade
+-----------
 
-Assumes VIM is compiled against your system ruby
+    Install Homebrew
+    Install ZSH
+    chsh -s /usr/local/bin/zsh
 
-cd ~/.vim/bundle/command-t/ruby/command-t
-rvm use system
-ruby extconf.rb
-make
-sudo make install
+Powerline fonts
+---------------
+
+My vim currently uses characters in the powerline fonts. I am currently using
+(Inconsolata font with powerline)[https://github.com/Lokaltog/powerline-fonts/blob/master/Inconsolata/Inconsolata%20for%20Powerline.otf]
 
 
 Why fork?
