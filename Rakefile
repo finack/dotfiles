@@ -44,7 +44,7 @@ end
 
 files = File.new(File.join(pwd, "MANIFEST"), "r").read.split("\n")
 
-task :default => ['submodules:init', 'submodules:update', 'dotfiles:install', 'vim:install']
+task :default => ['submodules:init', 'submodules:update', 'dotfiles:install', 'vim:install', 'install:tmux']
 
 namespace :dotfiles do
   desc "Install all dotfiles"
@@ -99,9 +99,17 @@ namespace :vim do
   end
 end
 
-namespace :python do
+namespace :install do
   desc 'Install Python'
-  task :install do
+  task :python do
     system Installer.mac_or_unix "brew install python", "sudo apt-get install python"
+  end
+
+  desc "Install tmux"
+  task :tmux do
+    system Installer.mac_or_unix(
+      "brew install reattach-to-user-namespace; brew install tmux",
+      ""
+    )
   end
 end

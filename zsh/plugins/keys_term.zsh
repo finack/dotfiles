@@ -11,7 +11,7 @@ bindkey -M vicmd '^a' beginning-of-line
 bindkey -M viins '^e' end-of-line
 bindkey -M vicmd '^e' end-of-line
 
-
+bindkey -M viins '\e.' insert-last-word
 
 ## Lifted from https://github.com/fschulze/zsh-settings/blob/master/bindkey.zsh
 # allow you to start typing a command and
