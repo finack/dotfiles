@@ -8,9 +8,6 @@ PATH="/usr/local/heroku/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/bin:$PATH"
 
-PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 PATH="$HOME/.bin:$PATH"
 
 export PATH

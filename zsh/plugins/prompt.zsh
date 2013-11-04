@@ -5,10 +5,9 @@ autoload -U colors && colors
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-
-# Solarized GNU Colors
-if [ -e "$HOME/.zsh/dircolors/dircolors.256dark" -a $+commands[dircolors] ]; then
-  eval `dircolors $HOME/.zsh/dircolors/dircolors.256dark`
+if [ -e "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh" -a $+commands[dircolors] ]; then
+  echo "Setting colors"
+  eval "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh"
 fi
 
 #expand functions in the prompt
@@ -37,23 +36,3 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-## Colors
-#SOLARIZED TERMCOL  XTERM
-#--------- -------  ----
-#base03    brblack  234
-#base02    black    235
-#base01    brgreen  240
-#base00    bryellow 241
-#base0     brblue   244
-#base1     brcyan   245
-#base2     white    254
-#base3     brwhite  230
-#yellow    yellow   136
-#orange    brred    166
-#red       red      160
-#magenta   magenta  125
-#violet    brmagenta 61
-#blue      blue      33
-#cyan      cyan      37
-#green     green     64

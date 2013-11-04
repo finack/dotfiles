@@ -112,3 +112,15 @@
 [submodule "vim/bundle/vim-pathogen"]
 	path = vim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule "base16-theme"]
+	path = base16-theme
+	url = https://github.com/chriskempson/base16.git
+[submodule "themes/base16-iterm2"]
+	path = themes/base16-iterm2
+	url = https://github.com/chriskempson/base16-iterm2
+[submodule "vim/bundle/base16-theme"]
+	path = vim/bundle/base16-theme
+	url = https://github.com/chriskempson/base16-vim
+[submodule "zsh/base16-theme"]
+	path = zsh/base16-theme
+	url = https://github.com/chriskempson/base16-shell.git
