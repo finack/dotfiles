@@ -6,7 +6,6 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 if [ -e "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh" -a $+commands[dircolors] ]; then
-  echo "Setting colors"
   eval "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh"
 fi
 
