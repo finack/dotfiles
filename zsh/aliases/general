@@ -16,7 +16,6 @@ alias -g L='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
 alias p='pstree -g2'
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -nr | head -n 20"
-alias tmux='tmux -2'
 alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%f"; done'
 
 # setup
@@ -24,11 +23,13 @@ setup_dev() {
   gem install git-smart omglog grb rubocop
 }
 
-setup_tmux() {
-  chmod a+rwx /tmp/pair_tmux
-  echo -e "#!/bin/zsh\nSSH_AUTH_SOCK=$SSH_AUTH_SOCK tmux -2 -S /tmp/pair_tmux attach" > /tmp/pair-me-up-scotty
+alias tmux='tmux -2'
+alias t='tmux'
+tp() {
+  tmux -S /tmp/pair
+  chmod a+rwx /tmp/pair
+  echo -e "#!/bin/zsh\nSSH_AUTH_SOCK=$SSH_AUTH_SOCK tmux -2 -S /tmp/pair attach" > /tmp/pair-me-up-scotty
   chmod a+rx /tmp/pair-me-up-scotty
-  echo "Don't forget to git pair"
 }
 
 setup_pry() {
@@ -45,13 +46,5 @@ sync_awsdocs() {
   fi;
 }
 
-
-# Ruby
-alias help-strftime='ruby ~/bin/help-strftime.rb'
-
-# Rails
-alias r='bundle exec rails'
-alias migrate="bundle exec db:migrate db:test:prepare"
-alias remigrate="bundle exec db:migrate db:migrate:redo db:schema:dump db:test:prepare"
 
 # vim ft=sh
