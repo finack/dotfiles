@@ -60,24 +60,14 @@ map <leader>da :bufdo silent! bdelete<CR>
 vmap <tab>      >gv
 vmap <s-tab>    <gv
 
-" FuzzyFinder and switchback commands
-map <leader>e   :e#<CR>
-" map <leader>b   :FufBuffer<CR>
-" map <leader><C-N> :FufFile **/<CR>
-" map <D-e> :FufBuffer<CR>
-" map <leader>n :FufFile **/<CR>
-" map <D-N> :FufFile **/<CR>
-
-" refresh the FuzzyFinder cache
-map <leader>rf :FufRenewCache<CR>
-
-" Command-T
-" map <D-N>       :CommandTFlush<CR>:CommandT<CR>
-" map <leader>F   :CommandTFlush<CR>:CommandT<CR>
-" map <Leader>f   :CommandT<CR>
-" map <Leader>b   :CommandTBuffer<CR>
 map <Leader>f   :CtrlP<CR>
-map <Leader>b   :CtrlPBuffer<CR>
+map <Leader>F   :CtrlPBuffer<CR>
+map <leader>t   :CtrlPTag<cr>
+map <leader>T   :CtrlPBufTag<cr>
+
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
 
 "" ctags moved to git hook
 " ctags with rails load path
@@ -86,9 +76,6 @@ map <Leader>b   :CtrlPBuffer<CR>
 
 " ctags with bundler load path
 " map <leader>c :!~/.rvm/bin/ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-
-" Git blame
-map <leader>g   :Gblame<CR>
 
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
@@ -109,10 +96,11 @@ imap <F1>           <Nop>
 " Easy access to the shell
 map <Leader><Leader> :!
 
-" AckGrep current word
-map <leader>a :call AckGrep()<CR>
-" AckVisual current selection
-vmap <leader>a :call AckVisual()<CR>
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind ,g (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap <leader>k :Ag<SPACE>
 
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
