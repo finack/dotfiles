@@ -100,3 +100,9 @@
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/bundle/vim-emblem"]
+	path = vim/bundle/vim-emblem
+	url = https://github.com/heartsentwined/vim-emblem.git
+[submodule "vim/bundle/vim-mustache-handlebars"]
+	path = vim/bundle/vim-mustache-handlebars
+	url = https://github.com/mustache/vim-mustache-handlebars.git
