@@ -73,6 +73,7 @@ namespace :submodules do
   task :update do
     puts "Updating submodules"
     system 'git submodule update'
+    Rake:Task['vim:compile_plugins'].invoke
   end
 end
 
@@ -88,12 +89,18 @@ namespace :vim do
         cd -
       done
            })
+    Rake::Task['vim:compile_plugins'].invoke
+  end
+
+  desc "Compile vim-proc plugin"
+  task :compile_plugins do
+    system 'cd vim/bundle/vim-proc; make clean && make; cd -'
   end
 
   desc "Install Vim"
   task :install do
     system Installer.mac_or_unix(
-      "brew install macvim --env-std --override-system-vim",
+      "brew install macvim --env-std --override-system-vim --with-lua",
       "sudo apt-get install vim-nox"
     )
   end
