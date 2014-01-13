@@ -98,15 +98,11 @@ noremap  <Right>       <NOP>
 " Easy access to the shell
 map <Leader><Leader> :!
 
-"" Use silver searcher instead of grep
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-" bind leader 
-nnoremap <leader>k :Ag<SPACE>
-
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
 
 " Show Tags
 map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
+
+map <Leader>q :q<cr>
+map <Leader>Q :qa!<cr>
