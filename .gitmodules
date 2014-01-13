@@ -112,3 +112,6 @@
 [submodule "vim/bundle/nerdtree-ag"]
 	path = vim/bundle/nerdtree-ag
 	url = https://github.com/taiansu/nerdtree-ag.git
+[submodule "vim/bundle/vim-rails"]
+	path = vim/bundle/vim-rails
+	url = https://github.com/tpope/vim-rails.git
