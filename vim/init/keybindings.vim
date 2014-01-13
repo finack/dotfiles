@@ -69,14 +69,6 @@ nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
 vmap <leader>gV :Gitv! --all<cr>
 
-"" ctags moved to git hook
-" ctags with rails load path
-" map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-" map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
-
-" ctags with bundler load path
-" map <leader>c :!~/.rvm/bin/ruby -rbundler/setup -e 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
 
@@ -88,18 +80,29 @@ map <silent> <D-C> :let @* = expand("%")<CR>:echo "Copied: ".expand("%")<CR>
 map <leader>C :let @* = expand("%").":".line(".")<CR>:echo "Copied: ".expand("%").":".line(".")<CR>
 
 " Disable middle mouse button, F1
-map <MiddleMouse>   <Nop>
-imap <MiddleMouse>  <Nop>
-map <F1>            <Nop>
-imap <F1>           <Nop>
+map      <MiddleMouse> <NOP>
+imap     <MiddleMouse> <NOP>
+map      <F1>          <NOP>
+imap     <F1>          <NOP>
+
+" Disable arrow keys
+inoremap <Up>          <NOP>
+inoremap <Down>        <NOP>
+inoremap <Left>        <NOP>
+inoremap <Right>       <NOP>
+noremap  <Up>          <NOP>
+noremap  <Down>        <NOP>
+noremap  <Left>        <NOP>
+noremap  <Right>       <NOP>
 
 " Easy access to the shell
 map <Leader><Leader> :!
 
+"" Use silver searcher instead of grep
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" bind ,g (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" bind leader 
 nnoremap <leader>k :Ag<SPACE>
 
 " Recalculate diff when it gets messed up.
