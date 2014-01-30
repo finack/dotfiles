@@ -4,9 +4,10 @@ if [ -n "$ZSH_VERSION" ]; then
   fi
 fi
 
-PATH="/usr/local/heroku/bin:$PATH"
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/bin:$PATH"
+
 
 PATH="$HOME/.bin:$PATH"
 

@@ -20,7 +20,7 @@ alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%
 
 # setup
 setup_dev() {
-  gem install git-smart omglog grb rubocop
+  gem install git-smart omglog grb rubocop hitch
 }
 
 alias tmux='tmux -2'
