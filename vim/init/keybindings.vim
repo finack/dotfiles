@@ -7,9 +7,28 @@ let maplocalleader = ";"
 " Make Y consistent with D and C
 map Y           y$
 
+" Search
+nmap <leader>s  :%s/
+vmap <leader>s  :s/
+
 " Split screen
-map <leader>v   :vsp<CR>
-map <leader>h   :sp<CR>
+" map <leader>v   :vsp<CR>
+
+" Move between screens
+map <leader>w   ^Ww
+map <leader>=   ^W=
+map <leader>j   ^Wj
+map <leader>k   ^Wk
+
+" Open .vimrc file in new tab. Think Command + , [Preferences...] but with Shift.
+map <D-<>       :tabedit ~/.vimrc<CR>
+
+" Reload .vimrc
+map <leader>rv  :source ~/.vimrc<CR>
+
+" Undo/redo - Doesn't MacVim already have this?
+map <D-z>       :earlier 1<CR>
+map <D-Z>       :later 1<CR>
 
 " Auto-indent whole file
 map <leader>=   mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
@@ -41,6 +60,15 @@ map <leader>da :bufdo silent! bdelete<CR>
 vmap <tab>      >gv
 vmap <s-tab>    <gv
 
+map <Leader>f   :CtrlP<CR>
+map <Leader>b   :CtrlPBuffer<CR>
+map <leader>t   :CtrlPTag<cr>
+map <leader>r   :CtrlPMRUFiles<cr>
+
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
+
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
 
@@ -70,12 +98,18 @@ noremap  <Right>       <NOP>
 " Easy access to the shell
 map <Leader><Leader> :!
 
+"" Use silver searcher instead of grep
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" bind leader 
+nnoremap <leader>k :Ag!<SPACE>
+
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
 
 " Show Tags
-map <Leader>l <ESC>:TagbarToggle<RETURN>
+map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
 
-" Quit it!
 map <Leader>q :q<cr>
 map <Leader>Q :qa!<cr>

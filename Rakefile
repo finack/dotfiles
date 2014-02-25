@@ -73,7 +73,6 @@ namespace :submodules do
   task :update do
     puts "Updating submodules"
     system 'git submodule update'
-    Rake:Task['vim:compile_plugins'].invoke
   end
 end
 
@@ -89,12 +88,6 @@ namespace :vim do
         cd -
       done
            })
-    Rake::Task['vim:compile_plugins'].invoke
-  end
-
-  desc "Compile vim-proc plugin"
-  task :compile_plugins do
-    system 'cd vim/bundle/vim-proc; make clean && make; cd -'
   end
 
   desc "Install Vim"
