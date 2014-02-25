@@ -109,3 +109,6 @@
 [submodule "vim/bundle/vim-ag"]
 	path = vim/bundle/vim-ag
 	url = https://github.com/rking/ag.vim.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
