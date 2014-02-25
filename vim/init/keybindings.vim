@@ -7,9 +7,28 @@ let maplocalleader = ";"
 " Make Y consistent with D and C
 map Y           y$
 
+" Search
+nmap <leader>s  :%s/
+vmap <leader>s  :s/
+
 " Split screen
-map <leader>v   :vsp<CR>
-map <leader>h   :sp<CR>
+" map <leader>v   :vsp<CR>
+
+" Move between screens
+map <leader>w   ^Ww
+map <leader>=   ^W=
+map <leader>j   ^Wj
+map <leader>k   ^Wk
+
+" Open .vimrc file in new tab. Think Command + , [Preferences...] but with Shift.
+map <D-<>       :tabedit ~/.vimrc<CR>
+
+" Reload .vimrc
+map <leader>rv  :source ~/.vimrc<CR>
+
+" Undo/redo - Doesn't MacVim already have this?
+map <D-z>       :earlier 1<CR>
+map <D-Z>       :later 1<CR>
 
 " Auto-indent whole file
 map <leader>=   mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
@@ -40,6 +59,15 @@ map <leader>da :bufdo silent! bdelete<CR>
 "indent/unindent visual mode selection with tab/shift+tab
 vmap <tab>      >gv
 vmap <s-tab>    <gv
+
+map <Leader>f   :CtrlP<CR>
+map <Leader>F   :CtrlPBuffer<CR>
+map <leader>t   :CtrlPTag<cr>
+map <leader>T   :CtrlPBufTag<cr>
+
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
 
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
@@ -74,8 +102,7 @@ map <Leader><Leader> :!
 nmap du :diffupdate<CR>
 
 " Show Tags
-map <Leader>l <ESC>:TagbarToggle<RETURN>
+map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
 
-" Quit it!
 map <Leader>q :q<cr>
 map <Leader>Q :qa!<cr>
