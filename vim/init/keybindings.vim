@@ -62,7 +62,8 @@ vmap <s-tab>    <gv
 
 map <Leader>f   :CtrlP<CR>
 map <Leader>b   :CtrlPBuffer<CR>
-map <leader>t   :CtrlPTag<cr>
+map <leader>t   :CtrlPBufTag<cr>
+map <leader>T   :CtrlPBufTagAll<cr>
 map <leader>r   :CtrlPMRUFiles<cr>
 
 nmap <leader>gv :Gitv --all<cr>
