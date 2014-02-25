@@ -61,9 +61,9 @@ vmap <tab>      >gv
 vmap <s-tab>    <gv
 
 map <Leader>f   :CtrlP<CR>
-map <Leader>F   :CtrlPBuffer<CR>
+map <Leader>b   :CtrlPBuffer<CR>
 map <leader>t   :CtrlPTag<cr>
-map <leader>T   :CtrlPBufTag<cr>
+map <leader>r   :CtrlPMRUFiles<cr>
 
 nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
@@ -103,7 +103,7 @@ map <Leader><Leader> :!
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 " bind leader 
-nnoremap <leader>k :Ag<SPACE>
+nnoremap <leader>k :Ag!<SPACE>
 
 " Recalculate diff when it gets messed up.
 nmap du :diffupdate<CR>
