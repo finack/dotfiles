@@ -1,4 +1,6 @@
+MANIFEST
 ackrc
+agignore
 bashrc
 bin
 gemrc
@@ -10,11 +12,10 @@ inputrc
 irbrc
 pryrc
 rdebugrc
+themes
 tmux.conf
-tomorrow-theme
 vim
 vimrc
 zestsecrets
-zlogin
 zsh
 zshrc
