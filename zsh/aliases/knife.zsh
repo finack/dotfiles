@@ -19,5 +19,5 @@ alias kne='kn edit'
 alias kns='kn show'
 
 alias kdb='knife data bag'
-alias kdbe='kn edit'
+alias kdbe='kdb edit'
 alias kdbes='kdbe --secret-file ~/.secrets/zestcash/development/application_keys/chef_development_databag.key'
