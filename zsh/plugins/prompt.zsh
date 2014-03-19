@@ -5,9 +5,9 @@ autoload -U colors && colors
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-if [ -e "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh" -a $+commands[dircolors] ]; then
-  eval "$HOME/.zsh/base16-theme/base16-tomorrow.dark.sh"
-fi
+BASE16_SCHEME="tomorrow"
+BASE16_SHELL="$HOME/.themes/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
 #expand functions in the prompt
 setopt prompt_subst
