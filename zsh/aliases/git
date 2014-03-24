@@ -39,6 +39,7 @@ alias gl='glog --graph'
 alias glol='git log --pretty=oneline --abbrev-commit --graph --decorate'
 alias glwip='gl origin/master..origin/develop'
 alias gla='gl --all'
+alias glp='gl -p'
 glg() {
   query="$1"
   shift
