@@ -27,3 +27,5 @@
   default = current
 [mergetool]
   keepBackup = true
+[credential]
+	helper = osxkeychain
