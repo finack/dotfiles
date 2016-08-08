@@ -110,7 +110,7 @@ nnoremap <leader>k :Ag!<SPACE>
 nmap du :diffupdate<CR>
 
 " Show Tags
-map <Leader>l <ESC>:Tlist<RETURN> " (normal mode) brings up the tag list
+map <Leader>l <ESC>:TagbarToggle<RETURN> " (normal mode) brings up the tag list
 
 map <Leader>q :q<cr>
 map <Leader>Q :qa!<cr>

@@ -32,3 +32,11 @@ autocmd FileType ruby imap  <Space>=><Space>
 
 " Open all folds in Markdown.
 autocmd FileType mkd normal zR
+
+" Go related mappings
+au FileType go nmap <Leader>gi <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gr <Plug>(go-run)
+au FileType go nmap <Leader>gb <Plug>(go-build)
+au FileType go nmap <Leader>gt <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-tab)

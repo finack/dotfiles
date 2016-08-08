@@ -128,8 +128,8 @@ brew_launchctl_restart 'postgresql'
 brew_install_or_upgrade 'redis'
 brew_launchctl_restart 'redis'
 brew_install_or_upgrade 'the_silver_searcher'
-brew_install_or_upgrade 'vim'
-brew_install_or_upgrade 'ctags'
+brew_install_or_upgrade 'vim --with-lua'
+brew_install_or_upgrade 'ctags-exuberant'
 brew_install_or_upgrade 'tmux'
 brew_install_or_upgrade 'reattach-to-user-namespace'
 brew_install_or_upgrade 'imagemagick'
@@ -140,6 +140,9 @@ brew_install_or_upgrade 'highlight'
 
 brew_install_or_upgrade 'rbenv'
 brew_install_or_upgrade 'ruby-build'
+
+brew_install_or_upgrade 'go'
+brew_install_or_upgrade 'gotags'
 
 # shellcheck disable=SC2016
 append_to_zshrc 'eval "$(rbenv init - --no-rehash zsh)"' 1
