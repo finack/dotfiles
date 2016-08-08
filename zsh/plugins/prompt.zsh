@@ -5,7 +5,7 @@ autoload -U colors && colors
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-BASE16_SCHEME="twilight"
+BASE16_SCHEME="tomorrow"
 BASE16_SHELL="$HOME/.themes/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
