@@ -127,6 +127,9 @@ brew_install_or_upgrade 'postgres'
 brew_launchctl_restart 'postgresql'
 brew_install_or_upgrade 'redis'
 brew_launchctl_restart 'redis'
+brew_install_or_upgrade 'openssl'
+brew unlink openssl && brew link openssl --force
+brew_install_or_upgrade 'libyaml'
 brew_install_or_upgrade 'the_silver_searcher'
 brew_install_or_upgrade 'vim --with-lua'
 brew_install_or_upgrade 'ctags-exuberant'
@@ -147,9 +150,9 @@ brew_install_or_upgrade 'gotags'
 # shellcheck disable=SC2016
 append_to_zshrc 'eval "$(rbenv init - --no-rehash zsh)"' 1
 
-brew_install_or_upgrade 'openssl'
-brew unlink openssl && brew link openssl --force
-brew_install_or_upgrade 'libyaml'
+brew_install_or_upgrade 'python'
+pip install --upgrade pip
+pip install grip
 
 ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 
