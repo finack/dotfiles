@@ -40,3 +40,7 @@ au FileType go nmap <Leader>gr <Plug>(go-run)
 au FileType go nmap <Leader>gb <Plug>(go-build)
 au FileType go nmap <Leader>gt <Plug>(go-test)
 au FileType go nmap gd <Plug>(go-def-tab)
+
+" Markdown Editting
+autocmd FileType markdown setlocal spell wrap tw=79
+let vim_markdown_preview_github=1

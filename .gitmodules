@@ -78,7 +78,7 @@
 	url = https://github.com/tpope/vim-dispatch.git
 [submodule "vim/bundle/vim-tmux"]
 	path = vim/bundle/vim-tmux
-	url = https://github.com/tejr/vim-tmux.git
+  url = https://github.com/tmux-plugins/vim-tmux.git
 [submodule "themes/base16-shell"]
 	path = themes/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
@@ -100,3 +100,9 @@
 [submodule "vim/bundle/neocomplete"]
 	path = vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "vim/bundle/vim-easymotion"]
+	path = vim/bundle/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "vim/bundle/vim-markdown-preview"]
+	path = vim/bundle/vim-markdown-preview
+	url = https://github.com/JamshedVesuna/vim-markdown-preview.git

@@ -10,8 +10,6 @@
   ui = true
 [core]
   excludesfile = ~/.git_ignore
-[init]
-  templatedir = ~/.git_template
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
 [alias]
