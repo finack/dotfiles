@@ -1,108 +1,24 @@
-[submodule "vim/bundle/vim-endwise"]
-	path = vim/bundle/vim-endwise
-	url = https://github.com/tpope/vim-endwise.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundle/vim-repeat"]
-	path = vim/bundle/vim-repeat
-	url = https://github.com/tpope/vim-repeat.git
-[submodule "vim/bundle/vim-javascript"]
-	path = vim/bundle/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
-[submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "vim/bundle/vim-ruby"]
-	path = vim/bundle/vim-ruby
-	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule "vim/bundle/tabular"]
-	path = vim/bundle/tabular
-	url = https://github.com/godlygeek/tabular
-[submodule "vim/bundle/gundo.vim"]
-	path = vim/bundle/gundo.vim
-	url = https://github.com/sjl/gundo.vim.git
-[submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
-	url = https://github.com/ervandew/supertab.git
-[submodule "vim/bundle/ctrlp"]
-	path = vim/bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule "tomorrow-theme"]
 	path = tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme
-[submodule "vim/bundle/vim-tmux-navigator"]
-	path = vim/bundle/vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "base16-theme"]
 	path = base16-theme
 	url = https://github.com/chriskempson/base16.git
 [submodule "themes/base16-iterm2"]
 	path = themes/base16-iterm2
 	url = https://github.com/chriskempson/base16-iterm2
-[submodule "vim/bundle/base16-theme"]
-	path = vim/bundle/base16-theme
-	url = https://github.com/chriskempson/base16-vim
 [submodule "zsh/base16-theme"]
 	path = zsh/base16-theme
 	url = https://github.com/chriskempson/base16-shell.git
-[submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "vim/bundle/nerdtree-ag"]
-	path = vim/bundle/nerdtree-ag
-	url = https://github.com/taiansu/nerdtree-ag.git
-[submodule "vim/bundle/vim-rails"]
-	path = vim/bundle/vim-rails
-	url = https://github.com/tpope/vim-rails.git
-[submodule "vim/bundle/vim-ag"]
-	path = vim/bundle/vim-ag
-	url = https://github.com/rking/ag.vim.git
-[submodule "vim/bundle/vim-dispatch"]
-	path = vim/bundle/vim-dispatch
-	url = https://github.com/tpope/vim-dispatch.git
-[submodule "vim/bundle/vim-tmux"]
-	path = vim/bundle/vim-tmux
-  url = https://github.com/tmux-plugins/vim-tmux.git
 [submodule "themes/base16-shell"]
 	path = themes/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
-[submodule "vim/bundle/vim-go"]
-	path = vim/bundle/vim-go
-	url = https://github.com/fatih/vim-go.git
 [submodule "themes/powerline"]
 	path = themes/powerline
 	url = https://github.com/powerline/fonts
-[submodule "vim/bundle/vim-airline-themes"]
-	path = vim/bundle/vim-airline-themes
-	url = git@github.com:vim-airline/vim-airline-themes.git
 [submodule "themes/fonts"]
 	path = themes/fonts
 	url = https://github.com/powerline/fonts
-[submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
-[submodule "vim/bundle/neocomplete"]
-	path = vim/bundle/neocomplete
-	url = https://github.com/Shougo/neocomplete.vim.git
-[submodule "vim/bundle/vim-easymotion"]
-	path = vim/bundle/vim-easymotion
-	url = https://github.com/easymotion/vim-easymotion.git
-[submodule "vim/bundle/vim-markdown-preview"]
-	path = vim/bundle/vim-markdown-preview
-	url = https://github.com/JamshedVesuna/vim-markdown-preview.git
+[submodule "vim/bundle/Vundle.vim"]
+	path = vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
