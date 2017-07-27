@@ -8,34 +8,37 @@ filetype plugin indent on
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'JamshedVesuna/vim-markdown-preview'
+" UI Changes
+Plugin 'bling/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'ervandew/supertab'
-Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'chriskempson/base16-vim'
+
+" Movement
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim'
 Plugin 'taiansu/nerdtree-ag'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-pathogen'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'chriskempson/base16-vim'
+
+" Language
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'fatih/vim-go'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-dispatch'
 
 
 call vundle#end()
