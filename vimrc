@@ -1,47 +1,46 @@
 set nocompatible                " Don't maintain compatibility with vi
 filetype off                    " Avoid a Vim/Vundle bug
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
 syntax on                       " Highlight known syntaxes
 filetype plugin indent on
 
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " UI Changes
-Plugin 'bling/vim-airline'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ervandew/supertab'
-Plugin 'godlygeek/tabular'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'chriskempson/base16-vim'
+Plug 'bling/vim-airline'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
 
 " Movement
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'taiansu/nerdtree-ag'
-" Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'taiansu/nerdtree-ag'
+" Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 
 " Language
-Plugin 'JamshedVesuna/vim-markdown-preview'
-Plugin 'fatih/vim-go'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'tpope/vim-dispatch'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'fatih/vim-go'
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-dispatch'
 
 
-call vundle#end()
+let g:deoplete#enable_at_startup = 1
+call plug#end()
 filetype plugin indent on
 
 runtime! init/**.vim

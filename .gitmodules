@@ -19,6 +19,3 @@
 [submodule "themes/fonts"]
 	path = themes/fonts
 	url = https://github.com/powerline/fonts
-[submodule "vim/bundle/Vundle.vim"]
-	path = vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
