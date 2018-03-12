@@ -77,32 +77,26 @@ namespace :submodules do
 end
 
 namespace :vim do
-  desc "Update VIM plugins"
-  task :update do
-    puts "Pull vim submodules"
-    system(%{
-      for x in vim/bundle/*; do
-        echo $x
-        cd $x
-        git checkout master && git pull
-        cd -
-      done
-           })
-  end
 
-  desc "Install Vim"
+  desc "Install NeoVim"
   task :install do
+    Rake::Task['install:python'].invoke
+    system 'pip3 install neovim psutil'
+    system 'pip2 install neovim'
+    system 'npm install -g neovim'
+    system 'gem install neovim'
     system Installer.mac_or_unix(
-      "brew install macvim --env-std --override-system-vim --with-lua",
-      "sudo apt-get install vim-nox"
+      "brew install neovim --env-std --override-system-vim",
+      "sudo apt-get install neovim"
     )
+
   end
 end
 
 namespace :install do
   desc 'Install Python'
   task :python do
-    system Installer.mac_or_unix "brew install python", "sudo apt-get install python"
+    system Installer.mac_or_unix "brew install python3", "sudo apt-get install python3"
   end
 
   desc "Install tmux"

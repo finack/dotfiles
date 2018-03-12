@@ -1,8 +1,8 @@
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
 
-# use vim as an editor
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # Manage paths
 source "$HOME/.zsh/1.path.zsh"

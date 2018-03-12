@@ -6,6 +6,8 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
 
+
+
 " UI Changes
 Plug 'bling/vim-airline'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -37,6 +39,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'fatih/vim-go'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-dispatch'
+Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 let g:deoplete#enable_at_startup = 1
