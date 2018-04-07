@@ -19,3 +19,6 @@
 [submodule "themes/fonts"]
 	path = themes/fonts
 	url = https://github.com/powerline/fonts
+[submodule "zsh/zsh-git-prompt"]
+	path = zsh/zsh-git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt.git
