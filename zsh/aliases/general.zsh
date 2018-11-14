@@ -20,11 +20,6 @@ alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%
 alias restart-video='sudo killall VDCAssistant'
 alias vim='nvim'
 
-# setup
-setup_dev() {
-  gem install git-smart omglog grb rubocop hitch
-}
-
 alias tmux='tmux -2'
 alias t='tmux'
 tp() {
@@ -37,16 +32,5 @@ tp() {
 setup_pry() {
   bundle exec gem install pry pry-doc hirb pry-rails
 }
-
-sync_awsdocs() {
-  pwd=`pwd`
-  current_dir=`basename $pwd`
-  if [ "$current_dir" = 'aws' ]; then
-    for i in *; do mkdir -p $i/latest; s3cmd sync s3://awsdocs/$i/latest/ $i/latest/; done
-  else
-    echo "You need to be in a directory called 'aws' for this to work (not $current_dir)"
-  fi;
-}
-
 
 # vim ft=sh
