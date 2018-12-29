@@ -19,6 +19,7 @@ alias profileme="history -10000 | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print
 alias show-colors='for code in {000..255}; do print -P -- "$code: %F{$code}Test%f"; done'
 alias restart-video='sudo killall VDCAssistant'
 alias vim='nvim'
+alias v=vim
 
 alias tmux='tmux -2'
 alias t='tmux'

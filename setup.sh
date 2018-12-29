@@ -1,159 +1,145 @@
 #!/bin/sh
 
-# Welcome to the thoughtbot laptop script!
-# Be prepared to turn your laptop (or desktop, no haters here)
-# into an awesome development machine.
-
+## Originally from https://github.com/thoughtbot/laptop/blob/master/mac
 fancy_echo() {
-  local fmt="$1"; shift
+	local fmt="$1"; shift
 
-  # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
+	# shellcheck disable=SC2059
+	printf "\\n$fmt\\n" "$@"
 }
 
-append_to_zshrc() {
-  local text="$1" zshrc
-  local skip_new_line="${2:-0}"
-
-  if [ -w "$HOME/.zshrc.local" ]; then
-    zshrc="$HOME/.zshrc.local"
-  else
-    zshrc="$HOME/.zshrc"
-  fi
-
-  if ! grep -Fqs "$text" "$zshrc"; then
-    if [ "$skip_new_line" -eq 1 ]; then
-      printf "%s\n" "$text" >> "$zshrc"
-    else
-      printf "\n%s\n" "$text" >> "$zshrc"
-    fi
-  fi
-}
-
+# shellcheck disable=SC2154
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
 set -e
 
+if [ ! -d "$HOME/.bin/" ]; then
+	mkdir "$HOME/.bin"
+fi
+
+if [ ! -f "$HOME/.zshrc" ]; then
+	touch "$HOME/.zshrc"
+fi
+
+HOMEBREW_PREFIX="/usr/local"
+
+if [ -d "$HOMEBREW_PREFIX" ]; then
+	if ! [ -r "$HOMEBREW_PREFIX" ]; then
+		sudo chown -R "$LOGNAME:admin" /usr/local
+	fi
+else
+	sudo mkdir "$HOMEBREW_PREFIX"
+	sudo chflags norestricted "$HOMEBREW_PREFIX"
+	sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
+fi
+
+update_shell() {
+	local shell_path;
+	shell_path="$(command -v zsh)"
+
+	fancy_echo "Changing your shell to zsh ..."
+	if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+		fancy_echo "Adding '$shell_path' to /etc/shells"
+		sudo sh -c "echo $shell_path >> /etc/shells"
+	fi
+	sudo chsh -s "$shell_path" "$USER"
+}
 
 case "$SHELL" in
-  */zsh) : ;;
-  *)
-    fancy_echo "Changing your shell to zsh ..."
-      chsh -s "$(which zsh)"
-    ;;
+	*/zsh)
+		if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ] ; then
+			update_shell
+		fi
+		;;
+	*)
+		update_shell
+		;;
 esac
 
-brew_install_or_upgrade() {
-  if brew_is_installed "$1"; then
-    if brew_is_upgradable "$1"; then
-      fancy_echo "Upgrading %s ..." "$1"
-      brew upgrade "$@"
-    else
-      fancy_echo "Already using the latest version of %s. Skipping ..." "$1"
-    fi
-  else
-    fancy_echo "Installing %s ..." "$1"
-    brew install "$@"
-  fi
-}
-
-brew_is_installed() {
-  local name="$(brew_expand_alias "$1")"
-
-  brew list -1 | grep -Fqx "$name"
-}
-
-brew_is_upgradable() {
-  local name="$(brew_expand_alias "$1")"
-
-  ! brew outdated --quiet "$name" >/dev/null
-}
-
-brew_tap() {
-  brew tap "$1" 2> /dev/null
-}
-
-brew_expand_alias() {
-  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
-}
-
-brew_launchctl_restart() {
-  local name="$(brew_expand_alias "$1")"
-  local domain="homebrew.mxcl.$name"
-  local plist="$domain.plist"
-
-  fancy_echo "Restarting %s ..." "$1"
-  mkdir -p "$HOME/Library/LaunchAgents"
-  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
-
-  if launchctl list | grep -Fq "$domain"; then
-    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
-  fi
-  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
-}
-
 gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
-    fancy_echo "Updating %s ..." "$1"
-    gem update "$@"
-  else
-    fancy_echo "Installing %s ..." "$1"
-    gem install "$@"
-    rbenv rehash
-  fi
+	if gem list "$1" --installed > /dev/null; then
+		gem update "$@"
+	else
+		gem install "$@"
+	fi
 }
 
 if ! command -v brew >/dev/null; then
-  fancy_echo "Installing Homebrew ..."
-    curl -fsS \
-      'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+	fancy_echo "Installing Homebrew ..."
+		curl -fsS \
+			'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 
-    append_to_zshrc '# recommended by brew doctor'
-
-    # shellcheck disable=SC2016
-    append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
-
-    export PATH="/usr/local/bin:$PATH"
-else
-  fancy_echo "Homebrew already installed. Skipping ..."
+		export PATH="/usr/local/bin:$PATH"
 fi
 
-fancy_echo "Updating Homebrew formulas ..."
-brew update
+if brew list | grep -Fq brew-cask; then
+	fancy_echo "Uninstalling old Homebrew-Cask ..."
+	brew uninstall --force brew-cask
+fi
 
-brew_install_or_upgrade 'zsh'
-brew_install_or_upgrade 'git'
-brew_install_or_upgrade 'postgres'
-brew_launchctl_restart 'postgresql'
-brew_install_or_upgrade 'redis'
-brew_launchctl_restart 'redis'
-brew_install_or_upgrade 'openssl'
-brew unlink openssl && brew link openssl --force
-brew_install_or_upgrade 'libyaml'
-brew_install_or_upgrade 'the_silver_searcher'
-brew_install_or_upgrade 'vim --with-lua'
-brew_install_or_upgrade 'ctags-exuberant'
-brew_install_or_upgrade 'tmux'
-brew_install_or_upgrade 'reattach-to-user-namespace'
-brew_install_or_upgrade 'imagemagick'
-brew_install_or_upgrade 'qt'
-brew_install_or_upgrade 'hub'
-brew_install_or_upgrade 'node'
-brew_install_or_upgrade 'highlight'
+fancy_echo "Updating Homebrew formulae ..."
+brew update --force # https://github.com/Homebrew/brew/issues/1151
+brew bundle --file=- <<EOF
+tap "homebrew/services"
+tap "universal-ctags/universal-ctags"
+tap "caskroom/cask"
+tap "heroku/brew"
+tap "thoughtbot/formulae"
+tap "homebrew/cask-fonts"
 
-brew_install_or_upgrade 'rbenv'
-brew_install_or_upgrade 'ruby-build'
+# Unix
+brew "coreutils"
+brew "fzf"
+brew "git"
+brew "neovim", args: ["env-std", "override-system-vim"]
+brew "openssl"
+brew "rcm"
+brew "reattach-to-user-namespace"
+brew "the_silver_searcher"
+brew "tmux"
+brew "universal-ctags", args: ["HEAD"]
+brew "vim"
+brew "watchman"
+brew "zsh"
 
-brew_install_or_upgrade 'go'
-brew_install_or_upgrade 'gotags'
+# Heroku
+brew "heroku/brew/heroku"
+brew "parity"
 
-# shellcheck disable=SC2016
-append_to_zshrc 'eval "$(rbenv init - --no-rehash zsh)"' 1
+# Programming language prerequisites and package managers
+brew "coreutils"
+brew "libyaml" # should come after openssl
+brew "yarn"
+cask "gpg-suite"
 
-brew_install_or_upgrade 'python'
-pip install --upgrade pip
-pip install grip
+cask "font-hack-nerd-font"
 
+# Languages
+brew "node"
+brew "npm"
+
+brew "rbenv"
+brew "ruby-build"
+
+brew "python3"
+brew "python2"
+
+brew "rust"
+
+brew "shfmt"
+
+brew "postgres", restart_service: :changed
+EOF
+
+fancy_echo "Update heroku binary ..."
+brew unlink heroku
+brew link --force heroku
+
+fancy_echo "Update pip"
+pip3 install --upgrade pip
+pip2 install --upgrade pip
+
+fancy_echo "Update ruby"
 ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 
 eval "$(rbenv init - zsh)"
@@ -164,14 +150,28 @@ fi
 
 rbenv global "$ruby_version"
 rbenv shell "$ruby_version"
+rbenv rehash
 
 gem update --system
-
 gem_install_or_update 'bundler'
+number_of_cores=$(sysctl -n hw.ncpu)
+bundle config --global jobs $((number_of_cores - 1))
 
-fancy_echo "Configuring Bundler ..."
-  number_of_cores=$(sysctl -n hw.ncpu)
-  bundle config --global jobs $((number_of_cores - 1))
+fancy_echo "Grab submodules"
+git submodule update --init
 
-brew_install_or_upgrade 'heroku-toolbelt'
+fancy_echo "Add neovim support"
+pip3 install neovim psutil
+pip2 install neovim
+npm install -g neovim
+gem install neovim
 
+npm install --global typescript
+
+mkdir -p ~/.local/share/nvim/plugged
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim +PlugInstall +qall
+
+fancy_echo "Linking rc files"
+rcup -v

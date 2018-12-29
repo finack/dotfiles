@@ -15,6 +15,7 @@ setopt CORRECT
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
+
 # completion
 autoload -U compinit && compinit
 
@@ -50,4 +51,6 @@ zstyle ':completion:*:(all-|)files' ignored-patterns "(*.pyc|*~)"
 # but not for these programs
 zstyle ':completion:*:ls:*:(all-|)files' ignored-patterns
 zstyle ':completion:*:rm:*:(all-|)files' ignored-patterns
-compinit
+
+(( $+commands[npm] )) && . <(npm completion)
+
