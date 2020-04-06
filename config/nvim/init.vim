@@ -125,7 +125,7 @@
 
   " Move between screens
   map <leader>w   ^Ww
-  map <leader>=   ^W=
+  " map <leader>=   ^W=
   map <leader>j   ^Wj
   map <leader>k   ^Wk
 
@@ -227,6 +227,8 @@
   set background=dark
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
+  else
+    colorscheme base16-solarized-dark
   endif
 
   function! AirlineInit()
@@ -237,7 +239,7 @@
   autocmd User AirlineAfterInit call AirlineInit()
 
   " let g:airline_theme = g:colors_name
-  let g:airline_theme = 'base16_oceanicnext'
+  let g:airline_theme = 'base16_solarized'
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#whitespace#enabled = 1
   let g:airline#extensions#hunks#non_zero_only = 1
@@ -414,7 +416,7 @@
 
 " Code Formating  -----------------------------------------------------------{{{
 
-  nmap <silent> <leader>=  <Plug>(ale_fix)
+  nmap <silent> <leader>lf  <Plug>(ale_fix)
 
   let g:ale_fixers = {
     \  'bash': ['shfmt'],
@@ -459,6 +461,10 @@ let g:ale_javascript_tsserver_use_global = 1
 	inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+	vmap <leader>=  <Plug>(coc-format-selected)
+	nmap <leader>=  <Plug>(coc-format-selected)
+  map <leader>-   <Plug>(coc-format)
 
 	map <silent> <leader>ll <Plug>(coc-diagnostic-info)<cr>
 	map <silent> <leader>ln <Plug>(coc-diagnostic-next)<cr>
@@ -530,9 +536,14 @@ let g:ale_javascript_tsserver_use_global = 1
     \}
 
   let g:airline#extensions#ale#enabled = 1
+  let g:ale_set_highlights = 1
 
-  highlight! link ALEErrorSign DiffDelete 
-  highlight! link ALEWarningSign DiffChange 
+
+  highlight ALEError cterm=bold,inverse
+  highlight ALEWarning cterm=inverse
+	highlight ALEInfo cterm=underline
+  " highlight! link CocHintSign	DiffText
+
 
   let g:ale_echo_msg_error_str = ''
   let g:ale_echo_msg_warning_str = ''
@@ -546,6 +557,9 @@ let g:ale_javascript_tsserver_use_global = 1
 
 	let g:ale_lint_on_save = 1
 	let g:ale_lint_on_text_change = 0
+
+  let g:ale_sign_highlight_linenrs = 1
+
 "  }}}
 
 " Search and Display Lists (fzf)  ----------------------------------------{{{

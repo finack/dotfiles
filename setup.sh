@@ -91,7 +91,8 @@ tap "homebrew/cask-fonts"
 brew "coreutils"
 brew "fzf"
 brew "git"
-brew "neovim", args: ["env-std", "override-system-vim"]
+#brew "neovim", args: ["env-std", "override-system-vim"]
+brew "neovim"
 brew "openssl"
 brew "rcm"
 brew "reattach-to-user-namespace"
@@ -110,7 +111,7 @@ brew "parity"
 brew "coreutils"
 brew "libyaml" # should come after openssl
 brew "yarn"
-cask "gpg-suite"
+#cask "gpg-suite"
 
 cask "font-hack-nerd-font"
 
