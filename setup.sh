@@ -82,7 +82,6 @@ brew update --force # https://github.com/Homebrew/brew/issues/1151
 brew bundle --file=- <<EOF
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
-tap "caskroom/cask"
 tap "heroku/brew"
 tap "thoughtbot/formulae"
 tap "homebrew/cask-fonts"
@@ -111,7 +110,6 @@ brew "parity"
 brew "coreutils"
 brew "libyaml" # should come after openssl
 brew "yarn"
-#cask "gpg-suite"
 
 cask "font-hack-nerd-font"
 
@@ -123,13 +121,7 @@ brew "rbenv"
 brew "ruby-build"
 
 brew "python3"
-brew "python2"
 
-brew "rust"
-
-brew "shfmt"
-
-brew "postgres", restart_service: :changed
 EOF
 
 fancy_echo "Update heroku binary ..."
@@ -138,10 +130,9 @@ brew link --force heroku
 
 fancy_echo "Update pip"
 pip3 install --upgrade pip
-pip2 install --upgrade pip
 
 fancy_echo "Update ruby"
-ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
+ruby_version=2.6.6
 
 eval "$(rbenv init - zsh)"
 

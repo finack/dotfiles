@@ -16,7 +16,7 @@
  " }}}
 
 " Appeareance {{{
-  Plug 'chriskempson/base16-vim'
+  Plug 'altercation/vim-colors-solarized'
   Plug 'airblade/vim-gitgutter'
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -24,7 +24,7 @@
 " }}}
 
 " Completion {{{
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " }}}
 
 " Finders {{{
@@ -222,14 +222,11 @@
 " }}}
 
 " Appearance {{{
-  let g:base16colorspace=256
   set t_Co=256
+  syntax enable
+  let g:solarized_termcolors=256
   set background=dark
-  if filereadable(expand("~/.vimrc_background"))
-    source ~/.vimrc_background
-  else
-    colorscheme base16-solarized-dark
-  endif
+  colorscheme solarized
 
   function! AirlineInit()
     let g:airline_section_x = airline#section#create([])
@@ -489,10 +486,10 @@ let g:ale_javascript_tsserver_use_global = 1
     endif
   endfunction
 
-  highlight! link CocErrorSign DiffDelete 
-  highlight! link CocWarningSign DiffChange 
-	highlight! link CocHintSign	DiffText
-	highlight! link CocInfoSign DiffAdd
+  " highlight! link CocErrorSign DiffDelete 
+  " highlight! link CocWarningSign DiffChange 
+	" highlight! link CocHintSign	DiffText
+	" highlight! link CocInfoSign DiffAdd
 
 " }}}
 " Completion (Deoplete)  ----------------------------------------------------{{{
@@ -539,9 +536,9 @@ let g:ale_javascript_tsserver_use_global = 1
   let g:ale_set_highlights = 1
 
 
-  highlight ALEError cterm=bold,inverse
-  highlight ALEWarning cterm=inverse
-	highlight ALEInfo cterm=underline
+  " highlight ALEError cterm=bold,inverse
+  " highlight ALEWarning cterm=inverse
+	" highlight ALEInfo cterm=underline
   " highlight! link CocHintSign	DiffText
 
 
