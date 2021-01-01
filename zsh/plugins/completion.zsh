@@ -16,8 +16,13 @@ setopt CORRECT
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
+# Enable homebrew completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 # completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 # automatically enter directories without cd
 setopt auto_cd
@@ -53,4 +58,3 @@ zstyle ':completion:*:ls:*:(all-|)files' ignored-patterns
 zstyle ':completion:*:rm:*:(all-|)files' ignored-patterns
 
 (( $+commands[npm] )) && . <(npm completion)
-
