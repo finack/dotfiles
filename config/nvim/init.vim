@@ -16,7 +16,7 @@
  " }}}
 
 " Appeareance {{{
-  Plug 'altercation/vim-colors-solarized'
+  Plug 'chriskempson/base16-vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -224,9 +224,9 @@
 " Appearance {{{
   set t_Co=256
   syntax enable
-  let g:solarized_termcolors=256
+  let base16colorspace=256
   set background=dark
-  colorscheme solarized
+  colorscheme base16-solarized-dark
 
   function! AirlineInit()
     let g:airline_section_x = airline#section#create([])
