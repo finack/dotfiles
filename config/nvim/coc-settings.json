@@ -1,0 +1,19 @@
+{
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
+
+  "solargraph.diagnostics": true,
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true,
+  "solargraph.rename": true,
+  "solargraph.completion": true,
+  "solargraph.symbols": true,
+  "solargraph.useBundler": true,
+  "solargraph.bundlerPath": "/Users/pbaker/.rbenv/shims/bundle",
+
+  "go.goplsOptions": {
+    "usePlaceholders": true
+  }
+}
