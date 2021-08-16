@@ -20,3 +20,8 @@ compctl -/ -W ~/src/finack f
 for alias in $HOME/.zsh/aliases/*; do source $alias; done
 
 for plugin in $HOME/.zsh/plugins/*; do source $plugin; done
+
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+
+source ~/.env

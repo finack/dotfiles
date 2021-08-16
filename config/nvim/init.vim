@@ -421,7 +421,7 @@
 	map <silent> <leader>gl <Plug>(coc-diagnostic-info)<cr>
 	map <silent> <leader>]g <Plug>(coc-diagnostic-next)<cr>
 	map <silent> <leader>[g <Plug>(coc-diagnostic-prev)<cr>
-	" map <silent> <leader>lr <Plug>(coc-rename)<cr>
+	map <silent> <leader>lr <Plug>(coc-rename)<cr>
 	map <silent> <leader>gf <Plug>(coc-fix-current)<cr>
 
 	" Remap keys for gotos

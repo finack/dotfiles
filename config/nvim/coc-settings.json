@@ -3,6 +3,8 @@
   "diagnostic.warningSign": "",
   "diagnostic.infoSign": "",
 
+  "coc.preferences.formatOnSaveFiletypes": ["go", "javascript", "typescript", "json"],
+
   "solargraph.diagnostics": true,
   "solargraph.autoformat": true,
   "solargraph.formatting": true,
