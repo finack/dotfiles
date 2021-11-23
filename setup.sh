@@ -79,84 +79,17 @@ fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update --force # https://github.com/Homebrew/brew/issues/1151
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "heroku/brew"
-tap "thoughtbot/formulae"
-tap "homebrew/cask-fonts"
-
-# Unix
-brew "coreutils"
-brew "fzf"
-brew "git"
-#brew "neovim", args: ["env-std", "override-system-vim"]
-brew "neovim"
-brew "openssl"
-brew "rcm"
-brew "reattach-to-user-namespace"
-brew "the_silver_searcher"
-brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
-brew "vim"
-brew "watchman"
-brew "zsh"
-
-# Heroku
-brew "heroku/brew/heroku"
-brew "parity"
-
-# Programming language prerequisites and package managers
-brew "coreutils"
-brew "libyaml" # should come after openssl
-brew "yarn"
-
-cask "font-hack-nerd-font"
-
-# Languages
-brew "node"
-brew "npm"
-
-brew "rbenv"
-brew "ruby-build"
-
-brew "python3"
-
-EOF
-
-fancy_echo "Update heroku binary ..."
-brew unlink heroku
-brew link --force heroku
+brew bundle install
 
 fancy_echo "Update pip"
 pip3 install --upgrade pip
-
-fancy_echo "Update ruby"
-ruby_version=2.6.6
-
-eval "$(rbenv init - zsh)"
-
-if ! rbenv versions | grep -Fq "$ruby_version"; then
-  rbenv install -s "$ruby_version"
-fi
-
-rbenv global "$ruby_version"
-rbenv shell "$ruby_version"
-rbenv rehash
-
-gem update --system
-gem_install_or_update 'bundler'
-number_of_cores=$(sysctl -n hw.ncpu)
-bundle config --global jobs $((number_of_cores - 1))
 
 fancy_echo "Grab submodules"
 git submodule update --init
 
 fancy_echo "Add neovim support"
 pip3 install neovim psutil
-pip2 install neovim
 npm install -g neovim
-gem install neovim
 
 npm install --global typescript
 
