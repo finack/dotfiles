@@ -1,66 +1,40 @@
-" Plugins  ------------------------------------------------------------------{{{
+""" Plugins
   call plug#begin('~/.local/share/nvim/plugged')
   filetype plugin indent on
 
-" System {{{
+"""" System
   Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'simnalamburt/vim-mundo'
   Plug 'taiansu/nerdtree-ag'
- " }}}
 
-" Appeareance {{{
+"""" Appeareance
+  Plug 'jrudess/vim-foldtext'
   Plug 'chriskempson/base16-vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'RRethy/vim-illuminate'
-" }}}
 
-" Completion {{{
+"""" Completion
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" }}}
 
-" Finders {{{
+"""" Finders
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
-" }}}
 
-" Movement {{{
+"""" Movement
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-unimpaired' "}}} " code style {{{
-" }}}
+  Plug 'tpope/vim-unimpaired'
 
-" Git {{{{
-  function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-      if has('nvim')
-        !cargo build --release
-      else
-        !cargo build --release --no-default-features --features json-rpc
-      endif
-    endif
-  endfunction
-
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
-  Plug 'jreybert/vimagit', {'on_cmd': ['Magit', 'MagitOnly']}
-  Plug 'sgeb/vim-diff-fold'
-  Plug 'junegunn/gv.vim' " }}}} " markdown {{{
-  Plug 'tpope/vim-markdown', {'on_ft': 'markdown'}
+"""" Markdown
   Plug 'dhruvasagar/vim-table-mode'
-  Plug 'nelstrom/vim-markdown-folding', {'on_ft': 'markdown'}
-  Plug 'rhysd/vim-grammarous'
-  Plug 'junegunn/goyo.vim'
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-" }}}
 
-" Language {{{
+"""" Language
   Plug 'godlygeek/tabular'
   Plug 'tmux-plugins/vim-tmux'
 
@@ -69,38 +43,30 @@
   Plug 'janko-m/vim-test'
   Plug 'sbdchd/vim-run'
   Plug 'sheerun/vim-polyglot'
-" }}}
 
-" Javascript {{{
+"""" Javascript
   Plug 'othree/yajs.vim'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'elzr/vim-json'
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'Quramy/vison'
-" }}}
 
-" HTML {{{
+"""" HTML
   Plug 'mattn/emmet-vim'
   Plug 'othree/html5.vim'
   Plug 'skwp/vim-html-escape'
   Plug 'valloric/MatchTagAlways', {'on_ft': 'html'}
-" }}}
 
-" CSS {{{
+"""" CSS
   Plug 'hail2u/vim-css3-syntax'
   Plug 'ap/vim-css-color'
-" }}}
 
+"""" Initialization
   Plug 'ryanoasis/vim-devicons' " Always load last
-
-  
   call plug#end()
   filetype plugin indent on
-" }}}
 
-" Vim Options  --------------------------------------------------------------{{{
-
-" General Key Mappings {{{
+""" General Key Mappings
   let mapleader = ","
   let maplocalleader = ";"
 
@@ -176,9 +142,7 @@
   " or recording macros
   map      q             <NOP>
 
-" }}}
-
-" General Options {{{
+""" General Options
   set nocompatible                " Don't maintain compatibility with vi
   syntax on                       " Highlight known syntaxes
 
@@ -196,16 +160,14 @@
   filetype plugin on             " load filetype plugins
   set viminfo+=!                 " make sure it can save viminfo
   set modelines=1                " enable modelines in files
-" }}}
 
-" GUI Options {{{
+""" GUI Options
   " set guifont=Inconsolata:h24
   " set guioptions-=T               " Remove GUI toolbar
   " set guioptions-=e               " Use text tab bar, not GUI
   " set guioptions-=rL              " Remove scrollbars
-" }}}
 
-" Appearance {{{
+""" Appearance
   set t_Co=256
   syntax enable
   let base16colorspace=256
@@ -242,28 +204,8 @@
   let g:gitgutter_sign_removed            = ' '
   let g:gitgutter_sign_removed_first_line = '‾'
   let g:gitgutter_sign_modified_removed   = ''
-" }}}
 
-" Folding  ------------------------------------------------------------------{{{
-  function! MyFoldText() " {{{
-      let line = getline(v:foldstart)
-      let nucolwidth = &fdc + &number * &numberwidth
-      let windowwidth = winwidth(0) - nucolwidth - 3
-      let foldedlinecount = v:foldend - v:foldstart
-
-      " expand tabs into spaces
-      let onetab = strpart('          ', 0, &tabstop)
-      let line = substitute(line, '\t', onetab, 'g')
-
-      let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
-      let fillcharcount = windowwidth - len(line)
-      " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
-      return line . '…'. repeat(" ",fillcharcount)
-  endfunction " }}}
-  set foldtext=MyFoldText()
-
+""" Folding
   autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
   autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
@@ -273,7 +215,8 @@
   " Space to toggle folds.
   nnoremap <Space> za
   vnoremap <Space> za
-  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal fde=getline(v\:lnum)=~'^\"\"'?'>'.(matchend(getline(v\:lnum),'\"\"*')-2)\:'='
+  autocmd FileType vim setlocal foldmethod=expr
   autocmd FileType vim setlocal foldlevel=0
 
   autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
@@ -288,11 +231,9 @@
   autocmd FileType html setl foldmethod=expr
   autocmd FileType html setl foldexpr=HTMLFolds()
 
-  " autocmd FileType javascript,typescript,json setl foldmethod=syntax
   autocmd FileType javascript,typescript,typescriptreact,json setl foldmethod=syntax
-" }}}
 
-" Visual Cues {{{
+""" Visual Cues
   set showmatch                                      " show matching brackets
   set mat=5                                          " how many tenths of a second to blink matching brackets for
   set hlsearch                                       " highlight searched for phrases
@@ -327,9 +268,8 @@
   set hidden                      " Allow hidden, unsaved buffers
   set splitright                  " Add new windows towards the right
   set splitbelow                  " ... and bottom
-" }}}
 
-" Text Formatting/Layout {{{
+""" Text Formatting/Layout
   set fo=tcrqn      " See Help (complex)
   set ai            " autoindent
   set si            " smartindent
@@ -340,9 +280,8 @@
   set shiftwidth=2  " unify
   set expandtab     " Give me spaces or give me death
   set nowrap        " do not wrap lines
-" }}}
 
-" Files/Backups {{{
+""" Files/Backups
   "set backup " make backup file
   "set backupdir=$VIM\vimfiles\backup " where to put backup file
   "set directory=$VIM\vimfiles\temp " directory is the directory for temp file
@@ -361,9 +300,8 @@
   set wildignore+=.git,*.o,tmp/**,vendor/rails/**
   set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp
   set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp
-" }}}
 
-" Vim UI {{{
+""" Vim UI
   set lsp=0                            " space it out a little more (easier to read)
   set wildmenu  wildmode=full          " turn on wild menu
   set ruler                            " Always show current positions along the bottom
@@ -391,11 +329,8 @@
 " Write all writeable buffers when changing buffers or losing focus.
   set autowriteall                " Save when doing various buffer-switching things.
   autocmd BufLeave,FocusLost * silent! wall  " Save anytime we leave a buffer or MacVim loses focus.
-" }}}
 
-" }}}
-
-" Completion (coc) {{{
+""" Completion (coc)
 	" use <tab> for trigger completion and navigate next complete item
 	function! s:check_back_space() abort
 		let col = col('.') - 1
@@ -514,34 +449,19 @@
 	" highlight! link CocHintSign	DiffText
 	" highlight! link CocInfoSign DiffAdd
 
-" }}}
-" Completion -------------------------------------------------------------{{{
-
+""" Completion
   set splitbelow
   set completeopt+=menuone,noinsert,noselect
   set completeopt-=preview
-"}}}
 
-" Search and Display Lists (fzf)  ----------------------------------------{{{
-
+""" Search and Display Lists (fzf)
   map <silent> <leader>k :Ag<CR>
   map <silent> <leader>b :Buffers<CR>
   map <silent> <leader>f :GFiles<CR>
   map <silent> <leader>F :Files<CR>
   map <silent> <leader>h :HelpTags<CR>
-"}}}
 
-" Git  ----------------------------------------------------------------------{{{
-  " Automatically delete Fugitive buffers that are no longer being used.
-  " Otherwise, they tend to fill up the buffer list.
-  "
-  " Credit to Drew Neil of Vimcasts:
-  " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
-
-  autocmd BufReadPost fugitive://* set bufhidden=delete
-" }}}
-
-" Searching (AG)  -----------------------------------------------------------{{{
+""" Searching (AG)
   if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ --column
@@ -550,9 +470,8 @@
     " bind K to grep word under cursor
     nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
   endif
-" }}}
 
-" Nerd Commenter  -----------------------------------------------------------{{{
+""" Nerd Commenter
   " Comment/uncomment lines
   map <leader>/   <plug>NERDCommenterToggle
 
@@ -562,17 +481,15 @@
   let g:NERDCustomDelimiters = {
         \ 'tmux': { 'left': '#', 'leftAlt': '##' }
         \ }
-" }}}
 
-" Nerd Tree  ----------------------------------------------------------------{{{
+""" Nerd Tree
   " File tree browser
   noremap <nowait> \ :NERDTreeToggle<Enter>
 
   " File tree browser showing current file - pipe (shift-backslash)
   map \|          :NERDTreeFind<CR>
-" }}}
 
-" Undo  ---------------------------------------------------------------------{{{
+""" Undo
   "TODO Update undo
   map <leader>u   :GundoToggle<CR>
   nmap <leader>r :Run<CR>
@@ -581,4 +498,3 @@
   nmap <leader>ts :TestSuite<CR>
   nmap <leader>tl :TestLast<CR>
   nmap <leader>tg :TestVisit<CR>
-"}}}
