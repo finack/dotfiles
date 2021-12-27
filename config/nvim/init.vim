@@ -9,7 +9,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'simnalamburt/vim-mundo'
 Plug 'taiansu/nerdtree-ag'
 
-"""" Appeareance
+"""" Appearance
 Plug 'jrudess/vim-foldtext' " Pretty display of folded text
 Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
@@ -29,20 +29,21 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-
-"""" Markdown
-Plug 'dhruvasagar/vim-table-mode'
 
 """" Language
 Plug 'godlygeek/tabular'
 Plug 'tmux-plugins/vim-tmux'
 
-Plug 'tpope/vim-dispatch' "
+Plug 'tpope/vim-dispatch'
 " Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'janko-m/vim-test'
 Plug 'sbdchd/vim-run'
 Plug 'sheerun/vim-polyglot'
+
+"""" Markdown
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 """" Initialization
 Plug 'ryanoasis/vim-devicons' " Always load last
@@ -68,11 +69,13 @@ map <Leader><Leader> :!
 map <Leader>q :q<cr>
 map <Leader>Q :qa!<cr>
 
-" Open .vimrc file in new tab. Think Command + , [Preferences...] but with Shift.
-map <D-<>       :tabedit ~/.neovimrc<CR>
+" Open .vimrc file in new tab
+map <leader>ve       :vs ~/.dotfiles/config/nvim/init.vim<CR>
 
 " Reload .vimrc
-map <leader>rv  :source ~/.neovimrc<CR>
+map <leader>vr  :source ~/.dotfiles/config/nvim/init.vim<CR>
+
+map <leader>vc :vs ~/.dotfiles/config/nvim/cheatsheet.md<CR>
 
 " Undo/redo - Doesn't MacVim already have this?
 map <D-z>       :earlier 1<CR>
@@ -485,3 +488,30 @@ nmap <leader>tf :TestFile<CR>
 nmap <leader>ts :TestSuite<CR>
 nmap <leader>tl :TestLast<CR>
 nmap <leader>tg :TestVisit<CR>
+
+""" Markdown
+let g:vim_markdown_frontmatter = 1  " for YAML format
+nmap <leader>p <Plug>MarkdownPreviewToggle
+
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+""" Spell
+function! FzfSpellSink(word)
+  exe 'normal! "_ciw'.a:word
+endfunction
+
+function! FzfSpell()
+  let suggestions = spellsuggest(expand("<cword>"))
+  return fzf#run(fzf#wrap({'source': suggestions, 'sink': function("FzfSpellSink")}))
+endfunction
+nnoremap z= :call FzfSpell()<CR>
+
+" enable terminal codes for undercurl and under colors
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+hi SpellBad cterm=Undercurl ctermfg=red ctermbg=NONE term=Reverse gui=Undercurl guisp=Red
+hi SpellLocal cterm=Undercurl ctermfg=14 ctermbg=NONE term=Reverse gui=Undercurl guisp=Red
+hi SpellCap cterm=Undercurl ctermfg=12 ctermbg=NONE term=Reverse gui=Undercurl guisp=Red
+hi SpellRare cterm=Undercurl ctermfg=13 ctermbg=NONE term=Reverse gui=Undercurl guisp=Red
+
+" set spell spelllang=en_us termguicolors
