@@ -157,8 +157,8 @@ set modelines=1                " enable modelines in files
 set t_Co=256
 syntax enable
 let base16colorspace=256
-set background=dark
-colorscheme base16-solarized-dark
+set background=light
+colorscheme base16-solarized-light
 
 function! AirlineInit()
   let g:airline_section_x = airline#section#create([])
@@ -327,6 +327,9 @@ autocmd BufLeave,FocusLost * silent! wall  " Save anytime we leave a buffer or M
 		return !col || getline('.')[col - 1]  =~ '\s'
 	endfunction
 
+" Install via :CocInstall coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 	inoremap <silent><expr> <TAB>
 				\ pumvisible() ? "\<C-n>" :
 				\ <SID>check_back_space() ? "\<TAB>" :
@@ -401,6 +404,10 @@ endif
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
+
+
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -494,6 +501,7 @@ let g:vim_markdown_frontmatter = 1  " for YAML format
 nmap <leader>p <Plug>MarkdownPreviewToggle
 
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal tw=80
 
 """ Spell
 function! FzfSpellSink(word)
