@@ -184,7 +184,7 @@ let g:airline_skip_empty_sections = 1
 
 set updatetime=1000
 
-set signcolumn="yes"
+" set signcolumn = 3
 let g:gitgutter_sign_added              = ''
 let g:gitgutter_sign_modified           = ''
 let g:gitgutter_sign_removed            = ' '
