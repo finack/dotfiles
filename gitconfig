@@ -31,3 +31,5 @@
   user = finack
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
