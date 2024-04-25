@@ -6,8 +6,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # trap 'echo "Failure at $0:$LINENO"' ERR
-# load our own completion functions
-fpath=(~/.zsh/completion $fpath)
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
@@ -40,5 +38,9 @@ done
 
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+
+# load our own completion functions
+## FIXME: Likely not working
+fpath=(~/.zsh/completion $fpath)
 
 source ~/.env
