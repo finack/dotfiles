@@ -1,8 +1,14 @@
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
 local function cmp_setup()
   local cmp = require("cmp")
   local lspkind = require("lspkind")
 
-  require("luasnip.loaders.from_vscode").lazy_load()
+  -- require("luasnip.loaders.from_vscode").lazy_load()
 
   -- initialize global var to false -> nvim-cmp turned off per default
   vim.g.cmptoggle = true
@@ -17,11 +23,11 @@ local function cmp_setup()
     enabled = function()
       return vim.g.cmptoggle
     end,
-    snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-      end,
-    },
+    -- snippet = {
+    --   expand = function(args)
+    --     require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+    --   end,
+    -- },
     view = {
       entries = "custom", -- custom, native, wildmenu
     },
@@ -38,13 +44,24 @@ local function cmp_setup()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       -- ['<C-e>'] = cmp.mapping.abort(),
-      -- ["<Tab>"] = function(fallback) -- commented to avoid colliding with codeium
-      --   if cmp.visible() then
-      --     cmp.select_next_item()
-      --   else
-      --     fallback()
-      --   end
-      -- end,
+      ['<Tab>'] = function(fallback)
+        if not cmp.select_next_item() then
+          if vim.bo.buftype ~= 'prompt' and has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end
+      end,
+      ['<S-Tab>'] = function(fallback)
+        if not cmp.select_prev_item() then
+          if vim.bo.buftype ~= 'prompt' and has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end
+      end,
       ['<CR>'] = cmp.mapping.confirm({ select = false }),
       -- ["<CR>"] = cmp.mapping({
       -- 	i = function(fallback)
@@ -59,13 +76,13 @@ local function cmp_setup()
       -- }),
     }),
     sources = {
+      { name = "copilot" },
       { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
       { name = "nvim_lsp" },
       { name = "path" },
-      { name = "luasnip" },
+      -- { name = "luasnip" },
       -- { name = "cmdline" },
       { name = "ctags" },
-      { name = "codeium" },
       { name = "buffer",  keyword_length = 3 },
     },
     formatting = {
@@ -78,11 +95,12 @@ local function cmp_setup()
           nvim_lsp  = "<lsp",
           nvim_lua  = "<api",
           path      = "<path",
-          lua_snip  = "<snip",
+          -- lua_snip  = "<snip",
           gh_issues = "<git",
           ctags     = "<tag",
-          codeium   = "<ia"
+          -- codeium   = "<ia"
         },
+        symbol_map = { Copilot = "" },
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
         -- before = function (entry, vim_item)
@@ -122,7 +140,7 @@ end
 
 return {
   -- Autocompletion
-  { "hrsh7th/nvim-cmp",            config = cmp_setup },
+  { "hrsh7th/nvim-cmp",    config = cmp_setup },
   { "hrsh7th/cmp-buffer" },   -- completions from buffer
   { "hrsh7th/cmp-path" },     -- completions from paths
   { "hrsh7th/cmp-cmdline" },  -- completions from cmd line
@@ -131,9 +149,9 @@ return {
   { "delphinus/cmp-ctags" },  -- completions from Ctags
 
   -- Snippets
-  { "L3MON4D3/LuaSnip" },
-  { "saadparwaiz1/cmp_luasnip" },     -- LuaSnip completions
-  { "rafamadriz/friendly-snippets" }, -- vscode-like snippes
+  -- { "L3MON4D3/LuaSnip" },
+  -- { "saadparwaiz1/cmp_luasnip" },     -- LuaSnip completions
+  -- { "rafamadriz/friendly-snippets" }, -- vscode-like snippes
 
   -- UI
   { "onsails/lspkind.nvim" }, -- add nerd icons to completion menu sources

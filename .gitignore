@@ -1,3 +1,4 @@
 .DS_Store
 BrewFile.lock.json
 .tags
+config/github-copilot

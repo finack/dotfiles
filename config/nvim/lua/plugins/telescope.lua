@@ -19,7 +19,7 @@ local telescope_config = function()
 
   require("telescope").load_extension("ui-select")
   require("telescope").load_extension("noice")
-  require("telescope").load_extension("emoji")
+  -- require("telescope").load_extension("emoji")
 
   -- Enable telescope fzf native, if installed
   pcall(require("telescope").load_extension, "fzf")
@@ -85,7 +85,7 @@ local telescope_config = function()
   vks("n", "<leader>sc", builtin.colorscheme, "Colorchemes")
   vks("n", "<leader>ss", grep_string, "String (like ag)") -- Emulate fzf's Ag:
   vks("n", "<leader>sb", builtin.buffers, "Buffers")
-  vks("n", "<leader>se", ":Telescope emoji<cr>", "Emojis")
+  vks("n", "<leader>se", ":Telescope symbols<cr>", "[S] [E]mojis & symbols")
   vks("n", "<leader>sg", builtin.live_grep, "Find/grep")
   vks("n", "<leader>vh", builtin.help_tags, "[V]i [H]elp")
   vks("n", "<leader>vk", builtin.keymaps, "Key mappings")
@@ -132,5 +132,6 @@ return {
       )
     end
   },
-  { "xiyaowong/telescope-emoji.nvim" },
+  { "nvim-telescope/telescope-symbols.nvim" },
+  -- { "xiyaowong/telescope-emoji.nvim" },
 }
