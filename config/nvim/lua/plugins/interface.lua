@@ -2,18 +2,6 @@ return {
   { "simrat39/symbols-outline.nvim", opts = {} },
   { "m-demare/hlargs.nvim",          opts = {} },
   {
-    'stevearc/oil.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require('oil').setup({
-        default_file_explorer = false,
-        vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "pen parent folder" })
-      })
-    end
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {
@@ -96,23 +84,6 @@ return {
     end,
   },
   {
-    -- Integrated terminal
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("toggleterm").setup({
-        open_mapping = "<c-t>",
-        insert_mappings = true,   -- whether or not the open mapping applies in insert mode
-        terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-      })
-    end,
-  },
-  {
-    "benlubas/wrapping-paper.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-  },
-  {
     'tzachar/local-highlight.nvim',
     opts = {},
     -- config = function()
@@ -132,12 +103,6 @@ return {
   {
     'mcauley-penney/visual-whitespace.nvim',
     config = true
-  },
-  {
-    "NStefan002/screenkey.nvim",
-    cmd = "Screenkey",
-    version = "*",
-    config = true,
   },
   {
     "kshenoy/vim-signature" -- marks on gutter
