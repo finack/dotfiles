@@ -10,11 +10,11 @@ return {
       vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
 
       local function set_light()
-        vim.cmd("colorscheme github_light_default")
+        vim.cmd("colorscheme github_light_high_contrast")
       end
 
       local function set_dark()
-        vim.cmd("colorscheme github_dark_default")
+        vim.cmd("colorscheme github_dark_high_contrast")
       end
 
       set_dark()

@@ -1,5 +1,3 @@
-local IS_DEV = false
-
 local prompts = {
   -- Code related prompts
   Explain = "Please explain how the following code works.",
@@ -53,12 +51,10 @@ return {
       },
     },
     {
-      { import = "plugins.extras.copilot-vim" }, -- Or use { import = "lazyvim.plugins.extras.coding.copilot" },
       {
-        dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
         "CopilotC-Nvim/CopilotChat.nvim",
-        version = "v2.7.0",
-        -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
+        -- version = "v2.7.0",
+        branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
         -- Do not use branch and version together, either use branch or version
         dependencies = {
           { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
@@ -116,6 +112,7 @@ return {
             },
           },
         },
+
         config = function(_, opts)
           local chat = require("CopilotChat")
           local select = require("CopilotChat.select")
@@ -187,9 +184,86 @@ return {
               },
             },
           })
-        end,
+
+          local vks = function(mode, key, action, desc)
+            vim.keymap.set(mode, key, action, { noremap = true, desc = desc })
+          end
+
+          local function set_keymap(mode, lhs, rhs, options)
+            opts = vim.tbl_extend('force', { noremap = true, silent = true }, options or {})
+            vim.keymap.set(mode, lhs, rhs, options)
+          end
+
+          -- Show help actions with telescope
+          vks('n', '<leader>ah', function()
+            local actions = require("CopilotChat.actions")
+            require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+          end, { desc = "CopilotChat - Help actions" })
+
+          -- Show prompts actions with telescope (normal mode)
+          vks('n', '<leader>ap', function()
+            local actions = require("CopilotChat.actions")
+            require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+          end, { desc = "CopilotChat - Prompt actions" })
+
+          -- Show prompts actions with telescope (visual mode)
+          vks('x', '<leader>ap', function()
+            require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({
+              selection =
+                  require('CopilotChat.select').visual
+            }))
+          end, { desc = "CopilotChat - Prompt actions" })
+
+          -- Code related commands
+          vks('n', '<leader>ae', '<cmd>CopilotChatExplain<cr>', { desc = "CopilotChat - Explain code" })
+          vks('n', '<leader>at', '<cmd>CopilotChatTests<cr>', { desc = "CopilotChat - Generate tests" })
+          vks('n', '<leader>ar', '<cmd>CopilotChatReview<cr>', { desc = "CopilotChat - Review code" })
+          vks('n', '<leader>aR', '<cmd>CopilotChatRefactor<cr>', { desc = "CopilotChat - Refactor code" })
+          vks('n', '<leader>an', '<cmd>CopilotChatBetterNamings<cr>', { desc = "CopilotChat - Better Naming" })
+
+          -- Chat with Copilot in visual mode
+          vks('x', '<leader>av', ':CopilotChatVisual', { desc = "CopilotChat - Open in vertical split" })
+          vks('x', '<leader>ax', ':CopilotChatInline<cr>', { desc = "CopilotChat - Inline chat" })
+
+          -- Custom input for CopilotChat
+          vks('n', '<leader>ai', function()
+            local input = vim.fn.input("Ask Copilot: ")
+            if input ~= "" then
+              vim.cmd("CopilotChat " .. input)
+            end
+          end, { desc = "CopilotChat - Ask input" })
+
+          -- Generate commit message based on the git diff
+          vks('n', '<leader>am', '<cmd>CopilotChatCommit<cr>',
+            { desc = "CopilotChat - Generate commit message for all changes" })
+          vks('n', '<leader>aM', '<cmd>CopilotChatCommitStaged<cr>',
+            { desc = "CopilotChat - Generate commit message for staged changes" })
+
+          -- Quick chat with Copilot
+          vks('n', '<leader>aq', function()
+            local input = vim.fn.input("Quick Chat: ")
+            if input ~= "" then
+              vim.cmd("CopilotChatBuffer " .. input)
+            end
+          end, { desc = "CopilotChat - Quick chat" })
+
+          -- Debug
+          vks('n', '<leader>ad', '<cmd>CopilotChatDebugInfo<cr>', { desc = "CopilotChat - Debug Info" })
+
+          -- Fix the issue with diagnostic
+          vks('n', '<leader>af', '<cmd>CopilotChatFixDiagnostic<cr>', { desc = "CopilotChat - Fix Diagnostic" })
+
+          -- Clear buffer and chat history
+          vks('n', '<leader>al', '<cmd>CopilotChatReset<cr>',
+            { desc = "CopilotChat - Clear buffer and chat history" })
+
+          -- Toggle Copilot Chat Vsplit
+          vks('n', '<leader>av', '<cmd>CopilotChatToggle<cr>', { desc = "CopilotChat - Toggle" })
+        end, -- config
+
         event = "VeryLazy",
-        keys = {
+
+        --[[ keys = {
           -- Show help actions with telescope
           {
             "<leader>ah",
@@ -274,6 +348,6 @@ return {
           { "<leader>al", "<cmd>CopilotChatReset<cr>",         desc = "CopilotChat - Clear buffer and chat history" },
           -- Toggle Copilot Chat Vsplit
           { "<leader>av", "<cmd>CopilotChatToggle<cr>",        desc = "CopilotChat - Toggle" },
-        },
+        }, ]]
       },
     }
