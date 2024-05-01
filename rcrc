@@ -1,4 +1,4 @@
-EXCLUDES="setup.sh themes"
+EXCLUDES="BrewFile* setup.sh themes"
 DOTFILES_DIRS="$HOME/.dotfiles"
-SYMLINK_DIRS="bin zsh"
+SYMLINK_DIRS="bin config zsh"
 UNDOTTED="*:bin"

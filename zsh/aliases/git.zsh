@@ -13,6 +13,7 @@ alias gca='git commit -v -a'
 alias gcam='gca --amend'
 alias gch='git cherry-pick'
 alias gcm='git commit -v --amend'
+alias gwip='git commit -v -a -m "wip"'
 alias gco='git checkout'
 gcop() {
   git ls-remote --exit-code origin refs/pull/$1/merge
@@ -80,5 +81,13 @@ alias gssa='git stash apply'
 alias gssp='git stash pop'
 alias gup='git smart-pull'
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
+
+git-prune() {
+  git fetch --prune
+  for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}');
+    do git branch -D $branch;
+   done
+}
+alias gfu='git-prune'
 
 # vim ft=sh
