@@ -1,0 +1,29 @@
+tap "homebrew/services"
+tap "universal-ctags/universal-ctags"
+tap "homebrew/cask-fonts"
+
+# Unix
+brew "coreutils"
+brew "openssl"
+
+brew "fzf"
+brew "git"
+brew "neovim"
+brew "rcm"
+brew "reattach-to-user-namespace"
+brew "the_silver_searcher"
+brew "tmux"
+brew "universal-ctags", args: ["HEAD"]
+brew "ripgrep"
+brew "watchman"
+brew "zsh"
+
+#cask "font-hack-nerd-font"
+
+brew "node"
+
+brew "rbenv"
+brew "ruby-build"
+
+brew "python3"
+brew "python-psutil"

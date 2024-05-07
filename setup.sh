@@ -46,53 +46,13 @@ gem_install_or_update() {
 
 if ! command -v brew >/dev/null; then
 	fancy_echo "Installing Homebrew ..."
-		curl -fsS \
-			'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		export PATH="/usr/local/bin:$PATH"
-fi
-
-if brew list | grep -Fq brew-cask; then
-	fancy_echo "Uninstalling old Homebrew-Cask ..."
-	brew uninstall --force brew-cask
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update --force # https://github.com/Homebrew/brew/issues/1151
 brew bundle install
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "homebrew/cask-fonts"
-
-# Unix
-brew "coreutils"
-brew "openssl"
-
-brew "fzf"
-brew "git"
-brew "neovim"
-brew "rcm"
-brew "reattach-to-user-namespace"
-brew "the_silver_searcher"
-brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
-brew "ripgrep"
-brew "watchman"
-brew "zsh"
-
-cask "font-hack-nerd-font"
-
-brew "node"
-
-brew "rbenv"
-brew "ruby-build"
-
-brew "python3"
-EOF
-
-fancy_echo "Update pip"
-pip3 install --upgrade pip
 
 fancy_echo "Update ruby"
 ruby_version=3.3
