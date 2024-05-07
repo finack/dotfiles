@@ -113,7 +113,13 @@ return {
     opts = {
       -- add any options here
       lsp = { signature = { enabled = false } },
-      presets = { lsp_doc_border = true }
+      cmdline = { view = "cmdline" },
+      presets = {
+        lsp_doc_border = true,
+        bottom_search = true,
+        command_palette = false,
+        long_message_to_split = true
+      }
 
     },
     dependencies = {

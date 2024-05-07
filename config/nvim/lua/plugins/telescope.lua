@@ -71,8 +71,8 @@ local telescope_config = function()
   -- direct commands
   vks("n", "<leader>b", builtin.buffers, "Buffers")
   vks("n", "<leader>g", builtin.grep_string, "References")
-  vks("n", "<leader>f", project_files, "Paths")
-  vks("n", "<leader>F", builtin.find_files, "Paths")
+  vks("n", "<leader>F", project_files, "Paths")
+  vks("n", "<leader>f", builtin.find_files, "Paths")
   vks("n", "<leader>c", builtin.commands, "Commands")
   -- project_files unifies git_files and find_files
   -- vks('n', '<leader>sf', builtin.git_files,              'Git files')
