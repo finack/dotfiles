@@ -42,7 +42,7 @@ local function cmp_setup()
     mapping = cmp.mapping.preset.insert({
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
+      -- ["<leader><leader>"] = cmp.mapping.complete(),
       -- ['<C-e>'] = cmp.mapping.abort(),
       ['<Tab>'] = function(fallback)
         if not cmp.select_next_item() then
@@ -77,32 +77,32 @@ local function cmp_setup()
     }),
     sources = {
       { name = "copilot" },
-      { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
+      -- { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
       { name = "nvim_lsp" },
       { name = "path" },
       -- { name = "luasnip" },
       -- { name = "cmdline" },
-      { name = "ctags" },
+      -- { name = "ctags" },
       { name = "buffer",  keyword_length = 3 },
     },
     formatting = {
       format = lspkind.cmp_format({
-        mode = "symbol_text",  -- show symbol + text annotations
+        mode = "symbol",       -- show symbol + text annotations
         maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         menu = {
-          buffer    = "<buf",
-          nvim_lsp  = "<lsp",
-          nvim_lua  = "<api",
-          path      = "<path",
-          -- lua_snip  = "<snip",
-          gh_issues = "<git",
-          ctags     = "<tag",
-          -- codeium   = "<ia"
+          buffer    = "",
+          nvim_lsp  = "",
+          nvim_lua  = "󱂛",
+          path      = "",
+          gh_issues = "",
+          ctags     = "",
         },
         symbol_map = { Copilot = "" },
+
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        --
         -- before = function (entry, vim_item)
         --   ...
         --   return vim_item
@@ -110,7 +110,7 @@ local function cmp_setup()
       }),
     },
   })
-  -- Set configuration for specific filetype.
+
   cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
       { name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
@@ -118,24 +118,6 @@ local function cmp_setup()
       { name = "buffer" },
     }),
   })
-
-  -- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  -- cmp.setup.cmdline({ "/", "?" }, {
-  -- 	mapping = cmp.mapping.preset.cmdline(),
-  -- 	sources = {
-  -- 		{ name = "buffer" },
-  -- 	},
-  -- })
-
-  -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  -- cmp.setup.cmdline(":", {
-  -- 	mapping = cmp.mapping.preset.cmdline(),
-  -- 	sources = cmp.config.sources({
-  -- 		{ name = "path" },
-  -- 	}, {
-  -- 		{ name = "cmdline", keyword_length = 5 },
-  -- 	}),
-  -- })
 end
 
 return {
@@ -145,8 +127,8 @@ return {
   { "hrsh7th/cmp-path" },     -- completions from paths
   { "hrsh7th/cmp-cmdline" },  -- completions from cmd line
   { "hrsh7th/cmp-nvim-lsp" }, -- completions from LSP
-  { "hrsh7th/cmp-nvim-lua" }, -- neovim lua API
-  { "delphinus/cmp-ctags" },  -- completions from Ctags
+  -- { "hrsh7th/cmp-nvim-lua" }, -- neovim lua API
+  -- { "delphinus/cmp-ctags" },  -- completions from Ctags
 
   -- Snippets
   -- { "L3MON4D3/LuaSnip" },
