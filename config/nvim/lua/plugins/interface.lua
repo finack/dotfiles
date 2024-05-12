@@ -56,15 +56,14 @@ return {
       },
     },
   },
-  {                     -- Useful plugin to show you pending keybinds.
+  {
     'folke/which-key.nvim',
     event = 'VeryLazy', -- Sets the loading event to 'VeryLazy'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
-      -- Document existing key chains
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]olor', _ = 'which_key_ignore' },
+        ['<leader>c'] = { name = '[C]hange', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         -- ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
@@ -159,5 +158,16 @@ return {
         end,
       })
     end,
+  },
+  {
+    "numToStr/Navigator.nvim",
+    config = function()
+      require("Navigator").setup()
+      vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
+      vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
+      vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
+      vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
+      vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
+    end
   },
 }

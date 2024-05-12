@@ -19,8 +19,8 @@ return {
 
       set_dark()
 
-      vim.keymap.set("n", "<space>cl", set_light, { desc = "[L]ight [c]olorsheme" })
-      vim.keymap.set("n", "<space>cd", set_dark, { desc = "[D]ark [c]olorsheme" })
+      -- vim.keymap.set("n", "<space>cl", set_light, { desc = "[L]ight [c]olorsheme" })
+      -- vim.keymap.set("n", "<space>cd", set_dark, { desc = "[D]ark [c]olorsheme" })
     end,
   },
 }

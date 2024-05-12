@@ -18,22 +18,32 @@ return {
     config = function()
       require('Comment').setup({
         pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        toggler = {
+          line = "<leader>,",
+          block = "<leader><",
+        },
+        opleader = {
+          line = "<leader>cc",
+          block = "<leader>cb",
+        },
+        extra = {
+          ---Add comment on the line above
+          above = '<leader>ccO',
+          ---Add comment on the line below
+          below = '<leader>co',
+          ---Add comment at the end of line
+          eol = '<leader>cA',
+        },
       })
     end
   },
   {
-    "AndrewRadev/splitjoin.vim", -- Split/Join ruby hashes, arglists, etc
+    -- "AndrewRadev/splitjoin.vim", -- Split/Join ruby hashes, arglists, etc
+    "echasnovski/mini.splitjoin",
     config = function()
-      -- Splitjoin keymaps
-      vim.keymap.set("n", "gs", vim.cmd.SplitjoinSplit, { desc = "[S]plitjoin [S]plit" })
-      vim.keymap.set("n", "gj", vim.cmd.SplitjoinJoin, { desc = "[S]plitjoin [J]oin" })
-    end,
-  },
-  {
-    "AndrewRadev/switch.vim", -- Automate common substitutions
-    config = function()
-      -- remap default mapping to add description
-      vim.keymap.set("n", "gs", vim.cmd.Switch, { desc = "[S]witch toggle" })
+      vim.keymap.set("n", "<leader>cs", vim.cmd.MiniSplitjoinSplit, { desc = "[s]plit block (SplitJoin)" })
+      vim.keymap.set("n", "<leader>cS", vim.cmd.MiniSplitjoinSplit, { desc = "[S]plit block (SplitJoin)" })
+      vim.keymap.set("n", "<leader>cj", vim.cmd.MiniSplitjoinJoin, { desc = "[j]oin block (SplitJoin)" })
     end,
   },
   {

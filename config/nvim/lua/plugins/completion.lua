@@ -7,8 +7,13 @@ end
 local function cmp_setup()
   local cmp = require("cmp")
   local lspkind = require("lspkind")
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
   -- require("luasnip.loaders.from_vscode").lazy_load()
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+  )
 
   -- initialize global var to false -> nvim-cmp turned off per default
   vim.g.cmptoggle = true

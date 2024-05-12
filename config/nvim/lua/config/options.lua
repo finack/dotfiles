@@ -18,7 +18,7 @@ vim.opt.shiftround = true -- round indent to sw compatible
 vim.opt.expandtab = true
 
 -- Decrease update time
-vim.opt.timeoutlen = 500
+-- vim.opt.timeoutlen = 500
 -- vim.opt.updatetime = 200
 vim.opt.updatetime = 50 -- primeagen value
 
@@ -96,3 +96,10 @@ end
 
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "[q]uit vim" })
 vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit vim w/o saving" })
+
+local function send_bell()
+    vim.api.nvim_command('echo "\\<Esc>[7m"')
+    vim.api.nvim_command('echo "\\<Esc>[0m"')
+end
+
+vim.keymap.set('n', '<C-g>', send_bell, { noremap = true, silent = true })
