@@ -77,8 +77,8 @@ local function cmp_setup()
     }),
     sources = {
       { name = "copilot" },
-      -- { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
       { name = "nvim_lsp" },
+      { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
       { name = "path" },
       -- { name = "luasnip" },
       -- { name = "cmdline" },

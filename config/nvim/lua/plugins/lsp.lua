@@ -21,7 +21,7 @@ return {
         "vtsls",
         "taplo",
         "tailwindcss",
-        "hydra_lsp",
+        -- "hydra_lsp",
         -- "tsserver",
         -- "gopls",
       };
