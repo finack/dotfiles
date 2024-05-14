@@ -83,10 +83,13 @@ alias gup='git smart-pull'
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
 
 git-prune() {
-  git fetch --prune
-  for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}');
-    do git branch -D $branch;
-   done
+  git fetch --prune -all
+  for branch in $(git branch | sed 's/..//'); do
+    if ! git show-ref --verify --quiet refs/remotes/origin/$branch; then
+      echo "Deleting local branch: $branch"
+      git branch -D $branch
+    fi
+  done
 }
 alias gfu='git-prune'
 

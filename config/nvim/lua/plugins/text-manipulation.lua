@@ -41,10 +41,17 @@ return {
     -- "AndrewRadev/splitjoin.vim", -- Split/Join ruby hashes, arglists, etc
     "echasnovski/mini.splitjoin",
     config = function()
-      vim.keymap.set("n", "<leader>cs", vim.cmd.MiniSplitjoinSplit, { desc = "[s]plit block (SplitJoin)" })
-      vim.keymap.set("n", "<leader>cS", vim.cmd.MiniSplitjoinSplit, { desc = "[S]plit block (SplitJoin)" })
-      vim.keymap.set("n", "<leader>cj", vim.cmd.MiniSplitjoinJoin, { desc = "[j]oin block (SplitJoin)" })
-    end,
+      require("mini.splitjoin").setup({
+        mappings = {
+          toggle = "<leader>cs",
+          split = "<leader>cS",
+          joint = "<leader>cj",
+        },
+      })
+    end
+    -- vim.keymap.set("n", "<leader>cs", vim.cmd.MiniSplitjoin.toggle, { desc = "[s]plit block (SplitJoin)" })
+    -- vim.keymap.set("n", "<leader>cS", vim.cmd.MiniSplitjoint, { desc = "[S]plit block (SplitJoin)" })
+    -- vim.keymap.set("n", "<leader>cj", vim.cmd.MiniSplitjoinJoin, { desc = "[j]oin block (SplitJoin)" })
   },
   {
     "echasnovski/mini.surround",
