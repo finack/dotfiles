@@ -49,19 +49,26 @@ windows:
       root: ~/src/blaide/ark/julia
       layout: 8f30,187x55,0,0[187x38,0,0,0,187x16,0,39{93x16,0,39,2,93x16,94,39,3}]
       panes:
-        - nvim -c "Telescope find_files"
+        - nvim
         - npm run dev
         - #shell
   - dinah:
       root: ~/src/blaide/ark/dinah
       layout: 8f30,187x55,0,0[187x38,0,0,0,187x16,0,39{93x16,0,39,2,93x16,94,39,3}]
       panes:
-        - nvim -c "Telescope find_files"
+        - nvim
         - npm run dev
+        - #shell
+  - playground:
+      root: ~/src/blaide/ark/playground/peter
+      layout: 8f30,187x55,0,0[187x38,0,0,0,187x16,0,39{93x16,0,39,2,93x16,94,39,3}]
+      panes:
+        - nvim
+        - #shell
         - #shell
   - home:
       root: ~/.dotfiles
       layout: split-vertically
       panes:
-        - nvim -c "Telescope find_files"
+        - nvim
         - #shell
