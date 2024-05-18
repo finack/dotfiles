@@ -13,29 +13,15 @@ return {
     end,
   },
   {
-    'numToStr/Comment.nvim',
-    lazy = false,
-    config = function()
-      require('Comment').setup({
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-        toggler = {
-          line = "<leader>,",
-          block = "<leader><",
-        },
-        opleader = {
-          line = "<leader>cc",
-          block = "<leader>cb",
-        },
-        extra = {
-          ---Add comment on the line above
-          above = '<leader>ccO',
-          ---Add comment on the line below
-          below = '<leader>co',
-          ---Add comment at the end of line
-          eol = '<leader>cA',
-        },
-      })
-    end
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
   },
   {
     -- "AndrewRadev/splitjoin.vim", -- Split/Join ruby hashes, arglists, etc
