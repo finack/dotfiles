@@ -13,26 +13,6 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
 set -e
 
-if [ ! -d "$HOME/.bin/" ]; then
-	mkdir "$HOME/.bin"
-fi
-
-if [ ! -f "$HOME/.zshrc" ]; then
-	touch "$HOME/.zshrc"
-fi
-
-HOMEBREW_PREFIX="/usr/local"
-
-if [ -d "$HOMEBREW_PREFIX" ]; then
-	if ! [ -r "$HOMEBREW_PREFIX" ]; then
-		sudo chown -R "$LOGNAME:admin" /usr/local
-	fi
-else
-	sudo mkdir "$HOMEBREW_PREFIX"
-	sudo chflags norestricted "$HOMEBREW_PREFIX"
-	sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
-fi
-
 update_shell() {
 	local shell_path;
 	shell_path="$(command -v zsh)"
@@ -66,78 +46,16 @@ gem_install_or_update() {
 
 if ! command -v brew >/dev/null; then
 	fancy_echo "Installing Homebrew ..."
-		curl -fsS \
-			'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		export PATH="/usr/local/bin:$PATH"
-fi
-
-if brew list | grep -Fq brew-cask; then
-	fancy_echo "Uninstalling old Homebrew-Cask ..."
-	brew uninstall --force brew-cask
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update --force # https://github.com/Homebrew/brew/issues/1151
-<<<<<<< Updated upstream
 brew bundle install
-=======
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "heroku/brew"
-# tap "thoughtbot/formulae"
-tap "homebrew/cask-fonts"
-
-# Unix
-brew "coreutils"
-brew "fzf"
-brew "git"
-#brew "neovim", args: ["env-std", "override-system-vim"]
-brew "neovim"
-brew "openssl"
-brew "rcm"
-brew "reattach-to-user-namespace"
-brew "the_silver_searcher"
-brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
-brew "vim"
-brew "watchman"
-brew "zsh"
-
-# Heroku
-brew "heroku/brew/heroku"
-brew "parity"
-
-# Programming language prerequisites and package managers
-brew "coreutils"
-brew "libyaml" # should come after openssl
-brew "yarn"
-
-cask "font-hack-nerd-font"
-cask "divvy"
-cask "charles"
-
-# Languages
-brew "node"
-brew "npm"
-
-brew "rbenv"
-brew "ruby-build"
-
-brew "python3"
-
-EOF
-
-fancy_echo "Update heroku binary ..."
-brew unlink heroku
-brew link --force heroku
-
-fancy_echo "Update pip"
-pip3 install --upgrade pip
 
 fancy_echo "Update ruby"
-ruby_version=2.7.4
+ruby_version=3.3
 
 eval "$(rbenv init - zsh)"
 
@@ -151,22 +69,17 @@ rbenv rehash
 
 gem update --system
 gem_install_or_update 'bundler'
-number_of_cores=$(sysctl -n hw.ncpu)
-bundle config --global jobs $((number_of_cores - 1))
+gem_install_or_update 'neovim'
+gem_install_or_update 'tmuxinator'
 
 fancy_echo "Grab submodules"
 git submodule update --init
 
 fancy_echo "Add neovim support"
 pip3 install neovim psutil
+
 npm install -g neovim
-
 npm install --global typescript
-
-mkdir -p ~/.local/share/nvim/plugged
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +PlugInstall +qall
 
 fancy_echo "Linking rc files"
 rcup -v

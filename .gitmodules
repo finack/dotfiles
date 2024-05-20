@@ -10,3 +10,6 @@
 [submodule "themes/projekt0n"]
 	path = themes/projekt0n
 	url = https://github.com/projekt0n/github-theme-contrib.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

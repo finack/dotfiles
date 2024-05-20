@@ -93,3 +93,13 @@ if vim.g.neovide then
   -- vim.g.neovide_background_color = "#ffffff" .. alpha()
   vim.g.neovide_scroll_animation_length = 0.05
 end
+
+vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "[q]uit vim" })
+vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit vim w/o saving" })
+
+local function send_bell()
+    vim.api.nvim_command('echo "\\<Esc>[7m"')
+    vim.api.nvim_command('echo "\\<Esc>[0m"')
+end
+
+vim.keymap.set('n', '<C-g>', send_bell, { noremap = true, silent = true })

@@ -2,3 +2,7 @@
 BrewFile.lock.json
 .tags
 config/github-copilot
+config/darktable
+
+tmux/plugins
+!tmux/plugins/tpm/

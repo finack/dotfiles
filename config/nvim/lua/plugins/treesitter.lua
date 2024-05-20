@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    version = "v0.22.5",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -13,14 +14,15 @@ return {
         ignore_install = {},
         auto_install = true,
         ensure_installed = {
-          "c",
+          -- "c",
+          "html",
+          "javascript",
           "lua",
+          "markdown",
+          "query",
+          "ruby",
           "vim",
           "vimdoc",
-          "query",
-          "javascript",
-          "html",
-          "ruby",
         },
         sync_install = false,
         modules = { "highlight", "incremental_selection", "indent", "rainbow" },
@@ -36,7 +38,7 @@ return {
   },
   {
     -- treesitter to color delimiter pairs
-    "mrjones2014/nvim-ts-rainbow",
+    "HiPhish/rainbow-delimiters.nvim"
   },
   {
     -- Show code context (fixing scope lines to the top)

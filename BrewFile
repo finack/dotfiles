@@ -1,45 +1,29 @@
-tap "heroku/brew"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
-tap "thoughtbot/formulae"
 tap "universal-ctags/universal-ctags"
+tap "homebrew/cask-fonts"
 
 # Unix
 brew "coreutils"
+brew "openssl"
+
 brew "fzf"
 brew "git"
-#brew "neovim", args: ["env-std", "override-system-vim"]
 brew "neovim"
-brew "openssl"
 brew "rcm"
 brew "reattach-to-user-namespace"
 brew "the_silver_searcher"
 brew "tmux"
 brew "universal-ctags", args: ["HEAD"]
-brew "vim"
+brew "ripgrep"
 brew "watchman"
 brew "zsh"
 
-# Heroku
-brew "heroku/brew/heroku"
-brew "parity"
+#cask "font-hack-nerd-font"
 
-# Programming language prerequisites and package managers
-brew "coreutils"
-brew "libyaml" # should come after openssl
-brew "yarn"
-
-cask "font-hack-nerd-font"
-cask "rectangle" # Window manager
-
-# Languages
 brew "node"
-brew "npm"
 
 brew "rbenv"
 brew "ruby-build"
 
 brew "python3"
+brew "python-psutil"

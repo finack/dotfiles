@@ -43,4 +43,4 @@ export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:/Applications/Visual\ Studio\ Code.app
 ## FIXME: Likely not working
 fpath=(~/.zsh/completion $fpath)
 
-source ~/.env
+source /Users/peter/.config/op/plugins.sh

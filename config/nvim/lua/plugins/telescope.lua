@@ -69,34 +69,33 @@ local telescope_config = function()
   end
 
   -- direct commands
-  vks("n", "<leader>b", builtin.buffers, "Buffers")
-  vks("n", "<leader>g", builtin.grep_string, "References")
-  vks("n", "<leader>f", project_files, "Paths")
-  vks("n", "<leader>F", builtin.find_files, "Paths")
-  vks("n", "<leader>c", builtin.commands, "Commands")
-  -- project_files unifies git_files and find_files
-  -- vks('n', '<leader>sf', builtin.git_files,              'Git files')
-  -- vks('n', '<leader>sp', builtin.find_files,             'Paths' )
+  vks("n", "<leader>b", builtin.buffers, "search [b]uffers")
+  -- vks("n", "<leader>g", builtin.grep_string, "References")
+  vks("n", "<leader>F", project_files, "search git [F]iles")
+  vks("n", "<leader>f", builtin.find_files, "search [f]iles")
 
   -- search submenu
-  vks("n", "<leader>sT", builtin.builtin, "Telescope")
 
+  -- vks("n", "<leader>st", function() builtin.tags({ fname_width = 50, show_line = false }) end, "Tags")
   vks("n", "<leader>s:", builtin.command_history, "Command history")
+  vks("n", "<leader>sT", builtin.builtin, "Telescope")
   vks("n", "<leader>sc", builtin.colorscheme, "Colorchemes")
-  vks("n", "<leader>ss", grep_string, "String (like ag)") -- Emulate fzf's Ag:
-  vks("n", "<leader>sb", builtin.buffers, "Buffers")
-  vks("n", "<leader>se", ":Telescope symbols<cr>", "[S] [E]mojis & symbols")
+  vks("n", "<leader>se", builtin.symbols, "[e]mojis & symbols")
   vks("n", "<leader>sg", builtin.live_grep, "Find/grep")
+  vks("n", "<leader>sld", builtin.diagnostics, "Diagnostics ")
+  vks("n", "<leader>sli", builtin.lsp_incoming_calls, "[i]ncoming calls ")
+  vks("n", "<leader>slr", builtin.lsp_references, "References")
+  vks("n", "<leader>sls", builtin.lsp_document_symbols, "Symbols - document")
+  vks("n", "<leader>slt", builtin.lsp_type_definitions, "Types")
+  vks("n", "<leader>slw", builtin.lsp_workspace_symbols, "Symbols - workspace")
+  vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
+  vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
+  vks("n", "<leader>sp", builtin.spell_suggest, "Spelling suggestions")
+  vks("n", "<leader>vc", builtin.commands, "[c]ommands")
   vks("n", "<leader>vh", builtin.help_tags, "[V]i [H]elp")
   vks("n", "<leader>vk", builtin.keymaps, "Key mappings")
   vks("n", "<leader>vn", ":Telescope noice<cr>", "Noice (messages)")
-  vks("n", "<leader>vo", builtin.oldfiles, "Recent Opened files")
   vks("n", "<leader>vr", builtin.registers, "Registers")
-  vks("n", "<leader>sl", builtin.lsp_references, "LSP References")
-  vks("n", "<leader>sd", builtin.lsp_document_symbols, "Symbols - document")
-  vks("n", "<leader>sw", builtin.lsp_workspace_symbols, "Symbols - workppace")
-  vks("n", "<leader>st", function() builtin.tags({ fname_width = 50, show_line = false }) end, "Tags")
-  vks("n", "<leader>sp", builtin.spell_suggest, "Spelling suggestions")
   -- vks("n", "<leader><leader>", builtin.resume, "Resume previous search")
   vks("n", "<leader>/", function()
     -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -118,6 +117,13 @@ return {
       -- optional but desired:
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-ui-select.nvim" },
+      {
+        "debugloop/telescope-undo.nvim",
+        keys = { { "<leader>u", "<cmd>Telescope undo<cr>", "[u]ndo tree" } },
+        config = function()
+          require("telescope").load_extension("undo")
+        end,
+      },
     },
     config = telescope_config,
   },
