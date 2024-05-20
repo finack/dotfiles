@@ -86,25 +86,23 @@ return {
             vim.keymap.set(mode, key, action, { buffer = ev.buf, remap = false, desc = desc })
           end
 
-          keymap("n", "<leader>ld", vim.lsp.buf.definition, "[L]sp go to [d]efinition")
-          keymap("n", "<leader>lD", vim.lsp.buf.declaration, "[L]SP go to [D]eclaration")
-          keymap("n", "<leader>lr", vim.lsp.buf.references, "go to [r]eferences (LSP)")
-          keymap("n", "<leader>li", vim.lsp.buf.implementation, "goto implementation (LSP)")
-          keymap("n", "<leader>lk", vim.lsp.buf.hover, "show info (LSP)")
-          keymap("n", "<leader>lr", vim.lsp.buf.rename, "rename symbol (LSP)") -- default is <F2>
-          keymap("n", "<leader>l=", vim.lsp.buf.format, "reformat (LSP)")
-          keymap("v", "<leader>l=", RangeFormatting, "reformat (LSP)")
-          keymap("n", "<leader>ll", vim.lsp.diagnostic.get_line_diagnostics, "line diagnostic (LSP)")
-          keymap("n", "<leader>ls", vim.lsp.buf.signature_help, "signature help (LSP)")
-          keymap("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, "add workspace folder (LSP)")
-          keymap("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "remove workspace folder (LSP)")
-          keymap("n", "<leader>lwl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, "(LSP) list workspace folders")
-          keymap("n", "<leader>lt", vim.lsp.buf.type_definition, "type definition (LSP)")
-          keymap({ "n", "v" }, "<space>la", function()
-            vim.lsp.buf.code_action({ apply = true })
-          end, "code [a]ction")
+          keymap("n", "<leader>ld", vim.lsp.buf.definition, "go to [d]efinition")
+          keymap("n", "<leader>lD", vim.lsp.buf.declaration, "go to [D]eclaration")
+          keymap("n", "<leader>lr", vim.lsp.buf.references, "go to [r]eferences")
+          keymap("n", "<leader>li", vim.lsp.buf.implementation, "goto [i]mplementation")
+          keymap("n", "<leader>lk", vim.lsp.buf.hover, "[k] show info (also just [K])")
+          keymap("n", "<leader>lr", vim.lsp.buf.rename, "[R]rename symbol")
+          keymap("n", "<leader>l=", vim.lsp.buf.format, "[=]reformat (also <leader>o) ")
+          keymap("v", "<leader>l=", RangeFormatting, "reformat")
+          -- keymap("n", "<leader>ll", vim.lsp.diagnostic.get_line_diagnostics, "line diagnostic")
+          keymap("n", "<leader>lg", vim.lsp.buf.signature_help, "si[g]nature help")
+          keymap("n", "<leader>lt", vim.lsp.buf.type_definition, "[t]ype definition (LSP)")
+          keymap({ "n", "v" }, "<space>la", function() vim.lsp.buf.code_action({ apply = true }) end, "code [a]ction")
+          -- keymap("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, "add workspace folder (LSP)")
+          -- keymap("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "remove workspace folder (LSP)")
+          -- keymap("n", "<leader>lwl", function()
+          --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          -- end, "(LSP) list workspace folders")
         end,
       })
     end,
@@ -113,18 +111,15 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     branch = "dev",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",                        desc = "Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",           desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>",                desc = "Symbols (Trouble)" },
-      { "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
-      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>",                            desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>",                             desc = "Quickfix List (Trouble)" },
+      { "<leader>lx", "<cmd>Trouble diagnostics toggle<cr>",                        desc = "show Diagnostics" },
+      { "<C-q>",      "<cmd>Trouble diagnostics toggle<cr>",                        desc = "show Diagnostics" },
+      { "<leader>lX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",           desc = "show Buffer Diagnostics" },
+      { "<leader>ls", "<cmd>Trouble symbols toggle focus=false<cr>",                desc = "show Symbols" },
+      { "<leader>ll", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "show LSP Definitions / references / ..." },
+      { "<leader>lL", "<cmd>Trouble loclist toggle<cr>",                            desc = "show Location List" },
+      { "<leader>lQ", "<cmd>Trouble qflist toggle<cr>",                             desc = "show oQuickfix List" },
     },
   },
   {
@@ -150,7 +145,7 @@ return {
     "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
     config = function()
       require("toggle_lsp_diagnostics").init()
-      vim.keymap.set("n", "<leader>xd", ":ToggleDiag<cr>", { desc = "Toggle LSP diagnostics (warnings)" })
+      vim.keymap.set("n", "<leader>xd", ":ToggleDiag<cr>", { desc = "Toggle LSP diagnostics" })
     end,
   },
 }

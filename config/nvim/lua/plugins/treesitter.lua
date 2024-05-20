@@ -38,7 +38,6 @@ return {
   },
   {
     -- treesitter to color delimiter pairs
-    -- "mrjones2014/nvim-ts-rainbow",
     "HiPhish/rainbow-delimiters.nvim"
   },
   {

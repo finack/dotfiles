@@ -18,7 +18,7 @@ vim.opt.shiftround = true -- round indent to sw compatible
 vim.opt.expandtab = true
 
 -- Decrease update time
--- vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 500
 -- vim.opt.updatetime = 200
 vim.opt.updatetime = 50 -- primeagen value
 
