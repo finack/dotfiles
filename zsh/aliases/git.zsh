@@ -13,7 +13,8 @@ alias gca='git commit -v -a'
 alias gcam='gca --amend'
 alias gch='git cherry-pick'
 alias gcm='git commit -v --amend'
-alias gwip='git commit -v -a -m "wip"'
+alias gwip='git commit -v -m "wip"'
+alias gwipa='git commit -v -a -m "wip"'
 alias gco='git checkout'
 gcop() {
   git ls-remote --exit-code origin refs/pull/$1/merge
@@ -83,7 +84,7 @@ alias gup='git smart-pull'
 alias graf='git remote add $argv[1] $argv[2] && gf $argv[1]'
 
 git-prune() {
-  git fetch --prune -all
+  git fetch --prune --all
   for branch in $(git branch | sed 's/..//'); do
     if ! git show-ref --verify --quiet refs/remotes/origin/$branch; then
       echo "Deleting local branch: $branch"

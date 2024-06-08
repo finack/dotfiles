@@ -18,7 +18,7 @@ source "$HOME/.zsh/1.path.zsh"
 f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
 compctl -/ -W ~/src/finack f
 
-for alias in $HOME/.zsh/aliases/*; do 
+for alias in $HOME/.zsh/aliases/*; do
   if [[ $(basename $alias) != _* ]]; then
     if [ "$debug" = true ]; then
       echo "Sourcing alias: $alias"
@@ -36,11 +36,8 @@ for plugin in $HOME/.zsh/plugins/*; do
   fi
 done
 
-export GOPATH=~/go
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
-
 # load our own completion functions
 ## FIXME: Likely not working
 fpath=(~/.zsh/completion $fpath)
 
-source /Users/peter/.config/op/plugins.sh
+source ~/.zshrc.local
