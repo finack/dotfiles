@@ -96,12 +96,10 @@ return {
       require('which-key').setup()
 
       require('which-key').register {
-        -- ['<leader>c'] = { name = '[c]hange', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[h]arpoon', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[l]ang', _ = 'which_key_ignore' },
+        ['<leader>n'] = { name = '[n]otices', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[s]earch', _ = 'which_key_ignore' },
-        -- ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
-        -- ['<leader>lw'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        -- ['<leader>x'] = { name = '[x] Trouble', _ = 'which_key_ignore' },
         ['<leader>v'] = { name = '[v]im', _ = 'which_key_ignore' },
       }
     end,

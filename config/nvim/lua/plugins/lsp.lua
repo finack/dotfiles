@@ -145,7 +145,7 @@ return {
     "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
     config = function()
       require("toggle_lsp_diagnostics").init()
-      vim.keymap.set("n", "<leader>xd", ":ToggleDiag<cr>", { desc = "Toggle LSP diagnostics" })
+      vim.keymap.set("n", "<leader>lq", ":ToggleDiag<cr>", { desc = "Toggle diagnostics" })
     end,
   },
 }
