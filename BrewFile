@@ -1,29 +1,44 @@
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "homebrew/cask-fonts"
-
-# Unix
-brew "coreutils"
 brew "openssl"
 
+brew "zsh"
 brew "fzf"
 brew "git"
+brew "git-delta"
 brew "neovim"
+
+# Manage dotfiles
 brew "rcm"
 brew "reattach-to-user-namespace"
-brew "the_silver_searcher"
+
 brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
 brew "ripgrep"
-brew "watchman"
-brew "zsh"
+
+# Amazing cat
+brew "bat"
+
+# man pages improved
+brew "tldr"
 
 #cask "font-hack-nerd-font"
 
-brew "node"
+brew "eza"
 
-brew "rbenv"
-brew "ruby-build"
+# Amazing top/htop
+brew "btop"
 
-brew "python3"
-brew "python-psutil"
+brew "node@20"
+
+tap "ngrok/ngrok"
+cask "ngrok"
+
+cask "1password-cli"
+
+brew "flyctl"
+
+brew "jq"
+
+# brew "rbenv"
+# brew "ruby-build"
+
+# brew "python3"
+# brew "python-psutil"
