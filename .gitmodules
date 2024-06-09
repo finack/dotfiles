@@ -13,3 +13,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "themes/dracula-zsh"]
+	path = themes/dracula-zsh
+	url = https://github.com/dracula/zsh.git

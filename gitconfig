@@ -10,6 +10,8 @@
   ui = true
 [core]
   excludesfile = ~/.git_ignore
+  pager = delta
+  editor = nvim
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
 [alias]
@@ -23,6 +25,7 @@
 [push]
   # Only push branches that have been set up to track a remote branch.
   default = current
+  useForceWithIncludes = true
 [mergetool]
   keepBackup = true
 [credential]
@@ -33,3 +36,13 @@
 	ff = only
 [init]
 	defaultBranch = main
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  line-numbers = true
+  features = Dracula
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default

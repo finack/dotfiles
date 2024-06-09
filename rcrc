@@ -1,4 +1,4 @@
-EXCLUDES="BrewFile* setup.sh themes README.md"
+EXCLUDES="BrewFile* setup.sh README.md tmp"
 DOTFILES_DIRS="$HOME/.dotfiles"
-SYMLINK_DIRS="bin config tmux zsh"
+SYMLINK_DIRS="bin config tmux themes zsh"
 UNDOTTED="*:bin"
