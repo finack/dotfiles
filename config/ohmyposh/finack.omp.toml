@@ -19,17 +19,35 @@ newline = true
     [blocks.segments.properties]
     style = 'full'
 
+[[blocks]]
+type = 'prompt'
+alignment = 'right'
+
   [[blocks.segments]]
   type = 'git'
   style = 'plain'
   foreground = 'p:blue'
   background = 'transparent'
-  template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+  foreground_templates = [
+    "{{ if or (.Working.Changed) (.Staging.Changed) }}p:blue{{ end }}",
+    "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:orange{{ end }}",
+    "{{ if gt .Ahead 0 }}p:purple{{ end }}",
+    "{{ if gt .Behind 0 }}p:purple{{ end }}",
+  ]
+
+  templates = [
+    "{{ .HEAD }}",
+    "{{ if .BranchStatus }}<p:cyan> {{ .BranchStatus }}</>{{ end }}",
+    "{{ if .Working.Changed }}<p:pink>  {{ .Working.String }}</>{{ end }}",
+    "{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}",
+    "{{ if .Staging.Changed }}<p:orange>  {{ .Staging.String }}</>{{ end }}",
+  ]
 
     [blocks.segments.properties]
     branch_icon = ''
-    commit_icon = '@'
+    # commit_icon = '@'
     fetch_status = true
+    # fetch_upstream_icon = true
 
 [[blocks]]
 type = 'rprompt'
@@ -38,7 +56,7 @@ overflow = 'hidden'
   [[blocks.segments]]
   type = 'executiontime'
   style = 'plain'
-  foreground = 'yellow'
+  foreground = 'p:yellow'
   background = 'transparent'
   template = '{{ .FormattedMs }}'
 
@@ -54,22 +72,22 @@ newline = true
   type = 'text'
   style = 'plain'
   foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
+    "{{if gt .Code 0}}p:red{{end}}",
+    "{{if eq .Code 0}}p:magenta{{end}}",
   ]
   background = 'transparent'
   template = '❯'
 
 [transient_prompt]
 foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}magenta{{end}}",
+  "{{if gt .Code 0}}p:red{{end}}",
+  "{{if eq .Code 0}}p:magenta{{end}}",
 ]
 background = 'transparent'
 template = '❯ '
 
 [secondary_prompt]
-foreground = 'magenta'
+foreground = 'p:orange'
 background = 'transparent'
 template = '❯❯ '
 
