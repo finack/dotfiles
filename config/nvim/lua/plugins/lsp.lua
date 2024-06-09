@@ -47,18 +47,38 @@ return {
     end,
   },
   {
-    "folke/neodev.nvim",
+    "SmiteshP/nvim-navic",
+    dependencies = "neovim/nvim-lspconfig",
+    lazy = true,
     config = function()
-      require("neodev").setup({}) -- must happen BEFORE lspconfig
+      local navic = require("nvim-navic")
+      navic.setup({
+        highlight = true,
+        separator = " > ",
+        depth_limit = 0,
+        depth_limit_indicator = "..",
+        lsp = {
+          auto_attach = true,
+        },
+      })
     end,
-  },                              -- init.lua support
+
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufnewFile" },
     config = function()
-      require("neodev").setup({}) -- must happen BEFORE lspconfig
-      local lspconfig = require("lspconfig")
-
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 

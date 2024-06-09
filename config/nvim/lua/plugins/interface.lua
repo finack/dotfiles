@@ -78,25 +78,10 @@ return {
       local colors = require 'dracula.palette.init'
 
       local winbar = {
-        lualine_a = {
-          {
-            'filetype',
-            -- separator = { left = '', right = '' },
-            -- color = {
-            --   fg = colors.purple,
-            --   bg = colors.base04
-            -- }
-          }
-        },
+        lualine_a = {},
         lualine_b = {
           {
             'filename',
-            path = 4,
-            -- separator = { left = '', right = '' },
-            -- color = {
-            --   fg = colors.purple,
-            --   bg = colors.base04
-            -- }
           }
         },
         lualine_c = {
@@ -112,8 +97,6 @@ return {
         lualine_z = {
           {
             'diagnostics',
-            -- separator = { left = '', right = '' },
-
             -- Table of diagnostic sources, available sources are:
             --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
             -- or a function that returns a table as such:
@@ -136,16 +119,14 @@ return {
             update_in_insert = false, -- Update diagnostics in insert mode.
             always_visible = false,   -- Show diagnostics even if there are none.
           }
-
-        }
+        },
       }
       local sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'filename' },
+        lualine_b = { { 'filename', path = 4 } },
         lualine_c = {},
-        -- lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_x = { 'branch', 'diff', 'diagnostics' },
-        lualine_y = { 'progress' },
+        lualine_w = { 'filetype' },
+        lualine_y = { 'branch', 'diff', 'progress' },
         lualine_z = { 'location' }
       }
       local inactive_sections = {
