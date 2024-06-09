@@ -73,7 +73,7 @@ newline = true
   style = 'plain'
   foreground_templates = [
     "{{if gt .Code 0}}p:red{{end}}",
-    "{{if eq .Code 0}}p:magenta{{end}}",
+    "{{if eq .Code 0}}p:pink{{end}}",
   ]
   background = 'transparent'
   template = '❯'
@@ -81,7 +81,7 @@ newline = true
 [transient_prompt]
 foreground_templates = [
   "{{if gt .Code 0}}p:red{{end}}",
-  "{{if eq .Code 0}}p:magenta{{end}}",
+  "{{if eq .Code 0}}p:pink{{end}}",
 ]
 background = 'transparent'
 template = '❯ '
@@ -93,15 +93,14 @@ template = '❯❯ '
 
 [palette]
 # https://draculatheme.com/contribute#color-palette
-black = "#282a36"   # Background
-white = "#f8f8f2"   # Foreground
-grey = "#44475A"    # Current Line
-blue = "#6272a4"    # Comments
+black = "#282a36"  # Background
+blue = "#6272a4"   # Comments
 cyan = "#8be9fd"
 green = "#50FA7B"
-magenta = "#ff79c6"
+grey = "#44475A"   # Current Line
 orange = "#ffb86c"
 pink = "#ff79c6"
 purple = "#bd93f9"
 red = "#FF5555"
+white = "#f8f8f2"  # Foreground
 yellow = "#f1fa8c"
