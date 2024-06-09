@@ -52,42 +52,6 @@ return {
     end
   },
 
-  -- window title
-  {
-    "fgheng/winbar.nvim", -- Show file path on first line of panes
-    opts = {
-      enabled = true,
-      show_file_path = true,
-      show_symbols = true,
-      colors = {
-        path = "", -- You can customize colors like #c946fd
-        file_name = "",
-        symbols = "",
-      },
-      icons = {
-        file_icon_default = "",
-        seperator = "/",
-        editor_state = "●",
-        lock_icon = "",
-      },
-      exclude_filetype = {
-        "help",
-        "startify",
-        "dashboard",
-        "packer",
-        "neogitstatus",
-        "NvimTree",
-        "Trouble",
-        "alpha",
-        "lir",
-        "Outline",
-        "spectre_panel",
-        "toggleterm",
-        "qf",
-      },
-    },
-  },
-
   -- Add labels to keys
   {
     'folke/which-key.nvim',
@@ -108,11 +72,98 @@ return {
   -- status line enhancements
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic", "maxmx03/dracula.nvim" },
     config = function()
+      local navic = require 'nvim-navic'
+      local colors = require 'dracula.palette.init'
+
+      local winbar = {
+        lualine_a = {
+          {
+            'filetype',
+            -- separator = { left = '', right = '' },
+            -- color = {
+            --   fg = colors.purple,
+            --   bg = colors.base04
+            -- }
+          }
+        },
+        lualine_b = {
+          {
+            'filename',
+            path = 4,
+            -- separator = { left = '', right = '' },
+            -- color = {
+            --   fg = colors.purple,
+            --   bg = colors.base04
+            -- }
+          }
+        },
+        lualine_c = {
+          {
+            function()
+              return navic.get_location()
+            end,
+            cond = function()
+              return navic.is_available()
+            end
+          },
+        },
+        lualine_z = {
+          {
+            'diagnostics',
+            -- separator = { left = '', right = '' },
+
+            -- Table of diagnostic sources, available sources are:
+            --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+            -- or a function that returns a table as such:
+            --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+            sources = { 'nvim_diagnostic', 'nvim_lsp' },
+
+            -- Displays diagnostics for the defined severity types
+            sections = { 'error', 'warn', 'info', 'hint' },
+
+            colors = { bg = colors.base03 },
+
+            diagnostics_color = {
+              error = { bg = colors.base03, fg = colors.red },
+              warn = { bg = colors.base03, fg = colors.yellow },
+              info = { bg = colors.base03, fg = colors.cyan },
+              hint = { bg = colors.base03, fg = colors.purple },
+            },
+            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+            colored = true,           -- Displays diagnostics status in color if set to true.
+            update_in_insert = false, -- Update diagnostics in insert mode.
+            always_visible = false,   -- Show diagnostics even if there are none.
+          }
+
+        }
+      }
+      local sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'filename' },
+        lualine_c = {},
+        -- lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { 'branch', 'diff', 'diagnostics' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      }
+      local inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {}
+      }
       require("lualine").setup({
+        winbar = winbar,
+        inactive_winbar = winbar,
+        sections = sections,
+        inactive_sections = inactive_sections,
         options = {
-          theme = "OceanicNext",
+          -- theme = "OceanicNext",
+          theme = vim.g.colors_name,
           extensions = { "nvim-dapi-ui", "trouble" },
         },
       })
@@ -164,73 +215,6 @@ return {
       { desc = "[ ][ ] dismiss messages", }),
     vim.keymap.set("n", "<leader>nh", function() require("noice").cmd("telescope") end,
       { desc = "[h]istory of messages", }),
-  },
-
-  -- floating statusline / filename
-  {
-    "b0o/incline.nvim",
-    dependencies = {},
-    event = "BufReadPre",
-    priority = 1200,
-    config = function()
-      local devicons = require 'nvim-web-devicons'
-
-      require("incline").setup({
-        window = {
-          padding = 0,
-          margin = { horizontal = 0 },
-        },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-          if filename == '' then
-            filename = '[No Name]'
-          end
-          local ft_icon, ft_color = devicons.get_icon_color(filename)
-
-          local function get_git_diff()
-            local icons = { removed = '', changed = '', added = '' }
-            local signs = vim.b[props.buf].gitsigns_status_dict
-            local labels = {}
-            if signs == nil then
-              return labels
-            end
-            for name, icon in pairs(icons) do
-              if tonumber(signs[name]) and signs[name] > 0 then
-                table.insert(labels, { icon .. signs[name] .. ' ', group = 'Diff' .. name })
-              end
-            end
-            if #labels > 0 then
-              table.insert(labels, { '┊ ' })
-            end
-            return labels
-          end
-
-          local function get_diagnostic_label()
-            local icons = { error = '', warn = '', info = '', hint = '' }
-            local label = {}
-
-            for severity, icon in pairs(icons) do
-              local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
-              if n > 0 then
-                table.insert(label, { icon .. n .. ' ', group = 'DiagnosticSign' .. severity })
-              end
-            end
-            if #label > 0 then
-              table.insert(label, { '┊ ' })
-            end
-            return label
-          end
-
-          return {
-            { get_diagnostic_label() },
-            { get_git_diff() },
-            { (ft_icon or '') .. ' ', guifg = ft_color, guibg = 'none' },
-            { filename .. ' ', gui = vim.bo[props.buf].modified and 'bold,italic' or 'bold' },
-            { '┊  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
-          }
-        end,
-      })
-    end,
   },
 
   -- Jump between nvim & tmux windows
