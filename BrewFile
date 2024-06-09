@@ -37,6 +37,8 @@ brew "flyctl"
 
 brew "jq"
 
+cask "jandedobbeleer/oh-my-posh/oh-my-posh"
+
 # brew "rbenv"
 # brew "ruby-build"
 
