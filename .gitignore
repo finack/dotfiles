@@ -10,6 +10,7 @@ config/gtk-2.0
 config/karabiner
 config/op
 config/simple-update-notifier
+config/configstore
 
 tmux/plugins
 !tmux/plugins/tpm/

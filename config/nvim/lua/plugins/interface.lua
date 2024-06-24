@@ -171,32 +171,39 @@ return {
   },
 
   -- pretty messages
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-      lsp = { signature = { enabled = false } },
-      cmdline = { view = "cmdline" },
-      presets = {
-        lsp_doc_border = true,
-        bottom_search = true,
-        command_palette = false,
-        long_message_to_split = true
-      }
-
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    vim.keymap.set("n", "<leader>nl", function() require("noice").cmd("last") end, { desc = "[l]ast message", }),
-    vim.keymap.set("n", "<leader>ne", function() require("noice").cmd("errors") end, { desc = "[e]rror messages", }),
-    vim.keymap.set("n", "<leader><leader>", function() require("noice").cmd("dismiss") end,
-      { desc = "[ ][ ] dismiss messages", }),
-    vim.keymap.set("n", "<leader>nh", function() require("noice").cmd("telescope") end,
-      { desc = "[h]istory of messages", }),
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     -- add any options here
+  --     lsp = {
+  --       signature = { enabled = false },
+  --       override = {
+  --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+  --         ["vim.lsp.util.stylize_markdown"] = true,
+  --         ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+  --       },
+  --     },
+  --     cmdline = { view = "cmdline" },
+  --     presets = {
+  --       lsp_doc_border = true,
+  --       bottom_search = true,
+  --       command_palette = false,
+  --       long_message_to_split = true
+  --     }
+  --
+  --   },
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     -- "rcarriga/nvim-notify",
+  --   },
+  --   vim.keymap.set("n", "<leader>nl", function() require("noice").cmd("last") end, { desc = "[l]ast message", }),
+  --   vim.keymap.set("n", "<leader>ne", function() require("noice").cmd("errors") end, { desc = "[e]rror messages", }),
+  --   vim.keymap.set("n", "<leader><leader>", function() require("noice").cmd("dismiss") end,
+  --     { desc = "[ ][ ] dismiss messages", }),
+  --   vim.keymap.set("n", "<leader>nh", function() require("noice").cmd("telescope") end,
+  --     { desc = "[h]istory of messages", }),
+  -- },
 
   -- Jump between nvim & tmux windows
   {

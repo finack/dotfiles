@@ -14,15 +14,21 @@ local telescope_config = function()
       ["ui-select"] = {
         require("telescope.themes").get_dropdown({}),
       },
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      },
     },
   })
 
   require("telescope").load_extension("ui-select")
-  require("telescope").load_extension("noice")
+  -- require("telescope").load_extension("noice")
   -- require("telescope").load_extension("emoji")
 
   -- Enable telescope fzf native, if installed
-  pcall(require("telescope").load_extension, "fzf")
+  -- pcall(require("telescope").load_extension, "fzf")
+  --
+  require('telescope').load_extension('fzy_native')
 
   local builtin = require("telescope.builtin")
   local themes = require("telescope.themes")
@@ -89,12 +95,11 @@ local telescope_config = function()
   vks("n", "<leader>slt", builtin.lsp_type_definitions, "Types")
   vks("n", "<leader>slw", builtin.lsp_workspace_symbols, "Symbols - workspace")
   vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
-  vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
   vks("n", "<leader>sp", builtin.spell_suggest, "Spelling suggestions")
   vks("n", "<leader>vc", builtin.commands, "[c]ommands")
   vks("n", "<leader>vh", builtin.help_tags, "[V]i [H]elp")
   vks("n", "<leader>vk", builtin.keymaps, "Key mappings")
-  vks("n", "<leader>vn", ":Telescope noice<cr>", "Noice (messages)")
+  -- vks("n", "<leader>vn", ":Telescope noice<cr>", "Noice (messages)")
   vks("n", "<leader>vr", builtin.registers, "Registers")
   -- vks("n", "<leader><leader>", builtin.resume, "Resume previous search")
   vks("n", "<leader>/", function()
@@ -111,11 +116,10 @@ end
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
       -- optional but desired:
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      { "nvim-telescope/telescope-fzy-native.nvim" },
       { "nvim-telescope/telescope-ui-select.nvim" },
       {
         "debugloop/telescope-undo.nvim",

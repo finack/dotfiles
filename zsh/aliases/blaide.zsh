@@ -12,3 +12,5 @@ bark() {
     fi
   fi
 }
+
+alias fly_worker_logs='fly logs -i $(fly status --json | jq -r ".Machines[] | select(.config.metadata.fly_process_group == \"worker\") | .id" | head -n 1)'

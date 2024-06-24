@@ -1,43 +1,41 @@
+tap "jandedobbeleer/oh-my-posh"
+tap "ngrok/ngrok"
+
 brew "openssl"
 
+cask "oh-my-posh"
 brew "zsh"
-brew "fzf"
+
 brew "git"
 brew "git-delta"
 brew "neovim"
 
-# Manage dotfiles
-brew "rcm"
+brew "rcm" # Manage dotfiles
 brew "reattach-to-user-namespace"
 
-brew "tmux"
+brew "bat" # Amazing cat
+brew "btop" # Amazing top/htop
+brew "eza" # Fancy LS
+brew "fd"
+brew "fzf"
+brew "jq"
 brew "ripgrep"
-
-# Amazing cat
-brew "bat"
-
-# man pages improved
-brew "tldr"
+brew "tmux"
 
 #cask "font-hack-nerd-font"
 
-brew "eza"
-
-# Amazing top/htop
-brew "btop"
-
-brew "node@20"
-
-tap "ngrok/ngrok"
 cask "ngrok"
+
+brew "libpq" # Postgres command line utilites
 
 cask "1password-cli"
 
 brew "flyctl"
 
-brew "jq"
+cask "jordanbaird-ice" # Mac Menu Bar Manager
+cask "meetingbar" # Meeting notifications
 
-cask "jandedobbeleer/oh-my-posh/oh-my-posh"
+brew "nvm"
 
 # brew "rbenv"
 # brew "ruby-build"

@@ -15,6 +15,7 @@ return {
         auto_install = true,
         ensure_installed = {
           -- "c",
+          "diff",
           "html",
           "javascript",
           "lua",

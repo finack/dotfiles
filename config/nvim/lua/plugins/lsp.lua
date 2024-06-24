@@ -11,16 +11,16 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       local ensure_installed = {
+        "vtsls",
         "biome",
-        -- "eslint",
+        "tailwindcss",
+        "eslint",
         "lua_ls",
         -- "rubocop",
         -- "rust_analyzer",
         -- "solargraph",
         -- "ruby_ls",
-        "vtsls",
         "taplo",
-        "tailwindcss",
         -- "hydra_lsp",
         -- "tsserver",
         -- "gopls",
@@ -46,7 +46,7 @@ return {
       })
     end,
   },
-  {
+  { -- show your current code context in topbar
     "SmiteshP/nvim-navic",
     dependencies = "neovim/nvim-lspconfig",
     lazy = true,
@@ -64,7 +64,7 @@ return {
     end,
 
   },
-  {
+  { -- Lua / Neovim development helper
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
@@ -130,7 +130,6 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    branch = "main",
     opts = {},
     keys = {
       { "<leader>lx", "<cmd>Trouble diagnostics toggle<cr>",                        desc = "show Diagnostics" },
@@ -219,4 +218,5 @@ return {
       vim.keymap.set("n", "<leader>lq", ":ToggleDiag<cr>", { desc = "Toggle diagnostics" })
     end,
   },
+  { 'kosayoda/nvim-lightbulb' }
 }
