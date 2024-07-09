@@ -18,13 +18,13 @@ return {
 
     config = function()
       local highlight = {
+        "RainbowCyan",
         "RainbowRed",
+        "RainbowGreen",
+        "RainbowViolet",
         "RainbowYellow",
         "RainbowBlue",
         "RainbowOrange",
-        "RainbowGreen",
-        "RainbowViolet",
-        "RainbowCyan",
       }
       local hooks = require "ibl.hooks"
       -- create the highlight groups in the highlight setup hook, so they are reset
@@ -52,57 +52,19 @@ return {
     end
   },
 
-  -- window title
-  {
-    "fgheng/winbar.nvim", -- Show file path on first line of panes
-    opts = {
-      enabled = true,
-      show_file_path = true,
-      show_symbols = true,
-      colors = {
-        path = "", -- You can customize colors like #c946fd
-        file_name = "",
-        symbols = "",
-      },
-      icons = {
-        file_icon_default = "",
-        seperator = "/",
-        editor_state = "●",
-        lock_icon = "",
-      },
-      exclude_filetype = {
-        "help",
-        "startify",
-        "dashboard",
-        "packer",
-        "neogitstatus",
-        "NvimTree",
-        "Trouble",
-        "alpha",
-        "lir",
-        "Outline",
-        "spectre_panel",
-        "toggleterm",
-        "qf",
-      },
-    },
-  },
-
   -- Add labels to keys
   {
     'folke/which-key.nvim',
-    event = 'VeryLazy', -- Sets the loading event to 'VeryLazy'
+    event = 'VeryLazy',
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
       require('which-key').register {
-        -- ['<leader>c'] = { name = '[c]hange', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = '[l]ang', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[s]earch', _ = 'which_key_ignore' },
-        -- ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
-        -- ['<leader>lw'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        -- ['<leader>x'] = { name = '[x] Trouble', _ = 'which_key_ignore' },
-        ['<leader>v'] = { name = '[v]im', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'harpoon', },
+        ['<leader>l'] = { name = 'lang' },
+        ['<leader>s'] = { name = 'search' },
+        ['<leader>v'] = { name = 'vim' },
+
       }
     end,
   },
@@ -110,11 +72,52 @@ return {
   -- status line enhancements
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "maxmx03/dracula.nvim" },
     config = function()
+      local colors = require 'dracula.palette.init'
+
+      local sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { { 'filename', path = 4 } },
+        lualine_c = {},
+        lualine_x = { 'branch' },
+        lualine_y = { 'diff',
+          {
+            'diagnostics',
+            sources = { 'nvim_diagnostic', 'nvim_lsp' },
+
+            sections = { 'error', 'warn', 'info', 'hint' },
+
+            diagnostics_color = {
+              error = { fg = colors.red },
+              warn = { fg = colors.yellow },
+              info = { fg = colors.cyan },
+              hint = { fg = colors.purple },
+            },
+            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+            colored = true,           -- Displays diagnostics status in color if set to true.
+            update_in_insert = false, -- Update diagnostics in insert mode.
+            always_visible = false,   -- Show diagnostics even if there are none.
+          },
+        },
+        lualine_z = {
+          -- 'progress',
+          'location'
+        }
+      }
+      local inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {}
+      }
       require("lualine").setup({
+        sections = sections,
+        inactive_sections = inactive_sections,
         options = {
-          theme = "OceanicNext",
+          theme = vim.g.colors_name,
           extensions = { "nvim-dapi-ui", "trouble" },
         },
       })
@@ -125,121 +128,13 @@ return {
   {
     'tzachar/local-highlight.nvim',
     opts = {},
-    -- config = function()
-    --   require('local-highlight').setup({
-    --     -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
-    --     -- -- OR attach to every filetype except:
-    --     -- disable_file_types = {'tex'},
-    --     -- hlgroup = 'Search',
-    --     -- cw_hlgroup = nil,
-    --     -- -- Whether to display highlights in INSERT mode or not
-    --     -- insert_mode = false,
-    --     -- min_match_len = 1,
-    --     -- max_match_len = math.huge,
-    --   })
-    -- end
-  },
-
-  -- pretty messages
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-      lsp = { signature = { enabled = false } },
-      cmdline = { view = "cmdline" },
-      presets = {
-        lsp_doc_border = true,
-        bottom_search = true,
-        command_palette = false,
-        long_message_to_split = true
-      }
-
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    vim.keymap.set("n", "<leader>nl", function() require("noice").cmd("last") end, { desc = "[l]ast message", }),
-    vim.keymap.set("n", "<leader>ne", function() require("noice").cmd("errors") end, { desc = "[e]rror messages", }),
-    vim.keymap.set("n", "<leader><leader>", function() require("noice").cmd("dismiss") end,
-      { desc = "[ ][ ] dismiss messages", }),
-    vim.keymap.set("n", "<leader>nh", function() require("noice").cmd("telescope") end,
-      { desc = "[h]istory of messages", }),
-  },
-
-  -- floating statusline / filename
-  {
-    "b0o/incline.nvim",
-    dependencies = {},
-    event = "BufReadPre",
-    priority = 1200,
-    config = function()
-      local devicons = require 'nvim-web-devicons'
-
-      require("incline").setup({
-        window = {
-          padding = 0,
-          margin = { horizontal = 0 },
-        },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-          if filename == '' then
-            filename = '[No Name]'
-          end
-          local ft_icon, ft_color = devicons.get_icon_color(filename)
-
-          local function get_git_diff()
-            local icons = { removed = '', changed = '', added = '' }
-            local signs = vim.b[props.buf].gitsigns_status_dict
-            local labels = {}
-            if signs == nil then
-              return labels
-            end
-            for name, icon in pairs(icons) do
-              if tonumber(signs[name]) and signs[name] > 0 then
-                table.insert(labels, { icon .. signs[name] .. ' ', group = 'Diff' .. name })
-              end
-            end
-            if #labels > 0 then
-              table.insert(labels, { '┊ ' })
-            end
-            return labels
-          end
-
-          local function get_diagnostic_label()
-            local icons = { error = '', warn = '', info = '', hint = '' }
-            local label = {}
-
-            for severity, icon in pairs(icons) do
-              local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
-              if n > 0 then
-                table.insert(label, { icon .. n .. ' ', group = 'DiagnosticSign' .. severity })
-              end
-            end
-            if #label > 0 then
-              table.insert(label, { '┊ ' })
-            end
-            return label
-          end
-
-          return {
-            { get_diagnostic_label() },
-            { get_git_diff() },
-            { (ft_icon or '') .. ' ', guifg = ft_color, guibg = 'none' },
-            { filename .. ' ', gui = vim.bo[props.buf].modified and 'bold,italic' or 'bold' },
-            { '┊  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
-          }
-        end,
-      })
-    end,
   },
 
   -- Jump between nvim & tmux windows
   {
     "numToStr/Navigator.nvim",
     config = function()
-      require("Navigator").setup()
+      require("Navigator").setup({ disable_on_zoom = false, mux = 'auto' })
       vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
       vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
       vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
@@ -296,6 +191,144 @@ return {
         end,
         desc = "Disable Jump in search (flash)",
       },
+    },
+  },
+
+  -- Use the tabline to show buffers
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("bufferline").setup({
+        options = {
+          separator_style = "slant",
+          show_buffer_icons = false,
+          right_mouse_command = "vertical sbuffer %d",
+          diagnostics = "nvim_lsp",
+          always_show_bufferline = false,
+          auto_toggle_bufferline = true,
+          numbers = "ordinal",
+          show_close_icon = false,
+          show_buffer_close_icons = false,
+        }
+      })
+
+      vim.api.nvim_set_keymap('n', 'gb', ':BufferLinePick<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', 'gB', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
+
+      for i = 1, 9 do
+        vim.api.nvim_set_keymap('n', '<leader>' .. i, ':lua require("bufferline").go_to(' .. i .. ')<CR>',
+          { noremap = true, silent = true, desc = "which_key_ignore" })
+      end
+    end,
+  },
+  -- messages, cmdline and the popupmenu
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    keys = {
+      { '<leader>n',        '',                                                                            desc = '+notices' },
+      { '<leader><leader>', function() require('noice').cmd('dismiss') end,                                desc = 'Noice Clear Messages' },
+      { '<leader>nl',       function() require('noice').cmd('last') end,                                   desc = 'Noice Last Message' },
+      { '<leader>nh',       function() require('noice').cmd('history') end,                                desc = 'Noice History' },
+      { '<leader>na',       function() require('noice').cmd('all') end,                                    desc = 'Noice All' },
+      { '<leader>nt',       function() require('noice').cmd('pick') end,                                   desc = 'Noice Picker (Telescope/FzfLua)' },
+      { '<C-f>',            function() if not require('noice.lsp').scroll(4) then return '<C-f>' end end,  silent = true,                           expr = true, desc = 'Scroll Forward',  mode = { 'i', 'n', 's' } },
+      { '<C-b>',            function() if not require('noice.lsp').scroll(-4) then return '<C-b>' end end, silent = true,                           expr = true, desc = 'Scroll Backward', mode = { 'i', 'n', 's' } },
+    },
+    config = function()
+      require('noice').setup({
+        transparency = 0.6,
+        cmdline = {
+          view = "cmdline_popup",
+          position = {
+            row = "75%", -- position at the bottom
+            col = "50%", -- center it horizontally
+          },
+        },
+        lsp = {
+          signature = { enabled = false },
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true,         -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true,        -- add a border to hover docs and signature help
+        },
+        routes = {
+          {
+            filter = {
+              -- kind = "lazy.nvim",
+              find = "Config Change Detected",
+            },
+            view = 'mini',
+            -- opts = { skip = true },
+          },
+          {
+            filter = {
+              event = 'msg_show',
+              any = {
+                { find = '%d+L, %d+B' },
+                { find = '^%d+ changes?; after #%d+' },
+                { find = '^%d+ changes?; before #%d+' },
+                { find = '^Hunk %d+ of %d+$' },
+                { find = '^%d+ fewer lines;?' },
+                { find = '^%d+ more lines?;?' },
+                { find = '^%d+ line less;?' },
+                { find = '^Already at newest change' },
+                { kind = 'wmsg' },
+                { kind = 'quickfix' },
+                { find = 'written' }
+              },
+            },
+            view = 'mini',
+          },
+          {
+            filter = {
+              event = 'msg_show',
+              any = {
+                { find = '^%d+ lines .ed %d+ times?$' },
+                { find = '^%d+ lines yanked$' },
+                { kind = 'emsg',                      find = 'E490' },
+                { kind = 'search_count' },
+              },
+            },
+            opts = { skip = true },
+          },
+          {
+            filter = {
+              event = 'notify',
+              any = {
+                { find = '^No code actions available$' },
+                { find = '^No information available$' },
+              },
+            },
+            view = 'mini',
+          },
+        }
+      })
+    end
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      render = "wrapped-compact",
+      timeout = 5000,
+      stages = "fade_in_slide_out",
+      max_width = 50,
     },
   },
 }

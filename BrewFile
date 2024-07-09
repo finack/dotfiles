@@ -1,29 +1,47 @@
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "homebrew/cask-fonts"
+tap "jandedobbeleer/oh-my-posh"
+tap "ngrok/ngrok"
 
-# Unix
-brew "coreutils"
 brew "openssl"
 
-brew "fzf"
-brew "git"
-brew "neovim"
-brew "rcm"
-brew "reattach-to-user-namespace"
-brew "the_silver_searcher"
-brew "tmux"
-brew "universal-ctags", args: ["HEAD"]
-brew "ripgrep"
-brew "watchman"
+cask "oh-my-posh"
 brew "zsh"
+
+brew "git"
+brew "git-delta"
+brew "lefthook"
+brew "neovim"
+
+brew "rcm" # Manage dotfiles
+brew "reattach-to-user-namespace"
+
+brew "bat" # Amazing cat
+brew "btop" # Amazing top/htop
+brew "eza" # Fancy LS
+brew "fd"
+brew "fzf"
+brew "jq"
+brew "ripgrep"
+brew "tmux"
 
 #cask "font-hack-nerd-font"
 
-brew "node"
+cask "ngrok"
 
-brew "rbenv"
-brew "ruby-build"
+brew "stripe/stripe-cli/stripe"
 
-brew "python3"
-brew "python-psutil"
+brew "libpq" # Postgres command line utilites
+
+cask "1password-cli"
+
+brew "flyctl"
+
+cask "jordanbaird-ice" # Mac Menu Bar Manager
+cask "meetingbar" # Meeting notifications
+
+brew "nvm"
+
+# brew "rbenv"
+# brew "ruby-build"
+
+# brew "python3"
+# brew "python-psutil"

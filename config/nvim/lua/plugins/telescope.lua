@@ -1,5 +1,8 @@
 -- borrowed from https://gitlab.com/oinak/dot_config_nvim
 local telescope_config = function()
+  local actions = require("telescope.actions")
+  local fb_actions = require("telescope").extensions.file_browser.actions
+
   -- This is your opts table
   require("telescope").setup({
     defaults = {
@@ -14,16 +17,37 @@ local telescope_config = function()
       ["ui-select"] = {
         require("telescope.themes").get_dropdown({}),
       },
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      },
+      file_browser = {
+        theme = "dropdown",
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
+        mappings = {
+          -- your custom insert mode mappings
+          ["n"] = {
+            -- your custom normal mode mappings
+            ["n"] = fb_actions.create,
+            ["h"] = fb_actions.goto_parent_dir,
+            ["/"] = function()
+              vim.cmd("startinsert")
+            end,
+            ["\\"] = actions.close,
+            ["|"] = actions.close,
+          },
+        },
+      },
     },
   })
 
   require("telescope").load_extension("ui-select")
+  require('telescope').load_extension('fzf')
+  require("telescope").load_extension("file_browser")
   require("telescope").load_extension("noice")
-  -- require("telescope").load_extension("emoji")
 
-  -- Enable telescope fzf native, if installed
-  pcall(require("telescope").load_extension, "fzf")
-
+  local telescope = require("telescope")
   local builtin = require("telescope.builtin")
   local themes = require("telescope.themes")
   local Job = require("plenary.job")
@@ -89,14 +113,13 @@ local telescope_config = function()
   vks("n", "<leader>slt", builtin.lsp_type_definitions, "Types")
   vks("n", "<leader>slw", builtin.lsp_workspace_symbols, "Symbols - workspace")
   vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
-  vks("n", "<leader>so", builtin.oldfiles, "Recent Opened files")
   vks("n", "<leader>sp", builtin.spell_suggest, "Spelling suggestions")
   vks("n", "<leader>vc", builtin.commands, "[c]ommands")
   vks("n", "<leader>vh", builtin.help_tags, "[V]i [H]elp")
   vks("n", "<leader>vk", builtin.keymaps, "Key mappings")
-  vks("n", "<leader>vn", ":Telescope noice<cr>", "Noice (messages)")
+  -- vks("n", "<leader>vn", ":Telescope noice<cr>", "Noice (messages)")
   vks("n", "<leader>vr", builtin.registers, "Registers")
-  -- vks("n", "<leader><leader>", builtin.resume, "Resume previous search")
+  vks("n", "<leader><cr>", builtin.resume, "Resume previous search")
   vks("n", "<leader>/", function()
     -- You can pass additional configuration to telescope to change theme, layout, etc.
     builtin.current_buffer_fuzzy_find(themes.get_dropdown({ winblend = 20, previewer = false, }))
@@ -106,17 +129,45 @@ local telescope_config = function()
   vks("n", "<leader>s/", function()
     builtin.live_grep { grep_open_files = true, prompt_title = "Live Grep in Open Files", }
   end, "[S]earch [/] in Open Files")
+  vks("n", "|", function()
+    local function telescope_buffer_dir()
+      return vim.fn.expand("%:p:h")
+    end
+
+    telescope.extensions.file_browser.file_browser({
+      path = "%:p:h",
+      cwd = telescope_buffer_dir(),
+      respect_gitignore = false,
+      hidden = true,
+      grouped = true,
+      previewer = false,
+      initial_mode = "normal",
+      layout_config = { height = 40 },
+    })
+  end, "Open File Browser with the path of the current buffer")
+  vks("n", "\\", function()
+    telescope.extensions.file_browser.file_browser({
+      path = "%:p:h",
+      respect_gitignore = true,
+      hidden = true,
+      grouped = true,
+      previewer = false,
+      initial_mode = "normal",
+      layout_config = { height = 40 },
+    })
+  end, "Open File Browswer")
 end
 
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- optional but desired:
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "nvim-telescope/telescope-ui-select.nvim" },
+      -- "nvim-telescope/telescope-fzf-native.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-symbols.nvim",
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       {
         "debugloop/telescope-undo.nvim",
         keys = { { "<leader>u", "<cmd>Telescope undo<cr>", "[u]ndo tree" } },
@@ -127,17 +178,16 @@ return {
     },
     config = telescope_config,
   },
-  {
-    "gnfisher/nvim-telescope-ctags-plus",
-    config = function()
-      local telescope = require('telescope')
-      telescope.load_extension('ctags_plus')
-      vim.keymap.set('n', 'g]', function()
-        telescope.extensions.ctags_plus.jump_to_tag()
-      end, { desc = 'jump to tag (telescope)', noremap = true, silent = true }
-      )
-    end
-  },
-  { "nvim-telescope/telescope-symbols.nvim" },
+  -- {
+  --   "gnfisher/nvim-telescope-ctags-plus",
+  --   config = function()
+  --     local telescope = require('telescope')
+  --     telescope.load_extension('ctags_plus')
+  --     vim.keymap.set('n', 'g]', function()
+  --       telescope.extensions.ctags_plus.jump_to_tag()
+  --     end, { desc = 'jump to tag (telescope)', noremap = true, silent = true }
+  --     )
+  --   end
+  -- },
   -- { "xiyaowong/telescope-emoji.nvim" },
 }

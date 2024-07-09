@@ -2,9 +2,15 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    version = "v0.22.5",
+    -- version = "v0.22.5",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      { -- treesitter to color delimiter pairs
+        "HiPhish/rainbow-delimiters.nvim"
+      },
+      { -- Show code context (fixing scope lines to the top)
+        "nvim-treesitter/nvim-treesitter-context",
+      },
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
@@ -15,6 +21,7 @@ return {
         auto_install = true,
         ensure_installed = {
           -- "c",
+          "diff",
           "html",
           "javascript",
           "lua",
@@ -35,13 +42,5 @@ return {
         },
       })
     end,
-  },
-  {
-    -- treesitter to color delimiter pairs
-    "HiPhish/rainbow-delimiters.nvim"
-  },
-  {
-    -- Show code context (fixing scope lines to the top)
-    "nvim-treesitter/nvim-treesitter-context",
   },
 }

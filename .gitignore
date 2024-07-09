@@ -1,9 +1,19 @@
 .DS_Store
 BrewFile.lock.json
 .tags
-config/github-copilot
+
+config/btop
+config/configstore
 config/darktable
+config/github-copilot
+config/gtk-2.0
+config/karabiner
+config/stripe
 config/op
+config/simple-update-notifier
+config/configstore
 
 tmux/plugins
 !tmux/plugins/tpm/
+
+tmp
