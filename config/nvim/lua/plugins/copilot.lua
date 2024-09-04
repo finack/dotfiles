@@ -47,7 +47,7 @@ return {
         c = {
           name = "ChatGPT",
           T = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
-          a = { "<cmd>ChatGPTActAs<CR>", "[a]ct as...", mode = "n"},
+          a = { "<cmd>ChatGPTActAs<CR>", "[a]ct as...", mode = "n" },
           c = { "<cmd>ChatGPT<CR>", "ChatGPT" },
           d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
           e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
@@ -99,7 +99,7 @@ return {
       answer_header = "## Copilot ",
       error_header = "## Error ",
       separator = " ",            -- Separator to use in chat
-      prompts = prompts,
+      -- prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
       show_help = false,          -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
       mappings = {
@@ -153,16 +153,16 @@ return {
       opts.selection = select.unnamed
 
       -- Override the git prompts message
-      opts.prompts.Commit = {
-        prompt = "Write commit message for the change with commitizen convention",
-        selection = select.gitdiff,
-      }
-      opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change with commitizen convention",
-        selection = function(source)
-          return select.gitdiff(source, true)
-        end,
-      }
+      -- opts.prompts.Commit = {
+      --   prompt = "Write commit message for the change with commitizen convention",
+      --   selection = select.gitdiff,
+      -- }
+      -- opts.prompts.CommitStaged = {
+      --   prompt = "Write commit message for the change with commitizen convention",
+      --   selection = function(source)
+      --     return select.gitdiff(source, true)
+      --   end,
+      -- }
 
       chat.setup(opts)
 
@@ -238,7 +238,7 @@ return {
         "<leader>ap",
         ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
         mode = "x",
-        desc = "CopilotChat - Prompt actions",
+        desc = "Prompt actions",
       },
       -- Code related commands
       { "<leader>ae", "<cmd>CopilotChatExplain<cr>",       desc = "Explain code" },

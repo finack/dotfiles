@@ -291,7 +291,8 @@ return {
                 { find = '^Already at newest change' },
                 { kind = 'wmsg' },
                 { kind = 'quickfix' },
-                { find = 'written' }
+                { find = 'written' },
+                { find = '[superman-nvim]' }
               },
             },
             view = 'mini',

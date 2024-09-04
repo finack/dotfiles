@@ -81,6 +81,7 @@ local function cmp_setup()
       -- }),
     }),
     sources = {
+      { name = "supermaven" },
       { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
@@ -88,13 +89,15 @@ local function cmp_setup()
       -- { name = "luasnip" },
       -- { name = "cmdline" },
       -- { name = "ctags" },
-      { name = "buffer",  keyword_length = 3 },
+      { name = "buffer",    keyword_length = 3 },
     },
     formatting = {
       format = lspkind.cmp_format({
-        mode = "symbol",       -- show symbol + text annotations
-        maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-        ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+        fields = { 'abbr', 'kind', 'menu' },
+        expandable_indicator = '▾',
+        mode = "symbol", -- show symbol + text annotations
+        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        ellipsis_char = "…", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         menu = {
           buffer    = "",
           nvim_lsp  = "",
@@ -103,15 +106,7 @@ local function cmp_setup()
           gh_issues = "",
           ctags     = "",
         },
-        symbol_map = { Copilot = "" },
-
-        -- The function below will be called before any actual modifications from lspkind
-        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-        --
-        -- before = function (entry, vim_item)
-        --   ...
-        --   return vim_item
-        -- end
+        symbol_map = { Copilot = "", Supermaven = "" },
       }),
     },
   })
