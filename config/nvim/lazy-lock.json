@@ -1,5 +1,4 @@
 {
-  "ChatGPT.nvim": { "branch": "main", "commit": "4d9d297c2409c8ebc715da7f1d7705a221564555" },
   "CopilotChat.nvim": { "branch": "canary", "commit": "2352cd3e7e980cd73594be05f96b2dc4c0dd4a74" },
   "Navigator.nvim": { "branch": "master", "commit": "91d86506ac2a039504d5205d32a1d4bc7aa57072" },
   "alpha-nvim": { "branch": "main", "commit": "b6f4129302db197a7249e67a90de3f2b676de13e" },

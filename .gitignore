@@ -2,16 +2,18 @@
 BrewFile.lock.json
 .tags
 
+config/Autodesk/
+config/QCAD/
 config/btop
+config/configstore
 config/configstore
 config/darktable
 config/github-copilot
 config/gtk-2.0
 config/karabiner
-config/stripe
 config/op
 config/simple-update-notifier
-config/configstore
+config/stripe
 
 tmux/plugins
 !tmux/plugins/tpm/

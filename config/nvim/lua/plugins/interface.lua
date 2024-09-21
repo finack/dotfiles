@@ -59,12 +59,11 @@ return {
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
-      require('which-key').register {
-        ['<leader>h'] = { name = 'harpoon', },
-        ['<leader>l'] = { name = 'lang' },
-        ['<leader>s'] = { name = 'search' },
-        ['<leader>v'] = { name = 'vim' },
-
+      require('which-key').add {
+        { "<leader>l", group = "lang", icon = "" },
+        { "<leader>s", group = "search", icon = "" },
+        { "<leader>v", group = "vim", icon = "" },
+        { "<leader>n", group = "notices", icon = "󰈸" },
       }
     end,
   },

@@ -1,88 +1,17 @@
-local prompts = {
-  -- Code related prompts
-  Explain = "Please explain how the following code works.",
-  Review = "Please review the following code and provide suggestions for improvement.",
-  Tests = "Please explain how the selected code works, then generate unit tests for it.",
-  Refactor = "Please refactor the following code to improve its clarity and readability.",
-  FixCode = "Please fix the following code to make it work as intended.",
-  FixError = "Please explain the error in the following text and provide a solution.",
-  BetterNamings = "Please provide better names for the following variables and functions.",
-  Documentation = "Please provide documentation for the following code.",
-  SwaggerApiDocs = "Please provide documentation for the following API using Swagger.",
-  SwaggerJsDocs = "Please write JSDoc for the following API using Swagger.",
-  -- Text related prompts
-  Summarize = "Please summarize the following text.",
-  Spelling = "Please correct any grammar and spelling errors in the following text.",
-  Wording = "Please improve the grammar and wording of the following text.",
-  Concise = "Please rewrite the following text to make it more concise.",
-}
-
 return {
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup({
-        -- api_key_cmd = "op read op://private/OpenAI/credential --no-newline",
-        openai_params = {
-          model = "gpt-4o",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          max_tokens = 300,
-          temperature = 0,
-          top_p = 1,
-          n = 1,
-        },
-        openai_edit_params = {
-          model = "gpt-4o",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          temperature = 0,
-          top_p = 1,
-          n = 1,
-        },
-      })
-      local wk = require("which-key")
-      wk.register({
-        c = {
-          name = "ChatGPT",
-          T = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
-          a = { "<cmd>ChatGPTActAs<CR>", "[a]ct as...", mode = "n" },
-          c = { "<cmd>ChatGPT<CR>", "ChatGPT" },
-          d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
-          e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
-          f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
-          g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
-          k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
-          l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
-          o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
-          r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
-          s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
-          t = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
-          x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
-        },
-      }, { prefix = "<leader>" })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  },
   {
     "zbirenbaum/copilot.lua",
     config = function()
-      require("copilot").setup()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end
   },
   {
     "zbirenbaum/copilot-cmp",
     config = function()
-      require("copilot_cmp").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
+      require("copilot_cmp").setup()
     end
   },
   {
@@ -91,9 +20,10 @@ return {
     -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
     -- Do not use branch and version together, either use branch or version
     dependencies = {
-      { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
+      { "nvim-telescope/telescope.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
+    build = "make tiktoken",
     opts = {
       question_header = "## User ",
       answer_header = "## Copilot ",
@@ -206,12 +136,8 @@ return {
 
       -- Add which-key mappings
       local wk = require("which-key")
-      wk.register({
-        ["<leader>"] = {
-          a = {
-            name = "+Copilot Chat",
-          },
-        },
+      wk.add({
+        { "<leader>a", group = "Copilot", icon = "" },
       })
     end,
     event = "VeryLazy",
