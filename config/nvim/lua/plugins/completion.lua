@@ -81,7 +81,6 @@ local function cmp_setup()
       -- }),
     }),
     sources = {
-      { name = "supermaven" },
       { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "nvim_lua" }, -- plugin excludes itself from non-lua buffers
@@ -89,7 +88,7 @@ local function cmp_setup()
       -- { name = "luasnip" },
       -- { name = "cmdline" },
       -- { name = "ctags" },
-      { name = "buffer",    keyword_length = 3 },
+      { name = "buffer",  keyword_length = 3 },
     },
     formatting = {
       format = lspkind.cmp_format({

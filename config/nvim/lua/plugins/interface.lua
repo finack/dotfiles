@@ -292,7 +292,6 @@ return {
                 { kind = 'wmsg' },
                 { kind = 'quickfix' },
                 { find = 'written' },
-                { find = '[superman-nvim]' }
               },
             },
             view = 'mini',
