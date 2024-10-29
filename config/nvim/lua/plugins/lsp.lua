@@ -234,7 +234,7 @@ return {
     "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
     config = function()
       require("toggle_lsp_diagnostics").init()
-      vim.keymap.set("n", "<leader>lq", ":ToggleDiag<cr>", { desc = "Toggle diagnostics" })
+      vim.keymap.set("n", "<leader>lt", ":ToggleDiag<cr>", { desc = "[t]oggle diagnostics" })
     end,
   },
   {
@@ -259,12 +259,12 @@ return {
     },
     keys = {
       {
-        "gw",
+        "aw",
         mode = { "n", "x" },
         function()
           require("wtf").ai()
         end,
-        desc = "[g]oto [w]tf : Analyze Diagnostics with GPT4"
+        desc = "[a]i [w]tf : Analyze Diagnostics with GPT4"
       },
     },
   }

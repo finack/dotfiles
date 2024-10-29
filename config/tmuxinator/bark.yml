@@ -45,27 +45,23 @@ root: ~/src/blaide/ark
 # attach: false
 
 windows:
-  - nvim:
-      root: ~/src/blaide/ark/
+  - julia:
+      root: ~/src/blaide/ark/julia
       panes:
         - nvim
+  - ivy:
+      root: ~/src/blaide/ark/ivy
+      panes:
+        - nvim
+  - servers:
+      root: ~/src/blaide/ark
+      layout: even-horizontal
+      panes:
+        - bark julia && npm run dev
+        - bark ivy && npm run start
   - shells:
       root: ~/src/blaide/ark/
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - bark dinah
         - bark julia
-  - servers:
-      root: ~/src/blaide/ark
-      layout: tiled
-      panes:
-        - bark dinah && npm run dev
-        - #shell
-        - bark dinah && npm run worker:dev
-        - #shell
-  - home:
-      root: ~/.dotfiles
-      layout: even-vertical
-      panes:
-        - #nvim
-        - #shell
