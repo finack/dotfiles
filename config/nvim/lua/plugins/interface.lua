@@ -60,6 +60,7 @@ return {
       require('which-key').setup()
 
       require('which-key').add {
+        { "<leader>d", group = "db", icon = "󱘲" },
         { "<leader>l", group = "lang", icon = "" },
         { "<leader>s", group = "search", icon = "" },
         { "<leader>v", group = "vim", icon = "" },
@@ -77,7 +78,7 @@ return {
 
       local sections = {
         lualine_a = { 'mode' },
-        lualine_b = { { 'filename', path = 4 } },
+        lualine_b = { { 'filename', path = 1 } },
         lualine_c = {},
         lualine_x = { 'branch' },
         lualine_y = { 'diff',
@@ -112,12 +113,21 @@ return {
         lualine_y = {},
         lualine_z = {}
       }
+      local winbar = {
+        lualine_a = {},
+        lualine_b = { 'filename' },
+        lualine_c = { 'diagnostics' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+      }
       require("lualine").setup({
         sections = sections,
         inactive_sections = inactive_sections,
+        winbar = winbar,
         options = {
           theme = vim.g.colors_name,
-          extensions = { "nvim-dapi-ui", "trouble" },
+          extensions = { "trouble" },
         },
       })
     end,
@@ -149,7 +159,7 @@ return {
     opts = {
       modes = {
         search = {
-          enabled = true
+          enabled = false
         },
         char = {
           jump_labels = true
@@ -192,37 +202,6 @@ return {
       },
     },
   },
-
-  -- Use the tabline to show buffers
-  {
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require("bufferline").setup({
-        options = {
-          separator_style = "slant",
-          show_buffer_icons = false,
-          right_mouse_command = "vertical sbuffer %d",
-          diagnostics = "nvim_lsp",
-          always_show_bufferline = false,
-          auto_toggle_bufferline = true,
-          numbers = "ordinal",
-          show_close_icon = false,
-          show_buffer_close_icons = false,
-        }
-      })
-
-      vim.api.nvim_set_keymap('n', 'gb', ':BufferLinePick<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', 'gB', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
-
-      for i = 1, 9 do
-        vim.api.nvim_set_keymap('n', '<leader>' .. i, ':lua require("bufferline").go_to(' .. i .. ')<CR>',
-          { noremap = true, silent = true, desc = "which_key_ignore" })
-      end
-    end,
-  },
-  -- messages, cmdline and the popupmenu
   {
     "folke/noice.nvim",
     event = "VeryLazy",
