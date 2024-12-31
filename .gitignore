@@ -8,10 +8,12 @@ config/btop
 config/configstore
 config/configstore
 config/darktable
+config/gh
 config/github-copilot
 config/gtk-2.0
 config/karabiner
 config/op
+config/raycast
 config/simple-update-notifier
 config/stripe
 

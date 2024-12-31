@@ -1,0 +1,18 @@
+font-family = MesloLGS NF
+font-size = 15
+
+theme = catppuccin-mocha 
+
+link-url = true
+macos-titlebar-style = hidden
+
+window-padding-x = 3
+window-padding-y = 3
+window-padding-balance = true
+
+copy-on-select = true
+
+macos-icon-frame = chrome
+
+window-height = 1000
+window-width = 1000
