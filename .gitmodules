@@ -16,3 +16,9 @@
 [submodule "themes/dracula-zsh"]
 	path = themes/dracula-zsh
 	url = https://github.com/dracula/zsh.git
+[submodule "themes/catppuccin-zsh"]
+	path = themes/catppuccin-zsh
+	url = https://github.com/catppuccin/zsh-syntax-highlighting.git
+[submodule "themes/catppuccin-tmux"]
+	path = themes/catppuccin-tmux
+	url = https://github.com/catppuccin/tmux.git

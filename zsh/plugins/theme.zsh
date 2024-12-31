@@ -1,1 +1,1 @@
-source ~/.themes/dracula-zsh/dracula.zsh-theme
+source ~/.themes/catppuccin-zsh/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
