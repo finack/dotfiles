@@ -11,6 +11,31 @@ return {
       require("codecompanion").setup({
         strategies = {
           chat = {
+            slash_commands = {
+              ["buffer"] = {
+                opts = {
+                  provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
+                },
+              },
+
+              ["file"] = {
+                opts = {
+                  provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
+                },
+              },
+
+              ["help"] = {
+                opts = {
+                  provider = "fzf_lua", -- telescope|mini_pick|fzf_lua
+                },
+              },
+
+              ["symbols"] = {
+                opts = {
+                  provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
+                },
+              },
+            },
             adapter = "anthropic",
           },
           inline = {
@@ -46,6 +71,9 @@ return {
           },
         },
       },
+    },
+    opts_extend = {
+      "sources.default",
     },
   },
 

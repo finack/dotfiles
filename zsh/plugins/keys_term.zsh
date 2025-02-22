@@ -1,6 +1,9 @@
 # vi mode
 # bindkey -v
 # bindkey '^F' vi-cmd-mode
+#
+set -o vi
+HISTCONTROL=ignorespace
 
 # use incremental search
 bindkey '^R' history-incremental-search-backward
@@ -13,29 +16,6 @@ bindkey -M vicmd '^e' end-of-line
 
 bindkey -M viins '\e.' insert-last-word
 
-## Lifted from https://github.com/fschulze/zsh-settings/blob/master/bindkey.zsh
-# allow you to start typing a command and
-# use the up/down arrow to auto complete from
-# commands in your history
-function history-search-end {
-    integer ocursor=$CURSOR
-
-    if [[ $LASTWIDGET = history-beginning-search-*-end ]]; then
-      # Last widget called set $hbs_pos.
-      CURSOR=$hbs_pos
-    else
-      hbs_pos=$CURSOR
-    fi
-
-    if zle .${WIDGET%-end}; then
-      # success, go to end of line
-      zle .end-of-line
-    else
-      # failure, restore position
-      CURSOR=$ocursor
-      return 1
-    fi
-}
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey '\e[B' history-beginning-search-forward-end
