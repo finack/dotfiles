@@ -1,9 +1,12 @@
 tap "dotenvx/brew"
+tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "jandedobbeleer/oh-my-posh"
 tap "ngrok/ngrok"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -22,12 +25,12 @@ brew "fd"
 brew "flyctl"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# GitHub command-line tool
-brew "gh"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Fast and powerful Git hooks manager for any type of projects
@@ -42,6 +45,8 @@ brew "neovim"
 brew "netcat"
 # Manage multiple Node.js versions
 brew "nvm"
+# Development kit for the Java programming language
+brew "openjdk"
 # RC file (dotfile) management
 brew "rcm"
 # Reattach process (e.g., tmux) to background
@@ -60,16 +65,20 @@ brew "virtualenv"
 brew "watchman"
 # Internet file retriever
 brew "wget"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Better dotenv–from the creator of `dotenv`
-brew "dotenvx/brew/dotenvx"
-# Command-line interface for 1Password
-cask "1password-cli"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# Terraform
+brew "hashicorp/tap/terraform"
+# Terraform Language Server
+brew "hashicorp/tap/terraform-ls"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Menu bar manager
 cask "jordanbaird-ice"
-# Shows the next meeting in the menu bar
-cask "meetingbar"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Prompt theme engine for any shell
