@@ -3,83 +3,59 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "jandedobbeleer/oh-my-posh"
 tap "ngrok/ngrok"
-# Cryptography and SSL/TLS Toolkit
+tap "stripe/stripe-cli"
 brew "openssl@3"
-# Official Amazon AWS command-line interface
 brew "awscli"
-# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Core application library for C
 brew "glib"
-# Dependency manager for Cocoa projects
 brew "cocoapods"
-# Shared library for Watchman and Eden projects
 brew "edencommon"
-# Modern, maintained replacement for ls
 brew "eza"
-# Simple, fast and user-friendly alternative to find
 brew "fd"
-# Command-line tools for fly.io services
 brew "flyctl"
-# Command-line fuzzy finder written in Go
 brew "fzf"
-# Distributed revision control system
 brew "git"
-# Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Lightweight and flexible command-line JSON processor
 brew "jq"
-# Fast and powerful Git hooks manager for any type of projects
 brew "lefthook"
-# Postgres C API library
-brew "libpq"
-# Package manager for the Lua programming language
+brew "libpq", link: true
 brew "luarocks"
-# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Utility for managing network connections
 brew "netcat"
-# Manage multiple Node.js versions
 brew "nvm"
-# Development kit for the Java programming language
 brew "openjdk"
-# RC file (dotfile) management
+brew "rbenv"
 brew "rcm"
-# Reattach process (e.g., tmux) to background
 brew "reattach-to-user-namespace"
-# Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Terminal multiplexer
 brew "tmux"
-# Manage complex tmux sessions easily
 brew "tmuxinator"
-# Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Tool for creating isolated virtual python environments
 brew "virtualenv"
-# Watch files and take action when they change
 brew "watchman"
-# Internet file retriever
 brew "wget"
-# Shell extension to navigate your filesystem faster
+brew "wireguard-go"
 brew "zoxide"
-# UNIX shell (command interpreter)
 brew "zsh"
-# Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# Terraform
 brew "hashicorp/tap/terraform"
-# Terraform Language Server
 brew "hashicorp/tap/terraform-ls"
-# Terminal emulator that uses platform-native UI and GPU acceleration
+brew "stripe/stripe-cli/stripe"
+cask "android-studio"
+cask "discord"
+cask "docker"
+cask "font-meslo-lg-nerd-font"
 cask "ghostty"
-# Menu bar manager
+cask "istat-menus"
 cask "jordanbaird-ice"
-# Reverse proxy, secure introspectable tunnels to localhost
+cask "karabiner-elements"
+cask "linear-linear"
 cask "ngrok"
-# Prompt theme engine for any shell
+cask "notion"
 cask "oh-my-posh"
+cask "raycast"
+cask "slack"
+cask "spotify"
+cask "zoom"

@@ -2,7 +2,8 @@
 
 ## Originally from https://github.com/thoughtbot/laptop/blob/master/mac
 fancy_echo() {
-	local fmt="$1"; shift
+	local fmt="$1"
+	shift
 
 	# shellcheck disable=SC2059
 	printf "\\n$fmt\\n" "$@"
@@ -14,11 +15,11 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 
 update_shell() {
-	local shell_path;
+	local shell_path
 	shell_path="$(command -v zsh)"
 
 	fancy_echo "Changing your shell to zsh ..."
-	if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+	if ! grep "$shell_path" /etc/shells >/dev/null 2>&1; then
 		fancy_echo "Adding '$shell_path' to /etc/shells"
 		sudo sh -c "echo $shell_path >> /etc/shells"
 	fi
@@ -26,18 +27,18 @@ update_shell() {
 }
 
 case "$SHELL" in
-	*/zsh)
-		if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ] ; then
-			update_shell
-		fi
-		;;
-	*)
+*/zsh)
+	if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ]; then
 		update_shell
-		;;
+	fi
+	;;
+*)
+	update_shell
+	;;
 esac
 
 gem_install_or_update() {
-	if gem list "$1" --installed > /dev/null; then
+	if gem list "$1" --installed >/dev/null; then
 		gem update "$@"
 	else
 		gem install "$@"
@@ -46,21 +47,21 @@ gem_install_or_update() {
 
 if ! command -v brew >/dev/null; then
 	fancy_echo "Installing Homebrew ..."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-		export PATH="/usr/local/bin:$PATH"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	export PATH="/usr/local/bin:$PATH"
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
-brew update --force # https://github.com/Homebrew/brew/issues/1151
-brew bundle install
+/opt/homebrew/bin/brew update --force # https://github.com/Homebrew/brew/issues/1151
+/opt/homebrew/bin/brew bundle install
 
 fancy_echo "Update ruby"
-ruby_version=3.3
+ruby_version=3.4.2
 
-eval "$(rbenv init - zsh)"
+eval "$(/opt/homebrew/bin/rbenv init - zsh)"
 
 if ! rbenv versions | grep -Fq "$ruby_version"; then
-  rbenv install -s "$ruby_version"
+	rbenv install -s "$ruby_version"
 fi
 
 rbenv global "$ruby_version"
