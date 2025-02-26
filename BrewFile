@@ -1,47 +1,61 @@
+tap "dotenvx/brew"
+tap "hashicorp/tap"
+tap "homebrew/bundle"
 tap "jandedobbeleer/oh-my-posh"
 tap "ngrok/ngrok"
-
-brew "openssl"
-
-cask "oh-my-posh"
-brew "zsh"
-
+tap "stripe/stripe-cli"
+brew "openssl@3"
+brew "awscli"
+brew "bat"
+brew "btop"
+brew "glib"
+brew "cocoapods"
+brew "edencommon"
+brew "eza"
+brew "fd"
+brew "flyctl"
+brew "fzf"
 brew "git"
 brew "git-delta"
-brew "lefthook"
-brew "neovim"
-
-brew "rcm" # Manage dotfiles
-brew "reattach-to-user-namespace"
-
-brew "bat" # Amazing cat
-brew "btop" # Amazing top/htop
-brew "eza" # Fancy LS
-brew "fd"
-brew "fzf"
+brew "go"
 brew "jq"
+brew "lefthook"
+brew "libpq", link: true
+brew "luarocks"
+brew "neovim"
+brew "netcat"
+brew "nvm"
+brew "openjdk"
+brew "rbenv"
+brew "rcm"
+brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "tmux"
-
-#cask "font-hack-nerd-font"
-
-cask "ngrok"
-
+brew "tmuxinator"
+brew "tree"
+brew "virtualenv"
+brew "watchman"
+brew "wget"
+brew "wireguard-go"
+brew "zoxide"
+brew "zsh"
+brew "zsh-syntax-highlighting"
+brew "hashicorp/tap/terraform"
+brew "hashicorp/tap/terraform-ls"
 brew "stripe/stripe-cli/stripe"
-
-brew "libpq" # Postgres command line utilites
-
-cask "1password-cli"
-
-brew "flyctl"
-
-cask "jordanbaird-ice" # Mac Menu Bar Manager
-cask "meetingbar" # Meeting notifications
-
-brew "nvm"
-
-# brew "rbenv"
-# brew "ruby-build"
-
-# brew "python3"
-# brew "python-psutil"
+cask "android-studio"
+cask "discord"
+cask "docker"
+cask "font-meslo-lg-nerd-font"
+cask "ghostty"
+cask "istat-menus"
+cask "jordanbaird-ice"
+cask "karabiner-elements"
+cask "linear-linear"
+cask "ngrok"
+cask "notion"
+cask "oh-my-posh"
+cask "raycast"
+cask "slack"
+cask "spotify"
+cask "zoom"

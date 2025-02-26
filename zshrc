@@ -34,3 +34,4 @@ done
 fpath=(~/.zsh/completion $fpath)
 
 source ~/.zshrc.local
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
