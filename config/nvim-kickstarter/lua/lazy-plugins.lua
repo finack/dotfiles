@@ -13,6 +13,7 @@ require('lazy').setup({
   require 'plugins.todo-comments',
   require 'plugins.treesitter',
   require 'plugins.which-key',
+  require 'plugins.snacks',
 
   -- require 'plugins.debug',
   -- require 'plugins.indent_line',
