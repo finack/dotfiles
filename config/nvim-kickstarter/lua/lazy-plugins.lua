@@ -1,22 +1,23 @@
 require('lazy').setup({
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
+  require 'plugins.ai',
   require 'plugins.autopairs',
   require 'plugins.blink-cmp',
   require 'plugins.catppucin',
   require 'plugins.conform',
+  require 'plugins.indent_line',
   require 'plugins.fzf-lua',
   require 'plugins.gitsigns',
   require 'plugins.indent_line',
   require 'plugins.lspconfig',
   require 'plugins.mini',
+  require 'plugins.precognition',
   require 'plugins.todo-comments',
   require 'plugins.treesitter',
+  require 'plugins.trouble',
   require 'plugins.which-key',
   require 'plugins.snacks',
 
   -- require 'plugins.debug',
-  -- require 'plugins.indent_line',
   -- require 'plugins.lint',
   -- require 'plugins.neo-tree',
 }, {
