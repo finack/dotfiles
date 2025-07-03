@@ -2,7 +2,6 @@
   name = Peter Baker
 	email = peter@blaide.com
 [push]
-  default = tracking
 [color]
   diff = auto
   status = auto
@@ -24,8 +23,9 @@
   submodule = 1
 [push]
   # Only push branches that have been set up to track a remote branch.
-  default = current
+	default = simple
   useForceWithIncludes = true
+	autoSetupRemote = true
 [mergetool]
   keepBackup = true
 [credential]

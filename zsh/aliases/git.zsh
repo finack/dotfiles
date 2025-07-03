@@ -3,25 +3,27 @@ alias ga='git add'
 alias gap='ga -p'
 alias gau='git add -u'
 alias gbr='git branch -v'
-gc() {
-  git diff --cached | grep '\btap[ph]\b' >/dev/null &&
-    echo "\e[0;31;29mOops, there's a #tapp or similar in that diff.\e[0m" ||
-    git commit -v "$@"
-}
-alias gc!='git commit -v'
+alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gcam='gca --amend'
-alias gch='git cherry-pick'
 alias gcm='git commit -v --amend'
 alias gwip='git commit -v -m "wip"'
 alias gwipa='git commit -v -a -m "wip"'
-alias gco='git checkout'
 gcop() {
-  git ls-remote --exit-code origin refs/pull/$1/merge
-  [ $? -ne 0 ] && echo "Could not find pull request $1" && return
-  git fetch origin +refs/pull/$1/merge
-  git checkout FETCH_HEAD
+  git add -A
+  DIFF=$(git diff --staged)
+  if [ -z "$DIFF" ]; then
+    echo "No changes to commit"
+    return 1
+  fi
+  COMMIT_MSG=$(echo "Generate a concise, specific git commit message (max 50 chars) for these changes. Just output the message text with no quotes or explanation:
+
+$DIFF" | claude -p)
+  echo $COMMIT_MSG
+  git commit -m "$COMMIT_MSG"
 }
+
+alias gco='git checkout'
 
 alias gd='git diff -M'
 alias gd.='git diff -M --color-words="."'
@@ -72,6 +74,11 @@ alias grec='git rebase --continue'
 alias grei='git rebase -i'
 alias grh='git reset --hard'
 alias grp='gr --patch'
+grum() {
+  current_branch=$(git symbolic-ref --short HEAD)
+  base=${1:-main}
+  git checkout $base && git pull && git checkout $current_branch && git rebase $base
+}
 alias grsh='git reset --soft HEAD~'
 alias grv='git remote -v'
 alias gs='git show'
