@@ -10,7 +10,6 @@ require('lazy').setup({
   require 'plugins.indent_line',
   require 'plugins.lspconfig',
   require 'plugins.mini',
-  require 'plugins.precognition',
   require 'plugins.todo-comments',
   require 'plugins.treesitter',
   require 'plugins.trouble',
