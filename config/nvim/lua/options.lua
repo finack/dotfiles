@@ -26,6 +26,13 @@ end)
 -- Enable break indent
 vim.o.breakindent = true
 
+-- Indentation settings
+vim.o.tabstop = 2       -- Number of spaces that a <Tab> counts for
+vim.o.shiftwidth = 2    -- Number of spaces to use for each step of indent
+vim.o.expandtab = true  -- Use spaces instead of tabs
+vim.o.autoindent = true -- Copy indent from current line when starting a new line
+vim.o.smartindent = true -- Smart autoindenting for C-like programs
+
 -- Save undo history
 vim.o.undofile = true
 

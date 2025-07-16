@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+# Script to create a new git worktree with tmux session setup
+# Usage: new-worktree <feature-name>
+
+set -eE
+
+# Function to handle errors with line numbers
+error_handler() {
+    local line_number=$1
+    echo "Error: Command failed at line $line_number"
+    exit 1
+}
+
+# Set up error trap
+trap 'error_handler $LINENO' ERR
+
+# Check if already inside a tmux session
+if [ -n "$TMUX" ]; then
+    echo "Error: Cannot run this script from inside a tmux session."
+    echo "Please detach from the current tmux session first (Ctrl+b d) and run again."
+    exit 1
+fi
+
+# Configuration
+BASE_DIR="$HOME/src/blaide"
+MAIN_REPO="$BASE_DIR/ark"
+FEATURE_NAME="$1"
+
+# If no argument provided, just start in ark directory
+if [ -z "$FEATURE_NAME" ]; then
+    WORKTREE_PATH="$MAIN_REPO"
+    SESSION_NAME="ark"
+    
+    # Check if tmux session already exists
+    if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+        echo "Tmux session '$SESSION_NAME' already exists. Attaching..."
+        tmux attach-session -t "$SESSION_NAME"
+        exit 0
+    fi
+    
+    # Skip to tmux session creation
+    echo "Setting up tmux session in ark directory: $SESSION_NAME"
+else
+    # Original worktree logic continues here
+    # Sanitize feature name for branch naming
+    BRANCH_NAME="peter/$FEATURE_NAME"
+    WORKTREE_PATH="$BASE_DIR/$FEATURE_NAME"
+    SESSION_NAME="$FEATURE_NAME"
+fi
+
+# Only create worktree if feature name was provided
+if [ -n "$FEATURE_NAME" ]; then
+    # Check if worktree already exists
+    if [ -d "$WORKTREE_PATH" ]; then
+        echo "Worktree already exists at $WORKTREE_PATH, continuing..."
+    else
+        echo "Creating git worktree for feature: $FEATURE_NAME"
+        
+        # Create the git worktree
+        cd "$MAIN_REPO"
+        git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME" || {
+            echo "Error: Failed to create worktree. Branch may already exist."
+            exit 1
+        }
+    fi
+
+    echo "Copying .env file..."
+    # Copy the .env file from moira if it doesn't exist in the worktree
+    if [ ! -f "$WORKTREE_PATH/moira/.env" ]; then
+        if [ -f "$MAIN_REPO/moira/.env" ]; then
+            cp "$MAIN_REPO/moira/.env" "$WORKTREE_PATH/moira/.env"
+            echo ".env file copied successfully"
+        else
+            echo "Warning: .env file not found in $MAIN_REPO/moira/"
+        fi
+    else
+        echo ".env file already exists in $WORKTREE_PATH/moira/, skipping copy"
+    fi
+fi
+
+# Check if tmux session already exists
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+    echo "Tmux session '$SESSION_NAME' already exists. Attaching..."
+    tmux attach-session -t "$SESSION_NAME"
+    exit 0
+fi
+
+
+echo "Setting up tmux session: $SESSION_NAME"
+
+# Create tmux session with windows
+tmux new-session -d -s "$SESSION_NAME" -c "$WORKTREE_PATH/moira"
+
+# nvim
+tmux rename-window -t "$SESSION_NAME:1" "nvim"
+tmux send-keys -t "$SESSION_NAME:1" "nvim" C-m
+
+# ai
+tmux new-window -t "$SESSION_NAME:2" -n "ai" -c "$WORKTREE_PATH/moira"
+tmux send-keys -t "$SESSION_NAME:2" "" C-m
+
+# servers
+tmux new-window -t "$SESSION_NAME:3" -n "servers" -c "$WORKTREE_PATH/moira"
+# Split horizontally into 2 panes
+tmux split-window -t "$SESSION_NAME:3" -h -c "$WORKTREE_PATH/moira"
+tmux select-layout -t "$SESSION_NAME:3" even-horizontal
+tmux send-keys -t "$SESSION_NAME:3.1" "npm run dev" C-m
+tmux send-keys -t "$SESSION_NAME:3.2" "" C-m
+
+# shells
+tmux new-window -t "$SESSION_NAME:4" -n "shells" -c "$WORKTREE_PATH"
+# Split horizontally into 2 panes
+tmux split-window -t "$SESSION_NAME:4" -h -c "$WORKTREE_PATH/moira"
+tmux select-layout -t "$SESSION_NAME:4" even-horizontal
+# Navigate to project directories
+tmux send-keys -t "$SESSION_NAME:4.1" "" C-m
+tmux send-keys -t "$SESSION_NAME:4.2" "" C-m
+
+# ngrok
+tmux new-window -t "$SESSION_NAME:5" -n "ngrok" -c "$WORKTREE_PATH/moira"
+tmux send-keys -t "$SESSION_NAME:5" "" C-m
+
+# Select first window
+tmux select-window -t "$SESSION_NAME:1"
+
+echo "Successfully created worktree and tmux session!"
+echo "Attaching to session..."
+
+# Attach to the session
+tmux attach-session -t "$SESSION_NAME"
