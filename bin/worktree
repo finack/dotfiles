@@ -57,12 +57,20 @@ if [ -n "$FEATURE_NAME" ]; then
     else
         echo "Creating git worktree for feature: $FEATURE_NAME"
         
-        # Create the git worktree
+        # Navigate to main repo
         cd "$MAIN_REPO"
-        git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME" || {
-            echo "Error: Failed to create worktree. Branch may already exist."
-            exit 1
-        }
+        
+        # Check if branch already exists (locally or remotely)
+        if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
+            echo "Branch '$BRANCH_NAME' already exists locally, using existing branch..."
+            git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
+        elif git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "Branch '$BRANCH_NAME' exists on remote, creating worktree from remote branch..."
+            git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
+        else
+            echo "Creating new branch '$BRANCH_NAME'..."
+            git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME"
+        fi
     fi
 
     echo "Copying .env file..."
