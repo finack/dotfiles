@@ -36,4 +36,10 @@ fpath=(~/.zsh/completion $fpath)
 source ~/.zshrc.local
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias claude="/Users/peter/.claude/local/claude"
+
+# Ensure fzf key bindings are loaded (must be after other plugins that might override them)
+if [[ -o interactive ]] && command -v fzf &> /dev/null; then
+  eval "$(fzf --zsh)"
+fi
+
+. "$HOME/.local/bin/env"

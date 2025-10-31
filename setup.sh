@@ -84,3 +84,5 @@ npm install --global typescript
 
 fancy_echo "Linking rc files"
 rcup -v
+
+bat cache --build

@@ -27,3 +27,5 @@ export CLICOLOR=1
 
 # TODO move to personal file
 export OPSCODE_USER=phb
+
+. "$HOME/.local/bin/env"

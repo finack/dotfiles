@@ -72,19 +72,6 @@ if [ -n "$FEATURE_NAME" ]; then
             git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME"
         fi
     fi
-
-    echo "Copying .env file..."
-    # Copy the .env file from moira if it doesn't exist in the worktree
-    if [ ! -f "$WORKTREE_PATH/moira/.env" ]; then
-        if [ -f "$MAIN_REPO/moira/.env" ]; then
-            cp "$MAIN_REPO/moira/.env" "$WORKTREE_PATH/moira/.env"
-            echo ".env file copied successfully"
-        else
-            echo "Warning: .env file not found in $MAIN_REPO/moira/"
-        fi
-    else
-        echo ".env file already exists in $WORKTREE_PATH/moira/, skipping copy"
-    fi
 fi
 
 # Check if tmux session already exists
@@ -98,36 +85,35 @@ fi
 echo "Setting up tmux session: $SESSION_NAME"
 
 # Create tmux session with windows
-tmux new-session -d -s "$SESSION_NAME" -c "$WORKTREE_PATH/moira"
+tmux new-session -d -s "$SESSION_NAME" -c "$WORKTREE_PATH"
 
 # nvim
-tmux rename-window -t "$SESSION_NAME:1" "nvim"
-tmux send-keys -t "$SESSION_NAME:1" "nvim" C-m
+tmux rename-window -t "$SESSION_NAME:1" "valet"
+tmux send-keys -t "$SESSION_NAME:1" "cd valet && nvim" C-m
 
-# ai
-tmux new-window -t "$SESSION_NAME:2" -n "ai" -c "$WORKTREE_PATH/moira"
+tmux new-window -t "$SESSION_NAME:2" -n "connect" -c "$WORKTREE_PATH/valet-connect"
 tmux send-keys -t "$SESSION_NAME:2" "" C-m
 
-# servers
-tmux new-window -t "$SESSION_NAME:3" -n "servers" -c "$WORKTREE_PATH/moira"
-# Split horizontally into 2 panes
-tmux split-window -t "$SESSION_NAME:3" -h -c "$WORKTREE_PATH/moira"
-tmux select-layout -t "$SESSION_NAME:3" even-horizontal
-tmux send-keys -t "$SESSION_NAME:3.1" "npm run dev" C-m
-tmux send-keys -t "$SESSION_NAME:3.2" "" C-m
+# ai
+tmux new-window -t "$SESSION_NAME:3" -n "ai" -c "$WORKTREE_PATH"
+tmux send-keys -t "$SESSION_NAME:3" "" C-m
 
 # shells
-tmux new-window -t "$SESSION_NAME:4" -n "shells" -c "$WORKTREE_PATH"
+tmux new-window -t "$SESSION_NAME:4" -n "shells" -c "$WORKTREE_PATH/valet"
 # Split horizontally into 2 panes
-tmux split-window -t "$SESSION_NAME:4" -h -c "$WORKTREE_PATH/moira"
+tmux split-window -t "$SESSION_NAME:4" -h -c "$WORKTREE_PATH/valet-connect"
 tmux select-layout -t "$SESSION_NAME:4" even-horizontal
 # Navigate to project directories
 tmux send-keys -t "$SESSION_NAME:4.1" "" C-m
 tmux send-keys -t "$SESSION_NAME:4.2" "" C-m
 
-# ngrok
-tmux new-window -t "$SESSION_NAME:5" -n "ngrok" -c "$WORKTREE_PATH/moira"
-tmux send-keys -t "$SESSION_NAME:5" "" C-m
+# servers
+tmux new-window -t "$SESSION_NAME:5" -n "servers" -c "$WORKTREE_PATH/valet"
+# Split horizontally into 2 panes
+tmux split-window -t "$SESSION_NAME:5" -h -c "$WORKTREE_PATH/valet-connect"
+tmux select-layout -t "$SESSION_NAME:5" even-horizontal
+tmux send-keys -t "$SESSION_NAME:5.1" "make dev" C-m
+tmux send-keys -t "$SESSION_NAME:5.2" "make start" C-m
 
 # Select first window
 tmux select-window -t "$SESSION_NAME:1"
