@@ -148,6 +148,11 @@ return {
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+      -- Configure position encoding to use UTF-16 (LSP spec standard)
+      -- This prevents warnings when multiple LSP clients are attached to the same buffer
+      capabilities.general = capabilities.general or {}
+      capabilities.general.positionEncodings = { 'utf-16', 'utf-8' }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -171,7 +176,10 @@ return {
         -- ts_ls = {},
         --
 
-        biome = {},
+        biome = {
+          -- Biome LSP will automatically respect per-workspace biome.json files
+          -- No additional configuration needed
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -186,7 +194,19 @@ return {
             },
           },
         },
-        vtsls = {},
+        vtsls = {
+          -- Configure vtsls to use monorepo root for better workspace support
+          root_dir = function(fname)
+            local util = require 'lspconfig.util'
+            -- First, try to find the monorepo root by looking for pnpm-workspace.yaml
+            local monorepo_root = util.root_pattern('pnpm-workspace.yaml')(fname)
+            if monorepo_root then
+              return monorepo_root
+            end
+            -- Fallback to standard TypeScript project detection
+            return util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git')(fname)
+          end,
+        },
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
