@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+
+# Script to create a new git worktree with tmux session setup
+# Usage: new-worktree <feature-name>
+
+set -eE
+
+# Function to handle errors with line numbers
+error_handler() {
+    local line_number=$1
+    echo "Error: Command failed at line $line_number"
+    exit 1
+}
+
+# Set up error trap
+trap 'error_handler $LINENO' ERR
+
+# Check if already inside a tmux session
+if [ -n "$TMUX" ]; then
+    echo "Error: Cannot run this script from inside a tmux session."
+    echo "Please detach from the current tmux session first (Ctrl+b d) and run again."
+    exit 1
+fi
+
+# Configuration
+BASE_DIR="$HOME/src/blaide"
+MAIN_REPO="$BASE_DIR/ark"
+FEATURE_NAME="$1"
+
+# If no argument provided, just start in ark directory
+if [ -z "$FEATURE_NAME" ]; then
+    WORKTREE_PATH="$MAIN_REPO"
+    SESSION_NAME="ark"
+    
+    # Check if tmux session already exists
+    if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+        echo "Tmux session '$SESSION_NAME' already exists. Attaching..."
+        tmux attach-session -t "$SESSION_NAME"
+        exit 0
+    fi
+    
+    # Skip to tmux session creation
+    echo "Setting up tmux session in ark directory: $SESSION_NAME"
+else
+    # Original worktree logic continues here
+    # Sanitize feature name for branch naming
+    BRANCH_NAME="peter/$FEATURE_NAME"
+    WORKTREE_PATH="$BASE_DIR/$FEATURE_NAME"
+    SESSION_NAME="$FEATURE_NAME"
+fi
+
+# Only create worktree if feature name was provided
+if [ -n "$FEATURE_NAME" ]; then
+    # Check if worktree already exists
+    if [ -d "$WORKTREE_PATH" ]; then
+        echo "Worktree already exists at $WORKTREE_PATH, continuing..."
+    else
+        echo "Creating git worktree for feature: $FEATURE_NAME"
+        
+        # Navigate to main repo
+        cd "$MAIN_REPO"
+        
+        # Check if branch already exists (locally or remotely)
+        if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
+            echo "Branch '$BRANCH_NAME' already exists locally, using existing branch..."
+            git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
+        elif git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "Branch '$BRANCH_NAME' exists on remote, creating worktree from remote branch..."
+            git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
+        else
+            echo "Creating new branch '$BRANCH_NAME'..."
+            git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME"
+        fi
+    fi
+fi
+
+# Check if tmux session already exists
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+    echo "Tmux session '$SESSION_NAME' already exists. Attaching..."
+    tmux attach-session -t "$SESSION_NAME"
+    exit 0
+fi
+
+
+echo "Setting up tmux session: $SESSION_NAME"
+
+# Create tmux session with windows
+tmux new-session -d -s "$SESSION_NAME" -c "$WORKTREE_PATH"
+
+# nvim
+tmux rename-window -t "$SESSION_NAME:1" "valet"
+tmux send-keys -t "$SESSION_NAME:1" "cd valet && nvim" C-m
+
+tmux new-window -t "$SESSION_NAME:2" -n "connect" -c "$WORKTREE_PATH/valet-connect"
+tmux send-keys -t "$SESSION_NAME:2" "" C-m
+
+# ai
+tmux new-window -t "$SESSION_NAME:3" -n "ai" -c "$WORKTREE_PATH"
+tmux send-keys -t "$SESSION_NAME:3" "" C-m
+
+# shells
+tmux new-window -t "$SESSION_NAME:4" -n "shells" -c "$WORKTREE_PATH/valet"
+# Split horizontally into 2 panes
+tmux split-window -t "$SESSION_NAME:4" -h -c "$WORKTREE_PATH/valet-connect"
+tmux select-layout -t "$SESSION_NAME:4" even-horizontal
+# Navigate to project directories
+tmux send-keys -t "$SESSION_NAME:4.1" "" C-m
+tmux send-keys -t "$SESSION_NAME:4.2" "" C-m
+
+# servers
+tmux new-window -t "$SESSION_NAME:5" -n "servers" -c "$WORKTREE_PATH/valet"
+# Split horizontally into 2 panes
+tmux split-window -t "$SESSION_NAME:5" -h -c "$WORKTREE_PATH/valet-connect"
+tmux select-layout -t "$SESSION_NAME:5" even-horizontal
+tmux send-keys -t "$SESSION_NAME:5.1" "make dev" C-m
+tmux send-keys -t "$SESSION_NAME:5.2" "make start" C-m
+
+# Select first window
+tmux select-window -t "$SESSION_NAME:1"
+
+echo "Successfully created worktree and tmux session!"
+echo "Attaching to session..."
+
+# Attach to the session
+tmux attach-session -t "$SESSION_NAME"

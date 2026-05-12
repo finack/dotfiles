@@ -18,7 +18,7 @@ setopt EXTENDED_GLOB
 
 # Enable homebrew completions
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  eval "$(brew shellenv)"
 fi
 
 # completion
