@@ -62,7 +62,7 @@ return {
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]atabase' },
         { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>u', group = '[U]I Toggles' },
         { '<leader>g', group = '[G]it' },
       },
     },

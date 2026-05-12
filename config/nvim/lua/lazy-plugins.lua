@@ -1,16 +1,9 @@
 require('lazy').setup({
-  require 'plugins.ai',
   require 'plugins.autopairs',
-  require 'plugins.blink-cmp',
   require 'plugins.catppucin',
   require 'plugins.conform',
-  require 'plugins.dadbod',
-  require 'plugins.indent_line',
-  require 'plugins.fzf-lua',
   require 'plugins.gitsigns',
-  require 'plugins.indent_line',
   require 'plugins.lspconfig',
-  require 'plugins.markdown-preview',
   require 'plugins.mini',
   require 'plugins.todo-comments',
   require 'plugins.treesitter',
@@ -18,10 +11,6 @@ require('lazy').setup({
   require 'plugins.vim-tmux-navigator',
   require 'plugins.which-key',
   require 'plugins.snacks',
-
-  -- require 'plugins.debug',
-  -- require 'plugins.lint',
-  -- require 'plugins.neo-tree',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

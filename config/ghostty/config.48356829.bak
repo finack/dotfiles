@@ -1,10 +1,7 @@
 font-family = MesloLGL Nerd Font
 font-size = 15
 
-theme = Catppuccin Mocha
-
-shell-integration = detect
-shell-integration-features = cursor,sudo,title
+theme = catppuccin-mocha 
 
 link-url = true
 macos-titlebar-style = hidden
@@ -19,4 +16,3 @@ macos-icon-frame = chrome
 
 window-height = 1000
 window-width = 1000
-keybind = shift+enter=text:\x1b\r

@@ -8,9 +8,6 @@ local debug=false
 # Manage paths
 source "$HOME/.zsh/1.path.zsh"
 
-f () { if [[ -e ~/src/finack/$1 ]] then cd ~/src/finack/$1; else cd ~/src/finack; fi }
-compctl -/ -W ~/src/finack f
-
 for alias in $HOME/.zsh/aliases/*; do
   if [[ $(basename $alias) != _* ]]; then
     if [ "$debug" = true ]; then
@@ -36,10 +33,7 @@ fpath=(~/.zsh/completion $fpath)
 source ~/.zshrc.local
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
 # Ensure fzf key bindings are loaded (must be after other plugins that might override them)
 if [[ -o interactive ]] && command -v fzf &> /dev/null; then
   eval "$(fzf --zsh)"
 fi
-
-. "$HOME/.local/bin/env"

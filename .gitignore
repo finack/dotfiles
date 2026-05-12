@@ -5,13 +5,16 @@ BrewFile.lock.json
 config/Autodesk/
 config/QCAD/
 config/btop
+config/cagent/
 config/cb
 config/configstore
 config/configstore
 config/darktable
 config/fish
 config/gh
+config/git/
 config/github-copilot
+config/goose/
 config/gtk-2.0
 config/karabiner
 config/op
@@ -19,6 +22,7 @@ config/raycast
 config/simple-update-notifier
 config/stripe
 config/uv
+config/valet/
 
 tmux/plugins
 !tmux/plugins/tpm/
